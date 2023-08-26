@@ -1,0 +1,12 @@
+.box {
+  max-width: 600px;
+  width: 100%;
+  flex-shrink: 0;
+  margin-left: 40px;
+  margin-top: 100px;
+}
+.box_constructor{
+  justify-content: flex-end;
+  align-items: flex-end;
+  margin-right: 16px;
+}
