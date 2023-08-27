@@ -1,7 +1,8 @@
 import styles from './BurgerIngredients.module.css';
 import { ConstructorElement } from '@ya.praktikum/react-developer-burger-ui-components';
-import {Button} from '@ya.praktikum/react-developer-burger-ui-components';
+import { Button } from '@ya.praktikum/react-developer-burger-ui-components';
 import { CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components';
+import { DragIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 
 
 function BurgerIngredients({ data }) {
@@ -19,16 +20,18 @@ function BurgerIngredients({ data }) {
           />
         </div>
         <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }} className={`${styles.box_constructor} custom-scroll`}>
-          {data.map((el, index) =>
+          {data.map(el =>
             el.type !== "bun" &&
-            <ConstructorElement
-              key={el._id}
-              type={index === 0 && 'top' || index === (data.length - 1) && 'bottom'}
-              isLocked={index === 0 && true || index === (data.length - 1) && true}
-              text={el.name}
-              price={el.price}
-              thumbnail={el.image}
-            />
+            <div className={styles.block} key={el._id}>
+              <div className={"mr-2"} >
+                <DragIcon type="primary"/>
+              </div>
+              <ConstructorElement
+                text={el.name}
+                price={el.price}
+                thumbnail={el.image}
+              />
+            </div>
           )}
         </div>
         <div className={styles.box_constructor_bun}>
@@ -47,7 +50,7 @@ function BurgerIngredients({ data }) {
           <p className={'text text_type_digits-medium mr-2'}>610</p>
           <CurrencyIcon type="primary" />
         </div>
-        <div className={styles.price_buuton }>
+        <div className={styles.price_buuton}>
           <Button htmlType="button" type="primary" size="medium">
             Оформить заказ
           </Button>

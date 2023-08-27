@@ -14,7 +14,7 @@ function BurgerConstructor({ data }) {
   return (
     <div className={styles.box}>
       <h1 className="text text_type_main-large mt-10 mb-5">Соберите бургер</h1>
-      <div className={styles.tab}>
+      <div className={`${styles.tab} mb-10`}>
         <div style={{ display: 'flex' }}>
           <Tab value="Булки" active={current === 'Булки'} onClick={setCurrent}>
             Булки
@@ -27,8 +27,8 @@ function BurgerConstructor({ data }) {
           </Tab>
         </div>
       </div>
-      <div className={styles.tab_box}>
-        <h3 className="mb-6 mt-10 text text_type_main-medium">Булки</h3>
+      <div className={`${styles.card} custom-scroll`}>
+        <h3 className="mb-6  text text_type_main-medium">Булки</h3>
         <ul className={styles.tab_box_wrap}>
           {arrBun.map(el =>
             <li key={el._id} className={`${styles.tab_box_item} mb-8`}>
@@ -41,7 +41,7 @@ function BurgerConstructor({ data }) {
             </li>
           )}
         </ul>
-        <h3 className="mb-6 mt-10 text text_type_main-medium">Соусы</h3>
+        <h3 className="mb-6 mt-2 text text_type_main-medium">Соусы</h3>
         <ul className={styles.tab_box_wrap}>
           {arrSause.map(el =>
             <li key={el._id} className={`${styles.tab_box_item} mb-8`}>
@@ -54,7 +54,7 @@ function BurgerConstructor({ data }) {
             </li>
           )}
         </ul>
-        <h3 className="mb-6 mt-10 text text_type_main-medium">Начинки</h3>
+        <h3 className="mb-6 mt-2 text text_type_main-medium">Начинки</h3>
         <ul className={styles.tab_box_wrap}>
           {arrMain.map(el =>
             <li key={el._id} className={`${styles.tab_box_item} mb-8`}>
