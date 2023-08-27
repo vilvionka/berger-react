@@ -4,9 +4,34 @@
   flex-shrink: 0;
   margin-left: 40px;
   margin-top: 100px;
+  display: flex;
+  align-items: flex-end;
+  flex-direction: column;
 }
-.box_constructor{
+.box_burger{
+  display: flex;
   justify-content: flex-end;
   align-items: flex-end;
-  margin-right: 16px;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.box_constructor_bun {
+  padding-right: 32px;
+  box-sizing: border-box;
+  max-width: 568px;
+  width: 100%;
+}
+
+.box_constructor {
+  padding-right: 16px;
+  height: 350px;
+  overflow-y: scroll;
+}
+.price{
+  display: flex;
+}
+.price_box{
+  display: flex;
+  align-items: center;
 }
