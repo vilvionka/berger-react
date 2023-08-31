@@ -1,63 +1,75 @@
+import React from 'react';
 import styles from './BurgerIngredients.module.css';
-import { ConstructorElement } from '@ya.praktikum/react-developer-burger-ui-components';
-import { Button } from '@ya.praktikum/react-developer-burger-ui-components';
+import { Tab } from '@ya.praktikum/react-developer-burger-ui-components';
+import { Typography } from '@ya.praktikum/react-developer-burger-ui-components';
+import { Box } from '@ya.praktikum/react-developer-burger-ui-components';
 import { CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components';
-import { DragIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 
 
 function BurgerIngredients({ data }) {
+  const [current, setCurrent] = React.useState('Булки');
+  const arrBun = data.filter(el => el.type === 'bun');
+  const arrSause = data.filter(el => el.type === 'sauce');
+  const arrMain = data.filter(el => el.type === 'main');
+
   return (
     <div className={styles.box}>
-      <div className={styles.box_burger}>
-        <div className={styles.box_constructor_bun}>
-          <ConstructorElement
-            key={data[0]._id}
-            type={'top'}
-            isLocked={true}
-            text={data[0].name}
-            price={data[0].price}
-            thumbnail={data[0].image}
-          />
-        </div>
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }} className={`${styles.box_constructor} custom-scroll`}>
-          {data.map(el =>
-            el.type !== "bun" &&
-            <div className={styles.block} key={el._id}>
-              <div className={"mr-2"} >
-                <DragIcon type="primary"/>
-              </div>
-              <ConstructorElement
-                text={el.name}
-                price={el.price}
-                thumbnail={el.image}
-              />
-            </div>
-          )}
-        </div>
-        <div className={styles.box_constructor_bun}>
-          <ConstructorElement
-            key={data[0]._id}
-            type={'bottom'}
-            isLocked={true}
-            text={data[0].name}
-            price={data[0].price}
-            thumbnail={data[0].image}
-          />
+      <h1 className="text text_type_main-large mt-10 mb-5">Соберите бургер</h1>
+      <div className={`${styles.tab} mb-10`}>
+        <div style={{ display: 'flex' }}>
+          <Tab value="Булки" active={current === 'Булки'} onClick={setCurrent}>
+            Булки
+          </Tab>
+          <Tab value="Соусы" active={current === 'Соусы'} onClick={setCurrent}>
+            Соусы
+          </Tab>
+          <Tab value="Начинки" active={current === 'Начинки'} onClick={setCurrent}>
+            Начинки
+          </Tab>
         </div>
       </div>
-      <div className={`${styles.price} mt-10`}>
-        <div className={`${styles.price_box} mr-10`}>
-          <p className={'text text_type_digits-medium mr-2'}>610</p>
-          <CurrencyIcon type="primary" />
-        </div>
-        <div className={styles.price_buuton}>
-          <Button htmlType="button" type="primary" size="medium">
-            Оформить заказ
-          </Button>
-        </div>
+      <div className={`${styles.card} custom-scroll`}>
+        <h3 className="mb-6  text text_type_main-medium">Булки</h3>
+        <ul className={styles.tab_box_wrap}>
+          {arrBun.map(el =>
+            <li key={el._id} className={`${styles.tab_box_item} mb-8`}>
+                <img src={el.image} alt={el.name} />
+                <div className={`${styles.price} mt-1 mb-4`}>
+                  <p className={'text text_type_digits-default mr-2'}>{el.price}</p>
+                  <CurrencyIcon type="primary" />
+                </div>
+                <span className={`${styles.name} mt-1 text text_type_main-default`}>{el.name}</span>
+            </li>
+          )}
+        </ul>
+        <h3 className="mb-6 mt-2 text text_type_main-medium">Соусы</h3>
+        <ul className={styles.tab_box_wrap}>
+          {arrSause.map(el =>
+            <li key={el._id} className={`${styles.tab_box_item} mb-8`}>
+                <img src={el.image} alt={el.name} />
+                <div className={`${styles.price} mt-1 mb-4`}>
+                  <p className={'text text_type_digits-default mr-2'}>{el.price}</p>
+                  <CurrencyIcon type="primary" />
+                </div>
+                <span className={`${styles.name} mt-1 text text_type_main-default`}>{el.name}</span>
+            </li>
+          )}
+        </ul>
+        <h3 className="mb-6 mt-2 text text_type_main-medium">Начинки</h3>
+        <ul className={styles.tab_box_wrap}>
+          {arrMain.map(el =>
+            <li key={el._id} className={`${styles.tab_box_item} mb-8`}>
+                <img src={el.image} alt={el.name} />
+                <div className={`${styles.price} mt-1 mb-4`}>
+                  <p className={'text text_type_digits-default mr-2'}>{el.price}</p>
+                  <CurrencyIcon type="primary" />
+                </div>
+                <span className={`${styles.name} mt-1 text text_type_main-default`}>{el.name}</span>
+            </li>
+          )}
+        </ul>
       </div>
     </div>
-
   )
 }
 
