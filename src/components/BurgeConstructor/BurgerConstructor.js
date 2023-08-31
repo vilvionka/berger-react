@@ -5,6 +5,7 @@ import { CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components
 import { DragIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 
 
+
 function BurgerConstructor({ data }) {
   return (
     <div className={styles.box}>
@@ -14,7 +15,7 @@ function BurgerConstructor({ data }) {
             key={data[0]._id}
             type={'top'}
             isLocked={true}
-            text={data[0].name}
+            text={data[0].name + '(верх)'}
             price={data[0].price}
             thumbnail={data[0].image}
           />
@@ -39,7 +40,7 @@ function BurgerConstructor({ data }) {
             key={data[0]._id}
             type={'bottom'}
             isLocked={true}
-            text={data[0].name}
+            text={data[0].name + '(низ)'}
             price={data[0].price}
             thumbnail={data[0].image}
           />
