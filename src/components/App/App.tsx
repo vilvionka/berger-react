@@ -1,23 +1,49 @@
-import React from 'react';
+
+import React, { useEffect } from 'react';
 import datas from './utils/data';
 import AppHeader from '../AppHeader/AppHeader';
-import BurgerConstructor from '../BurgerIngredients/BurgerIngredients';
-import BurgerIngredients from '../BurgeConstructor/BurgerConstructor';
+import BurgerIngredients from '../BurgerIngredients/BurgerIngredients';
+import BurgerConstructor from '../BurgeConstructor/BurgerConstructor';
 import styles from "./App.module.css";
 
 function App() {
   const data = datas();
+  //console.log(data);
+
+  const [state, setState] = React.useState({
+    productData: null,
+    loading: true
+  })
+
+  useEffect(() => {
+    const getProductData = async () => {
+      setState({ ...state, loading: true });
+      const res = await fetch('https://norma.nomoreparties.space/api/ingredients/');
+      const getData = await res.json();
+      setState({ productData: getData.data, loading: false });
+    }
+    getProductData();
+  }, [])
+
+
+let ingredients;
+let constructor;
+if(state.loading === false){
+  ingredients = <BurgerIngredients data = {state.productData}/>
+  constructor = <BurgerConstructor data = {state.productData}/>
+  
+
+}
   return (
     <>
       <AppHeader />
       <main>
         <div className={styles.container}>
-          <BurgerConstructor data = {data}/>
-          <BurgerIngredients data = {data}/>
+          {ingredients}
+          {constructor}
         </div>
       </main>
     </>
-
   );
 }
 
