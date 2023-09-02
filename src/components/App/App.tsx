@@ -1,14 +1,12 @@
 
 import React, { useEffect } from 'react';
-import datas from './utils/data';
 import AppHeader from '../AppHeader/AppHeader';
 import BurgerIngredients from '../BurgerIngredients/BurgerIngredients';
 import BurgerConstructor from '../BurgeConstructor/BurgerConstructor';
 import styles from "./App.module.css";
 
 function App() {
-  const data = datas();
-  //console.log(data);
+  
 
   const [state, setState] = React.useState({
     productData: null,
