@@ -1,4 +1,5 @@
 import React, { Children } from 'react';
+import PropTypes from 'prop-types';
 import { createPortal } from 'react-dom';
 import ModalOverlay from '../ModalOverlay/ModalOverlay';
 import styles from './Modal.module.css';
@@ -16,6 +17,10 @@ function Modal({ children }) {
     </>
 
   ), modalRoot)
+}
+
+Modal.propTypes = {
+  modalClose: PropTypes.any.isRequired
 }
 
 export default Modal;

@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import styles from './BurgerConstructor.module.css';
 import { ConstructorElement } from '@ya.praktikum/react-developer-burger-ui-components';
 import { Button } from '@ya.praktikum/react-developer-burger-ui-components';
@@ -80,6 +81,10 @@ function BurgerConstructor({ data }) {
       {modalBurger}
     </>
   )
+}
+
+BurgerConstructor.propTypes = {
+  data: PropTypes.array.isRequired
 }
 
 

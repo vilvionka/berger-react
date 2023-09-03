@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import styles from './IngredientDetails.module.css';
 import { Typography } from '@ya.praktikum/react-developer-burger-ui-components';
 import { Box } from '@ya.praktikum/react-developer-burger-ui-components';
@@ -39,6 +40,11 @@ function IngredientDetails({item, modalClose}) {
       </div>
     </>
   )
+}
+
+IngredientDetails.propTypes = {
+  item: PropTypes.object.isRequired,
+  modalClose: PropTypes.func.isRequired
 }
 
 export default IngredientDetails;

@@ -21,6 +21,7 @@
   align-items: center;
   flex-direction: column;
   cursor: pointer;
+  position: relative;
 }
 .tab_box_item img{
   width: 240px;
@@ -34,4 +35,12 @@
   height: 48px;
   width: 100%;
   text-align: center;
+}
+.curent{
+  position: absolute;
+  right:  20px;
+  top: 20px;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
 }

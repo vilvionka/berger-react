@@ -6,8 +6,6 @@ import BurgerConstructor from '../BurgeConstructor/BurgerConstructor';
 import styles from "./App.module.css";
 
 function App() {
-  
-
   const [state, setState] = React.useState({
     productData: null,
     loading: true
@@ -26,12 +24,11 @@ function App() {
 
 let ingredients;
 let constructor;
-if(state.loading === false){
+if(state.productData !== null && state.loading === false){
   ingredients = <BurgerIngredients data = {state.productData}/>
   constructor = <BurgerConstructor data = {state.productData}/>
-  
-
 }
+
   return (
     <>
       <AppHeader />
