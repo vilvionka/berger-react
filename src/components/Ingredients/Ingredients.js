@@ -11,7 +11,7 @@ import {Counter} from '@ya.praktikum/react-developer-burger-ui-components';
 
 
 function Ingredients({ item }) {
-  const [statet, setStatet] = React.useState(false);
+  const [state, setStatet] = React.useState(false);
 
   function modalOpen() {
     setStatet(true);
@@ -21,7 +21,7 @@ function Ingredients({ item }) {
   }
 
   let modalIngrediits;
-  if (statet) {
+  if (state) {
     modalIngrediits = <Modal modalClose={modalClose} >
       <IngredientDetails item={item} modalClose={modalClose} />
     </Modal>

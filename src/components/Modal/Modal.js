@@ -10,19 +10,17 @@ function Modal({ children, modalClose }) {
 
 
   useEffect(() => {
-    document.addEventListener('keydown', function (e) {
-      if (e.keyCode == 27) {
+    function closeByEscape(evt) {
+      if(evt.key === 'Escape') {
         modalClose();
       }
-    })
-    return () => {
-      document.removeEventListener("keydown", function (e) {
-        if (e.keyCode == 27) {
-          modalClose();
-        }
-      })
     }
-  },[])
+      document.addEventListener('keydown', closeByEscape);
+      return () => {
+        document.removeEventListener('keydown', closeByEscape);
+      }
+
+  }, []) 
 
 
 
@@ -41,7 +39,8 @@ function Modal({ children, modalClose }) {
 }
 
 Modal.propTypes = {
-  children: PropTypes.any.isRequired
+  children: PropTypes.any.isRequired,
+  modalClose: PropTypes.func.isRequired
 }
 
 export default Modal;

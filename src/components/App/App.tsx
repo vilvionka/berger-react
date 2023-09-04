@@ -4,6 +4,7 @@ import AppHeader from '../AppHeader/AppHeader';
 import BurgerIngredients from '../BurgerIngredients/BurgerIngredients';
 import BurgerConstructor from '../BurgeConstructor/BurgerConstructor';
 import styles from "./App.module.css";
+import { watch } from 'fs';
 
 function App() {
   const [state, setState] = React.useState({
@@ -11,26 +12,29 @@ function App() {
     loading: true
   })
 
+  const getProductData = () => {
+    setState({ ...state, loading: true });
+    fetch('https://norma.nomoreparties.space/api/ingredients/')
+      .then(res => res.json())
+      .then(data => setState({ productData: data.data, loading: false }))
+      .catch(e => {
+        return Promise.reject('Произощла ошибка');
+      });
+  };
+  
+
   useEffect(() => {
-    try{
-    const getProductData = async () => {
-      setState({ ...state, loading: true });
-      const res = await fetch('https://norma.nomoreparties.space/api/ingredients/');
-      const getData = await res.json();
-      setState({ productData: getData.data, loading: false });
-    }
-    getProductData();}catch(err){
-      alert('неправильные данные')
-    }
+    getProductData();
+
   }, [])
 
 
-let ingredients;
-let constructor;
-if(state.productData !== null && state.loading === false){
-  ingredients = <BurgerIngredients data = {state.productData}/>
-  constructor = <BurgerConstructor data = {state.productData}/>
-}
+  let ingredients;
+  let constructor;
+  if (state.productData !== null && state.loading === false) {
+    ingredients = <BurgerIngredients data={state.productData} />
+    constructor = <BurgerConstructor data={state.productData} />
+  }
 
   return (
     <>
