@@ -22,7 +22,7 @@ function Ingredients({ item }) {
 
   let modalIngrediits;
   if (statet) {
-    modalIngrediits = <Modal >
+    modalIngrediits = <Modal modalClose={modalClose} >
       <IngredientDetails item={item} modalClose={modalClose} />
     </Modal>
   }

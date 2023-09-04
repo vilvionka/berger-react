@@ -10,7 +10,7 @@ import TabBox from '../TabBox/TabBox';
 
 
 function BurgerIngredients({ data }) {
-
+  
   const arrBun = data.filter(el => el.type === 'bun');
   const arrSause = data.filter(el => el.type === 'sauce');
   const arrMain = data.filter(el => el.type === 'main');
@@ -46,7 +46,6 @@ function BurgerIngredients({ data }) {
 
 BurgerIngredients.propTypes = {
   data: PropTypes.array.isRequired
-
 }
 
 

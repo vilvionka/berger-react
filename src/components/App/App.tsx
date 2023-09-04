@@ -12,13 +12,16 @@ function App() {
   })
 
   useEffect(() => {
+    try{
     const getProductData = async () => {
       setState({ ...state, loading: true });
       const res = await fetch('https://norma.nomoreparties.space/api/ingredients/');
       const getData = await res.json();
       setState({ productData: getData.data, loading: false });
     }
-    getProductData();
+    getProductData();}catch(err){
+      alert('неправильные данные')
+    }
   }, [])
 
 

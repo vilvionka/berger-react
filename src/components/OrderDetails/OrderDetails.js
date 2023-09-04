@@ -3,16 +3,13 @@ import PropTypes from 'prop-types';
 import styles from './OrderDetails.module.css';
 import { Typography } from '@ya.praktikum/react-developer-burger-ui-components';
 import { Box } from '@ya.praktikum/react-developer-burger-ui-components';
-import { CloseIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import icon from '../../images/done.svg'
 
-function OrderDetails({ modalClose }) {
+function OrderDetails() {
 
   return (
     <>
-      <div className={styles.close} onClick={modalClose}>
-        <CloseIcon type="primary" />
-      </div>
+      
       <div className={`${styles.id} mt-30 mb-8 text text_type_digits-large`}>034536</div>
       <div className={`${styles.discription} text text_type_main-medium`}>идентификатор заказа</div>
       <div className={styles.icon}>
@@ -24,8 +21,6 @@ function OrderDetails({ modalClose }) {
   )
 }
 
-OrderDetails.propTypes = {
-  modalClose: PropTypes.func.isRequired
-}
+
 
 export default OrderDetails;

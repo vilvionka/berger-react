@@ -21,8 +21,8 @@ function BurgerConstructor({ data }) {
   }
   let modalBurger;
   if (state) {
-    modalBurger = <Modal >
-      <OrderDetails modalClose={modalClose} />
+    modalBurger = <Modal modalClose={modalClose}>
+      <OrderDetails />
     </Modal>
   }
 

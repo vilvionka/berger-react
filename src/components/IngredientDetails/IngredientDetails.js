@@ -6,15 +6,12 @@ import { Box } from '@ya.praktikum/react-developer-burger-ui-components';
 import { CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import { CloseIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 
-function IngredientDetails({item, modalClose}) {
+function IngredientDetails({item}) {
 
   return (
     <>
       <div className={`${styles.modal_header} mt-10`}>
         <h5 className={'text text_type_main-large'}>Детали ингредиента</h5>
-        <div className={styles.close} onClick={modalClose}>
-          <CloseIcon type="primary" />
-        </div>
       </div>
       <div className={styles.img}>
         <img src={item.image} alt={item.name} />
@@ -43,8 +40,7 @@ function IngredientDetails({item, modalClose}) {
 }
 
 IngredientDetails.propTypes = {
-  item: PropTypes.object.isRequired,
-  modalClose: PropTypes.func.isRequired
+  item: PropTypes.object.isRequired
 }
 
 export default IngredientDetails;
