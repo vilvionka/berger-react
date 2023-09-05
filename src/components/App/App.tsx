@@ -14,11 +14,17 @@ function App() {
 
   const getProductData = () => {
     setState({ ...state, loading: true });
-    fetch('https://norma.nomoreparties.space/api/ingredients/')
-      .then(res => res.json())
-      .then(data => setState({ productData: data.data, loading: false }))
-      .catch(e => {
-        return Promise.reject('Произощла ошибка');
+    fetch("https://norma.nomoreparties.space/api/ingredients/")
+      .then((res) => {
+        if (res.ok) {
+          return res.json();
+        }
+        return Promise.reject(`Ошибка ${res.status}`);
+      })
+
+      .then((data) => setState({ productData: data.data, loading: false }))
+      .catch((e) => {
+        console.error(e)
       });
   };
   
