@@ -1,0 +1,55 @@
+.box {
+  max-width: 600px;
+  width: 100%;
+  flex-shrink: 0;
+  margin-left: 40px;
+  margin-top: 100px;
+  display: flex;
+  align-items: flex-end;
+  flex-direction: column;
+}
+
+.box_burger {
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-end;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.box_constructor_bun {
+  padding-right: 32px;
+  box-sizing: border-box;
+  max-width: 568px;
+  width: 100%;
+}
+
+.box_constructor {
+  padding-right: 16px;
+  height: 350px;
+  overflow-y: scroll;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.price {
+  display: flex;
+}
+
+.price_box {
+  display: flex;
+  align-items: center;
+}
+
+.block {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.icon {
+  margin-right: 8px;
+  cursor: pointer;
+}
