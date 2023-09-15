@@ -7,11 +7,15 @@ import { CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components
 import { DragIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import Modal from '../Modal/Modal';
 import OrderDetails from '../OrderDetails/OrderDetails';
+import { useSelector } from 'react-redux';
 
 
 
-function BurgerConstructor({ data }) {
+function BurgerConstructor() {
   const [state, setState] = React.useState(false);
+  const data = useSelector(statet => statet.ingredient.data);
+  const datam = useSelector(statet => statet.burgerConstructor);
+  console.log(datam)
 
   function modalOpen() {
     setState(true);
@@ -31,17 +35,18 @@ function BurgerConstructor({ data }) {
       <div className={styles.box}>
         <div className={styles.box_burger}>
           <div className={styles.box_constructor_bun}>
-            <ConstructorElement
+            {datam && <ConstructorElement
               key={data[0]._id}
               type={'top'}
               isLocked={true}
               text={data[0].name + '(верх)'}
               price={data[0].price}
               thumbnail={data[0].image}
-            />
+            />}
           </div>
           <div className={`${styles.box_constructor} custom-scroll`}>
-            {data.map(el =>
+
+            {datam && data.map(el =>
               el.type !== "bun" &&
               <div className={styles.block} key={el._id}>
                 <div className={"mr-2"} >
@@ -56,14 +61,15 @@ function BurgerConstructor({ data }) {
             )}
           </div>
           <div className={styles.box_constructor_bun}>
-            <ConstructorElement
-              key={data[0]._id}
-              type={'bottom'}
-              isLocked={true}
-              text={data[0].name + '(низ)'}
-              price={data[0].price}
-              thumbnail={data[0].image}
-            />
+            {datam &&
+              <ConstructorElement
+                key={data[0]._id}
+                type={'bottom'}
+                isLocked={true}
+                text={data[0].name + '(низ)'}
+                price={data[0].price}
+                thumbnail={data[0].image}
+              />}
           </div>
         </div>
         <div className={`${styles.price} mt-10`}>
@@ -83,9 +89,9 @@ function BurgerConstructor({ data }) {
   )
 }
 
-BurgerConstructor.propTypes = {
-  data: PropTypes.array.isRequired
-}
+//BurgerConstructor.propTypes = {
+//  data: PropTypes.array.isRequired
+//}
 
 
 export default BurgerConstructor;

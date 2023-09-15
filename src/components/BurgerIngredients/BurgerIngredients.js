@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import styles from './BurgerIngredients.module.css';
 import Ingredients from '../Ingredients/Ingredients';
@@ -7,18 +7,28 @@ import { Typography } from '@ya.praktikum/react-developer-burger-ui-components';
 import { Box } from '@ya.praktikum/react-developer-burger-ui-components';
 import { CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import TabBox from '../TabBox/TabBox';
+import {useSelector} from 'react-redux';
 
 
-function BurgerIngredients({ data }) {
+
+function BurgerIngredients() {
+  //@ts-ignore
+ // const { datas } = useSelector(state => ({ datas: store.ingredient.data}));
+  const datas = useSelector(state => state.ingredient.data);
+  console.log(datas);
   
-  const arrBun = data.filter(el => el.type === 'bun');
-  const arrSause = data.filter(el => el.type === 'sauce');
-  const arrMain = data.filter(el => el.type === 'main');
-
+ 
   
+    
+    const  arrBun = datas.filter(el => el.type === 'bun');
+    const  arrSause = datas.filter(el => el.type === 'sauce');
+    const  arrMain = datas.filter(el => el.type === 'main');
+   
+  
+
 
   return (
-    <div className={styles.box}>
+     <div className={styles.box}>
       <TabBox />
       <div className={`${styles.card} custom-scroll`}>
         <h3 className="mb-6 text text_type_main-medium">Булки</h3>
@@ -40,13 +50,13 @@ function BurgerIngredients({ data }) {
           )}
         </ul>
       </div>
-    </div>
+    </div> 
   )
 }
 
-BurgerIngredients.propTypes = {
-  data: PropTypes.array.isRequired
-}
+//BurgerIngredients.propTypes = {
+ //datam: PropTypes.array.isRequired
+//}
 
 
 

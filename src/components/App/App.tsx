@@ -4,7 +4,10 @@ import AppHeader from '../AppHeader/AppHeader';
 import BurgerIngredients from '../BurgerIngredients/BurgerIngredients';
 import BurgerConstructor from '../BurgeConstructor/BurgerConstructor';
 import styles from "./App.module.css";
-import { watch } from 'fs';
+import { useDispatch } from 'react-redux';
+import { loadIngredients } from '../../services/action';
+
+
 
 function App() {
   const [state, setState] = React.useState({
@@ -27,19 +30,20 @@ function App() {
         console.error(e)
       });
   };
-  
+  const dispatсh = useDispatch();
 
   useEffect(() => {
+    //@ts-ignore
+    dispatсh(loadIngredients())
     getProductData();
+  }, []);
 
-  }, [])
 
-
-  let ingredients;
+  let ingredient;
   let constructor;
   if (state.productData !== null && state.loading === false) {
-    ingredients = <BurgerIngredients data={state.productData} />
-    constructor = <BurgerConstructor data={state.productData} />
+    ingredient = <BurgerIngredients />
+    constructor = <BurgerConstructor />
   }
 
   return (
@@ -47,7 +51,7 @@ function App() {
       <AppHeader />
       <main>
         <div className={styles.container}>
-          {ingredients}
+          {ingredient}
           {constructor}
         </div>
       </main>

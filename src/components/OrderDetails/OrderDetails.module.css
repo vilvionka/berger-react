@@ -1,12 +1,5 @@
 
-.close{
-  width: 24px;
-  height: 24px;
-  cursor: pointer;
-  position: absolute;
-  right: 40px;
-  top: 60px;
-}
+
 .id{
   width: 520px;
   margin-left: auto;
