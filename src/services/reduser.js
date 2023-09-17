@@ -1,21 +1,8 @@
-import {
-  ADD_LOADING
-} from './action';
+import {ingredientsReducer} from './ingredients/reduser';
+import {BurgerConstructorReducer} from './burgerConstructor/reduser';
+import { combineReducers } from 'redux';
 
-const initialState = {
-  ingredient: []
-}
-
-export const reducer = (state = initialState, action) => {
-  switch (action.type) {
-    case ADD_LOADING:
-      return {
-        ...state,
-        ingredient: action.payload
-      };
-
-    default: {
-      return state
-    }
-  }
-} 
+export const rootReducer = combineReducers({
+  ingredientsReducer,
+  BurgerConstructorReducer
+}) 

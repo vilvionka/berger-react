@@ -1,21 +1,37 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import styles from './BurgerConstructor.module.css';
-import { ConstructorElement } from '@ya.praktikum/react-developer-burger-ui-components';
-import { Button } from '@ya.praktikum/react-developer-burger-ui-components';
-import { CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components';
-import { DragIcon } from '@ya.praktikum/react-developer-burger-ui-components';
+import { Button, ConstructorElement, CurrencyIcon, DragIcon } from '@ya.praktikum/react-developer-burger-ui-components';
+import React, { useMemo } from 'react';
+import { useDrop } from "react-dnd";
+import { useDispatch, useSelector } from 'react-redux';
+import { v4 as uuidv4 } from 'uuid';
+import { ADD_INGREDIENT, DELETE_INGREDIENT } from '../../services/burgerConstructor/action';
 import Modal from '../Modal/Modal';
 import OrderDetails from '../OrderDetails/OrderDetails';
-import { useSelector } from 'react-redux';
+import styles from './BurgerConstructor.module.css';
+
 
 
 
 function BurgerConstructor() {
   const [state, setState] = React.useState(false);
-  const data = useSelector(statet => statet.ingredient.data);
-  const datam = useSelector(statet => statet.burgerConstructor);
-  console.log(datam)
+  const data = useSelector(store => store.BurgerConstructorReducer.burgerConstructor);
+  const dataBun = useSelector(store => store.BurgerConstructorReducer.bun);
+  const burgersData = useSelector(store => store.BurgerConstructorReducer);
+
+  console.log(data);
+  // console.log(dataBun);
+
+
+  const dispatch = useDispatch();
+
+  const [, dropTarget] = useDrop({
+    accept: "animal",
+    drop(item) {
+      dispatch({
+        type: ADD_INGREDIENT,
+        payload: { ...item, key: uuidv4() }
+      });
+    },
+  });
 
   function modalOpen() {
     setState(true);
@@ -30,51 +46,79 @@ function BurgerConstructor() {
     </Modal>
   }
 
+
+
+
+  let total = 0;
+  const totalPrice = useMemo(() => {
+    let sum = 0;
+    if (data.length > 0) {
+      let value = 0
+      sum = data.reduce((accumulator, item) => {
+        return accumulator + Number(item.item.price)
+      }, value)
+    }
+    let sumBun = 0;
+    if (Object.keys(dataBun).length > 0) {
+      sumBun = dataBun.item.price * 2;
+    }
+    total = sum + sumBun;
+    return total;
+  }, [burgersData])
+
+  function handleClose(id) {
+    console.log('2')
+    dispatch({
+      type: DELETE_INGREDIENT,
+      id
+    });
+  }
+
   return (
     <>
-      <div className={styles.box}>
+      <div className={styles.box} ref={dropTarget}>
+
         <div className={styles.box_burger}>
-          <div className={styles.box_constructor_bun}>
-            {datam && <ConstructorElement
-              key={data[0]._id}
+          <div className={styles.box_constructor_bun} >
+            {Object.keys(dataBun).length > 0 && <ConstructorElement
+              key={dataBun.key}
               type={'top'}
               isLocked={true}
-              text={data[0].name + '(верх)'}
-              price={data[0].price}
-              thumbnail={data[0].image}
-            />}
+              text={dataBun.item.name + '(верх)'}
+              price={dataBun.item.price}
+              thumbnail={dataBun.item.image} />
+            }
           </div>
-          <div className={`${styles.box_constructor} custom-scroll`}>
-
-            {datam && data.map(el =>
-              el.type !== "bun" &&
-              <div className={styles.block} key={el._id}>
+          <div className={`${styles.box_constructor} custom-scroll`} >
+            {data.length > 0 && data.map(el =>
+              <div className={styles.block} key={el.key} onClick={handleClose(el.key)}>
                 <div className={"mr-2"} >
                   <DragIcon type="primary" />
                 </div>
                 <ConstructorElement
-                  text={el.name}
-                  price={el.price}
-                  thumbnail={el.image}
-                />
+                  text={el.item.name}
+                  price={el.item.price}
+                  thumbnail={el.item.image} />
               </div>
             )}
           </div>
           <div className={styles.box_constructor_bun}>
-            {datam &&
+            {Object.keys(dataBun).length > 0 &&
               <ConstructorElement
-                key={data[0]._id}
+                key={dataBun.key}
                 type={'bottom'}
                 isLocked={true}
-                text={data[0].name + '(низ)'}
-                price={data[0].price}
-                thumbnail={data[0].image}
-              />}
+                text={dataBun.item.name + '(низ)'}
+                price={dataBun.item.price}
+                thumbnail={dataBun.item.image} />
+            }
           </div>
         </div>
+
+
         <div className={`${styles.price} mt-10`}>
           <div className={`${styles.price_box} mr-10`}>
-            <p className={'text text_type_digits-medium mr-2'}>610</p>
+            <p className={'text text_type_digits-medium mr-2'}>{total}</p>
             <CurrencyIcon type="primary" />
           </div>
           <div className={styles.price_buuton} onClick={modalOpen}>

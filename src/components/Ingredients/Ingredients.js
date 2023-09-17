@@ -8,10 +8,12 @@ import { CloseIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import IngredientDetails from '../IngredientDetails/IngredientDetails';
 import Modal from '../Modal/Modal';
 import {Counter} from '@ya.praktikum/react-developer-burger-ui-components';
+import { useDrag } from "react-dnd";
 
 
 function Ingredients({ item }) {
   const [state, setStatet] = React.useState(false);
+  
 
   function modalOpen() {
     setStatet(true);
@@ -19,6 +21,13 @@ function Ingredients({ item }) {
   function modalClose() {
     setStatet(false);
   }
+  const [{isDrag}, dragRef] = useDrag({
+    type: "animal",
+    item: {item},
+    collect: monitor => ({
+      isDrag: monitor.isDragging()
+  })
+});
 
   let modalIngrediits;
   if (state) {
@@ -27,8 +36,9 @@ function Ingredients({ item }) {
     </Modal>
   }
   return (
+    !isDrag && 
     <>
-      <li className={`${styles.tab_box_item} mb-8`} onClick={modalOpen}>
+      <li className={`${styles.tab_box_item} mb-8`} onClick={modalOpen} ref={dragRef}>
         <div className={styles.curent}>
           <Counter count={1} size="default" extraClass="m-1" />
         </div>
