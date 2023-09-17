@@ -1,9 +1,10 @@
 import { Button, ConstructorElement, CurrencyIcon, DragIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import React, { useMemo } from 'react';
-import { useDrop } from "react-dnd";
+import { useDrop, useDrag } from "react-dnd";
 import { useDispatch, useSelector } from 'react-redux';
 import { v4 as uuidv4 } from 'uuid';
-import { ADD_INGREDIENT, DELETE_INGREDIENT } from '../../services/burgerConstructor/action';
+import { ADD_INGREDIENT, DELETE_INGREDIENT, UPDATE_INGREDIENT } from '../../services/burgerConstructor/action';
+import { BurgerElement } from '../BurgerElement/BurgerElement';
 import Modal from '../Modal/Modal';
 import OrderDetails from '../OrderDetails/OrderDetails';
 import styles from './BurgerConstructor.module.css';
@@ -17,7 +18,7 @@ function BurgerConstructor() {
   const dataBun = useSelector(store => store.BurgerConstructorReducer.bun);
   const burgersData = useSelector(store => store.BurgerConstructorReducer);
 
-  console.log(data);
+ // console.log(data);
   // console.log(dataBun);
 
 
@@ -66,13 +67,10 @@ function BurgerConstructor() {
     return total;
   }, [burgersData])
 
-  function handleClose(id) {
-    console.log('2')
-  //  dispatch({
-  //    type: DELETE_INGREDIENT,
-  //    id
-  // });
-  }
+
+
+
+  
 
   return (
     <>
@@ -91,15 +89,7 @@ function BurgerConstructor() {
           </div>
           <div className={`${styles.box_constructor} custom-scroll`} >
             {data.length > 0 && data.map(el =>
-              <div className={styles.block} key={el.key} onClick={handleClose(el.key)}>
-                <div className={"mr-2"} >
-                  <DragIcon type="primary" />
-                </div>
-                <ConstructorElement
-                  text={el.item.name}
-                  price={el.item.price}
-                  thumbnail={el.item.image} />
-              </div>
+              <BurgerElement el = {el} key = {el.key}/>
             )}
           </div>
           <div className={styles.box_constructor_bun}>

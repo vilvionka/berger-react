@@ -1,5 +1,5 @@
 
-import { ADD_INGREDIENT, DELETE_INGREDIENT } from './action';
+import { ADD_INGREDIENT, DELETE_INGREDIENT, UPDATE_INGREDIENT } from './action';
 
 const initialState = {
   bun: {},
@@ -19,6 +19,11 @@ export const BurgerConstructorReducer = (state = initialState, action) => {
       return {
         ...state,
         burgerConstructor: state.burgerConstructor.filter(el => el.key !== state.payload)
+      }
+    case UPDATE_INGREDIENT:
+      return {
+        ...state,
+        burgerConstructor: []
       }
     default: {
       return state

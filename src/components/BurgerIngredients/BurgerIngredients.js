@@ -16,7 +16,7 @@ function BurgerIngredients() {
   //@ts-ignore
   // const { datas } = useSelector(state => ({ datas: store.ingredient.data}));
   const datas = useSelector(state => state.ingredientsReducer.ingredient.data);
-  console.log(datas);
+  //console.log(datas);
 
 
 
