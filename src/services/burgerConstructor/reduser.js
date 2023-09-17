@@ -18,7 +18,7 @@ export const BurgerConstructorReducer = (state = initialState, action) => {
     case DELETE_INGREDIENT:
       return {
         ...state,
-        burgerConstructor: []
+        burgerConstructor: state.burgerConstructor.filter(el => el.key !== state.payload)
       }
     default: {
       return state
