@@ -68,10 +68,10 @@ function BurgerConstructor() {
 
   function handleClose(id) {
     console.log('2')
-    dispatch({
-      type: DELETE_INGREDIENT,
-      id
-    });
+  //  dispatch({
+  //    type: DELETE_INGREDIENT,
+  //    id
+  // });
   }
 
   return (
