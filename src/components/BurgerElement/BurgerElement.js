@@ -6,15 +6,15 @@ import { useDrag } from "react-dnd";
 
 import styles from './BurgerElement.module.css';
 
-export function BurgerElement({ el }) {
+export function BurgerElement({ el, handleClose }) {
 
-  function handleClose(id) {
-    console.log(id)
+ // function handleClose(id) {
+ //   console.log(id)
     //  dispatch({
     //    type: DELETE_INGREDIENT,
     //    id
     // });
-  }
+ // }
 
   const [{ isDrag }, dragRef] = useDrag({
     type: "animal",
@@ -32,7 +32,8 @@ export function BurgerElement({ el }) {
       <ConstructorElement
         text={el.item.name}
         price={el.item.price}
-        thumbnail={el.item.image} />
+        thumbnail={el.item.image} 
+        handleClose = {handleClose}/>
     </div>
   )
 }

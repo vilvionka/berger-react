@@ -1,16 +1,32 @@
-import {ADD_LOADING} from './action';
+import {ADD_LOADING, ADD_COUNTER, LOADING, ERROR} from './action';
 
 const initialState = {
-  ingredient: []
+  ingredient: [],
+  loading: false,
+  error: null
 }
 
 export const ingredientsReducer = (state = initialState, action) => {
   switch (action.type) {
+    case ERROR:
+      return{
+        ...state,
+        loading: false,
+        error: action.payload
+      }
+    case LOADING:
+      return{
+        ...state,
+       loading: true,
+        error: null
+      }
     case ADD_LOADING:
       return {
         ...state,
-        ingredient: action.payload
+        loading: false,
+      ingredient: action.payload
       };
+      
 
     default: {
       return state

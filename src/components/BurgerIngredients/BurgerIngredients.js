@@ -14,16 +14,15 @@ import { useSelector } from 'react-redux';
 
 function BurgerIngredients() {
   //@ts-ignore
-  // const { datas } = useSelector(state => ({ datas: store.ingredient.data}));
-  const datas = useSelector(state => state.ingredientsReducer.ingredient.data);
+  const datas = useSelector(state => state.ingredientsReducer.ingredient);
   //console.log(datas);
 
 
 
 
    const  arrBun = datas.filter(el => el.type === 'bun');
-    const  arrSause = datas.filter(el => el.type === 'sauce');
-    const  arrMain = datas.filter(el => el.type === 'main');
+   const  arrSause = datas.filter(el => el.type === 'sauce');
+   const  arrMain = datas.filter(el => el.type === 'main');
 
 
 

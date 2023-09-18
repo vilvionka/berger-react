@@ -7,8 +7,7 @@ const getResponse = (res) => {
 }
 
 export const getProjectIngredients = () => {
-    return fetch('https://norma.nomoreparties.space/api/ingredients/')
-   .then(getResponse)
+    return fetch('https://norma.nomoreparties.space/api/ingredients/').then(getResponse)
   
 }
 
