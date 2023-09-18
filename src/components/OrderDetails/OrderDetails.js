@@ -4,8 +4,12 @@ import styles from './OrderDetails.module.css';
 import { Typography } from '@ya.praktikum/react-developer-burger-ui-components';
 import { Box } from '@ya.praktikum/react-developer-burger-ui-components';
 import icon from '../../images/done.svg'
+import { useSelector } from 'react-redux';
+
 
 function OrderDetails() {
+
+  const {order} = useSelector(store => store.orderReducer);
 
   return (
     <>

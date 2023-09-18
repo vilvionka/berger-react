@@ -1,21 +1,23 @@
 import { ConstructorElement, DragIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import { useDrag } from "react-dnd";
-
-
-
-
+import { useDispatch } from 'react-redux';
+import { DELETE_INGREDIENT } from '../../services/burgerConstructor/action';
 import styles from './BurgerElement.module.css';
 
-export function BurgerElement({ el, handleClose }) {
 
- // function handleClose(id) {
- //   console.log(id)
-    //  dispatch({
-    //    type: DELETE_INGREDIENT,
-    //    id
-    // });
- // }
 
+export function BurgerElement({ el }) {
+
+  const dispatch = useDispatch();
+
+  function handleClose() {
+    console.log(el.key)
+    dispatch({
+      action: DELETE_INGREDIENT,
+      id: el.key
+    })
+  }
+ 
   const [{ isDrag }, dragRef] = useDrag({
     type: "animal",
     item: { el },

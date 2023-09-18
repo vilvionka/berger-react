@@ -7,36 +7,45 @@ import { CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components
 import { CloseIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import IngredientDetails from '../IngredientDetails/IngredientDetails';
 import Modal from '../Modal/Modal';
-import {Counter} from '@ya.praktikum/react-developer-burger-ui-components';
+import { Counter } from '@ya.praktikum/react-developer-burger-ui-components';
 import { useDrag } from "react-dnd";
+import { useDispatch } from 'react-redux';
+import {MORE_DETAILS} from '../../services/moreDetails/action';
 
 
 function Ingredients({ item }) {
   const [state, setStatet] = React.useState(false);
-  
+
+  const dispatch = useDispatch();
+
 
   function modalOpen() {
     setStatet(true);
+    dispatch({
+      type: MORE_DETAILS,
+      payload: {...item}
+    });
   }
+
   function modalClose() {
     setStatet(false);
   }
-  const [{isDrag}, dragRef] = useDrag({
+  const [{ isDrag }, dragRef] = useDrag({
     type: "animal",
-    item: {item},
+    item: { item },
     collect: monitor => ({
       isDrag: monitor.isDragging()
-  })
-});
+    })
+  });
 
   let modalIngrediits;
   if (state) {
     modalIngrediits = <Modal modalClose={modalClose} >
-      <IngredientDetails item={item} modalClose={modalClose} />
+      <IngredientDetails modalClose={modalClose} />
     </Modal>
   }
   return (
-    !isDrag && 
+    !isDrag &&
     <>
       <li className={`${styles.tab_box_item} mb-8`} onClick={modalOpen} ref={dragRef}>
         <div className={styles.curent}>
