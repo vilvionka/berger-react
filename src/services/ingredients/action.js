@@ -1,7 +1,6 @@
 import { getProjectIngredients } from '../../utils/ingredient-api';
 
 export const ADD_LOADING = 'ADD_LOADING';
-export const ADD_COUNTER = 'ADD_COUNTER'
 export const LOADING = 'LOADING';
 export const ERROR = 'ERROR';
 

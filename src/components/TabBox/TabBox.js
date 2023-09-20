@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import styles from './TabBox.module.css';
 import { Tab } from '@ya.praktikum/react-developer-burger-ui-components';
 import { Typography } from '@ya.praktikum/react-developer-burger-ui-components';
@@ -7,7 +7,7 @@ import { Box } from '@ya.praktikum/react-developer-burger-ui-components';
 
 
 function TabBox() {
-  const [current, setCurrent] = React.useState('Булки');
+  const [current, setCurrent] = useState('Булки');
   
 
   return (

@@ -14,6 +14,7 @@ import { DndProvider } from "react-dnd";
 function App() {
   //@ts-ignore
   const { loading, error, ingredient } = useSelector(store => store.ingredientsReducer)
+ // console.log(ingredient)
 
   const dispatсh = useDispatch();
 

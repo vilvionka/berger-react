@@ -33,7 +33,6 @@ function BurgerConstructor() {
         type: ADD_INGREDIENT,
         payload: { ...item, key: uuidv4() }
       });
-
     },
   });
 

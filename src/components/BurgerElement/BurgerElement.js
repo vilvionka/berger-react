@@ -3,6 +3,7 @@ import { useDrag } from "react-dnd";
 import { useDispatch } from 'react-redux';
 import { DELETE_INGREDIENT } from '../../services/burgerConstructor/action';
 import styles from './BurgerElement.module.css';
+import { DELETE_COUNTER } from '../../services/ingredients/action';
 
 
 
@@ -11,13 +12,12 @@ export function BurgerElement({ el }) {
   const dispatch = useDispatch();
 
   function handleClose() {
-    console.log(el.key)
     dispatch({
-      action: DELETE_INGREDIENT,
-      id: el.key
-    })
+      type: DELETE_INGREDIENT,
+      id: el.key,
+    });
   }
- 
+
   const [{ isDrag }, dragRef] = useDrag({
     type: "animal",
     item: { el },
