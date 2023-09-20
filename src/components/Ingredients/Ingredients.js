@@ -23,7 +23,7 @@ function Ingredients({ item }) {
   const dispatch = useDispatch();
   let counterUpdate = 0
   const counterUpdatee = useMemo(() => data.filter(element => element._id === item._id).length, [data])
-  Object.keys(dataBun).length > 0 && dataBun._id === item._id ? counterUpdate = 2 : counterUpdate = 0
+  dataBun?._id === item._id ? counterUpdate = 2 : counterUpdate = 0
   
 
   function modalOpen() {

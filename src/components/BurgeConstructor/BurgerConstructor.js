@@ -4,7 +4,7 @@ import { useDrop } from "react-dnd";
 import { useDispatch, useSelector } from 'react-redux';
 import { v4 as uuidv4 } from 'uuid';
 import { ADD_INGREDIENT, UPDATE_INGREDIENT } from '../../services/burgerConstructor/action';
-import {ORDER} from '../../services/order/action';
+import { ORDER } from '../../services/order/action';
 import { BurgerElement } from '../BurgerElement/BurgerElement';
 import Modal from '../Modal/Modal';
 import OrderDetails from '../OrderDetails/OrderDetails';
@@ -19,8 +19,9 @@ function BurgerConstructor() {
   const dataBun = useSelector(store => store.BurgerConstructorReducer.bun);
   const burgersData = useSelector(store => store.BurgerConstructorReducer);
 
-   //console.log(data);
+  //console.log(data);
   // console.log(dataBun);
+  // console.log(burgersData)
 
 
   const dispatch = useDispatch();
@@ -36,15 +37,18 @@ function BurgerConstructor() {
   });
 
   function modalOpen() {
-    setState(true);
-    dispatch({
-      type: ORDER,
-       key: uuidv4()
-    });
+    if (dataBun) {
+      setState(true);
+      dispatch({
+        type: ORDER,
+        key: uuidv4()
+      });
+    }
   }
   function modalClose() {
     setState(false);
   }
+
   let modalBurger;
   if (state) {
     modalBurger = <Modal modalClose={modalClose}>
@@ -52,18 +56,11 @@ function BurgerConstructor() {
     </Modal>
   }
 
- // const arr = [1,2,3,4,5];
- //  arr.splice(2, 0, arr.splice(3, 1)[0]);
- //  console.log(arr);
+  // const arr = [1,2,3,4,5];
+  //  arr.splice(2, 0, arr.splice(3, 1)[0]);
+  //  console.log(arr);
 
-  const moveCard = useCallback((dragIndex, hoverIndex) => {
-    console.log(dragIndex, hoverIndex);
-    dispatch({
-      type: UPDATE_INGREDIENT,
-      dragIndex,
-      hoverIndex
-    });
-  }, [])
+
 
 
   const totalPrice = useMemo(() => {
@@ -75,10 +72,10 @@ function BurgerConstructor() {
       }, value)
     }
     let sumBun = 0;
-    if (Object.keys(dataBun).length > 0) {
+    if (dataBun) {
       sumBun = dataBun.price * 2;
     }
-   return sum + sumBun;
+    return sum + sumBun;
   }, [burgersData])
 
 
@@ -88,7 +85,7 @@ function BurgerConstructor() {
 
         <div className={styles.box_burger}>
           <div className={styles.box_constructor_bun} >
-            {Object.keys(dataBun).length > 0 && <ConstructorElement
+            {dataBun && <ConstructorElement
               key={dataBun.key}
               type={'top'}
               isLocked={true}
@@ -100,11 +97,11 @@ function BurgerConstructor() {
           </div>
           <div className={`${styles.box_constructor} custom-scroll`} >
             {data.length > 0 && data.map((el, index) =>
-              <BurgerElement el={el} key={el.key} moveCard={moveCard} index={index}/>
+              <BurgerElement el={el} key={el.key} index={index} />
             )}
           </div>
           <div className={styles.box_constructor_bun}>
-            {Object.keys(dataBun).length > 0 &&
+            {dataBun &&
               <ConstructorElement
                 key={dataBun.key}
                 type={'bottom'}
