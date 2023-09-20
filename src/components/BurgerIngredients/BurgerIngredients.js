@@ -7,7 +7,7 @@ import { Typography } from '@ya.praktikum/react-developer-burger-ui-components';
 import { Box } from '@ya.praktikum/react-developer-burger-ui-components';
 import { CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import TabBox from '../TabBox/TabBox';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { useInView } from 'react-intersection-observer';
 
 
@@ -18,6 +18,7 @@ function BurgerIngredients() {
   const [current, setCurrent] = useState('Булки');
   //@ts-ignore
   const datas = useSelector(state => state.ingredientsReducer.ingredient);
+ // console.log(datas)
 
   const arrBun = datas.filter(el => el.type === 'bun');
   const arrSause = datas.filter(el => el.type === 'sauce');
@@ -32,9 +33,7 @@ function BurgerIngredients() {
   const [ref2, inView2] = useInView({
     threshold: 0.1
   });
-  //console.log(inView);
-  //console.log(inView1);
-  //console.log(inView2);
+  
   useEffect(() => {
     if (inView && inView1) {
       setCurrent('Булки')

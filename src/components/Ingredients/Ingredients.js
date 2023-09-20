@@ -17,12 +17,13 @@ function Ingredients({ item }) {
   const [state, setStatet] = React.useState(false);
   const data = useSelector(store => store.BurgerConstructorReducer.burgerConstructor);
   const dataBun = useSelector(store => store.BurgerConstructorReducer.bun);
+ // console.log(item)
   
 
   const dispatch = useDispatch();
   let counterUpdate = 0
-  const counterUpdatee = useMemo(() => data.filter(element => element.item._id === item._id).length, [data])
-  Object.keys(dataBun).length > 0 && dataBun.item._id === item._id ? counterUpdate = 2 : counterUpdate = 0
+  const counterUpdatee = useMemo(() => data.filter(element => element._id === item._id).length, [data])
+  Object.keys(dataBun).length > 0 && dataBun._id === item._id ? counterUpdate = 2 : counterUpdate = 0
   
 
   function modalOpen() {
@@ -38,7 +39,7 @@ function Ingredients({ item }) {
   }
   const [{ isDrag }, dragRef] = useDrag({
     type: "animal",
-    item: { item },
+    item: item ,
     collect: monitor => ({
       isDrag: monitor.isDragging()
     })
