@@ -1,28 +1,24 @@
 import { Button, ConstructorElement, CurrencyIcon, DragIcon } from '@ya.praktikum/react-developer-burger-ui-components';
-import React, { useMemo, useCallback } from 'react';
+import React, { useMemo } from 'react';
 import { useDrop } from "react-dnd";
 import { useDispatch, useSelector } from 'react-redux';
 import { v4 as uuidv4 } from 'uuid';
-import { ADD_INGREDIENT, UPDATE_INGREDIENT } from '../../services/burgerConstructor/action';
-import { ORDER } from '../../services/order/action';
+import { ADD_INGREDIENT } from '../../services/burgerConstructor/action';
 import { BurgerElement } from '../BurgerElement/BurgerElement';
 import Modal from '../Modal/Modal';
 import OrderDetails from '../OrderDetails/OrderDetails';
 import styles from './BurgerConstructor.module.css';
+import { loadOrder } from '../../services/order/action';
+import {getBurgerSelectorBun, getBurgerSelectorIngredients, getBurgerSelector} from '../../services/burgerConstructor/selector';
 
 
 
 
 function BurgerConstructor() {
   const [state, setState] = React.useState(false);
-  const data = useSelector(store => store.BurgerConstructorReducer.burgerConstructor);
-  const dataBun = useSelector(store => store.BurgerConstructorReducer.bun);
-  const burgersData = useSelector(store => store.BurgerConstructorReducer);
-
-  //console.log(data);
-  // console.log(dataBun);
-  // console.log(burgersData)
-
+  const data = useSelector(getBurgerSelectorIngredients);
+  const dataBun = useSelector(getBurgerSelectorBun);
+  const burgersData = useSelector(getBurgerSelector);
 
   const dispatch = useDispatch();
 
@@ -36,13 +32,16 @@ function BurgerConstructor() {
     },
   });
 
+ // console.log(dataBun._id);
+  const burgId = [];
+ 
   function modalOpen() {
     if (dataBun) {
+      data.map(el => burgId.push(el._id));
+      burgId.push(dataBun._id);
+    //  console.log(burgId, dataBun);
       setState(true);
-      dispatch({
-        type: ORDER,
-        key: uuidv4()
-      });
+      dispatch(loadOrder(burgId))
     }
   }
   function modalClose() {
@@ -55,12 +54,6 @@ function BurgerConstructor() {
       <OrderDetails />
     </Modal>
   }
-
-  // const arr = [1,2,3,4,5];
-  //  arr.splice(2, 0, arr.splice(3, 1)[0]);
-  //  console.log(arr);
-
-
 
 
   const totalPrice = useMemo(() => {

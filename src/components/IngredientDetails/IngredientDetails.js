@@ -6,11 +6,11 @@ import { Box } from '@ya.praktikum/react-developer-burger-ui-components';
 import { CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import { CloseIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import {useSelector} from 'react-redux';
+import {getDetalsSelector} from '../../services/moreDetails/selector';
 
 function IngredientDetails() {
 
-  const {details} = useSelector(store => store.detailsReducer);
-  //console.log(details);
+  const {details} = useSelector(getDetalsSelector);
 
   return (
     <>

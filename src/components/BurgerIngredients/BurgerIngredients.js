@@ -8,6 +8,7 @@ import { Box } from '@ya.praktikum/react-developer-burger-ui-components';
 import { CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import { useSelector, useDispatch } from 'react-redux';
 import { useInView } from 'react-intersection-observer';
+import {getIngrediensSelector} from '../../services/ingredients/selector';
 
 
 
@@ -16,7 +17,7 @@ import { useInView } from 'react-intersection-observer';
 function BurgerIngredients() {
   const [current, setCurrent] = useState('Булки');
   //@ts-ignore
-  const datas = useSelector(state => state.ingredientsReducer.ingredient);
+  const datas = useSelector(getIngrediensSelector);
  
 
   const arrBun = datas.filter(el => el.type === 'bun');

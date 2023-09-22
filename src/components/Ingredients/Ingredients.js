@@ -11,13 +11,14 @@ import { Counter } from '@ya.praktikum/react-developer-burger-ui-components';
 import { useDrag } from "react-dnd";
 import { useDispatch, useSelector } from 'react-redux';
 import { MORE_DETAILS } from '../../services/moreDetails/action';
+import {getBurgerSelectorIngredients} from '../../services/burgerConstructor/selector';
+import {getBurgerSelectorBun} from '../../services/burgerConstructor/selector';
 
 
 function Ingredients({ item }) {
   const [state, setStatet] = React.useState(false);
-  const data = useSelector(store => store.BurgerConstructorReducer.burgerConstructor);
-  const dataBun = useSelector(store => store.BurgerConstructorReducer.bun);
- // console.log(item)
+  const data = useSelector(getBurgerSelectorIngredients);
+  const dataBun = useSelector(getBurgerSelectorBun);
   
 
   const dispatch = useDispatch();

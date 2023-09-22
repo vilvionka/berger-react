@@ -1,4 +1,5 @@
 import { ConstructorElement, DragIcon } from '@ya.praktikum/react-developer-burger-ui-components';
+import PropTypes from 'prop-types';
 import { useDrag, useDrop } from "react-dnd";
 import { useDispatch } from 'react-redux';
 import { DELETE_INGREDIENT, UPDATE_INGREDIENT } from '../../services/burgerConstructor/action';
@@ -7,7 +8,7 @@ import { useRef } from 'react'
 
 
 
-export function BurgerElement({ el, moveCard, index }) {
+export function BurgerElement({ el, index }) {
 
   const dispatch = useDispatch();
 
@@ -92,4 +93,9 @@ export function BurgerElement({ el, moveCard, index }) {
         handleClose={handleClose} />
     </div>
   )
+}
+
+BurgerElement.propTypes = {
+  el: PropTypes.object.isRequired,
+  index: PropTypes.number.isRequired
 }

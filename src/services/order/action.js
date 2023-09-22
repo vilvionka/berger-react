@@ -1,1 +1,23 @@
-export const ORDER = 'ORDER'
+import { getOrderProject } from '../../utils/order-api';
+
+export const ADD_LOADING_ORDER = 'ADD_LOADING_ORDER';
+export const LOADING_ORDER = 'LOADING_ORDER';
+export const ERROR_ORDER = 'ERROR_ORDER';
+
+
+
+export const loadOrder = (ingredientsObject) => (dispatch) => {
+ dispatch({ type: LOADING_ORDER })
+ getOrderProject(ingredientsObject).then(res => {
+    dispatch({
+      type: ADD_LOADING_ORDER,
+      payload: res.orders
+    })
+  })
+  .catch(error =>{
+    dispatch({
+      type: ERROR_ORDER,
+      payload: error.message
+    })
+  })
+}

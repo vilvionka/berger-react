@@ -1,0 +1,1 @@
+export const getIngrediensSelector = store => store.ingredientsReducer.ingredient;
