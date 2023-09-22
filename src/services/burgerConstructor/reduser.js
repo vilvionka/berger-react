@@ -1,5 +1,5 @@
 
-import { ADD_INGREDIENT, DELETE_INGREDIENT, UPDATE_INGREDIENT } from './action';
+import { ADD_INGREDIENT, DELETE_INGREDIENT, UPDATE_INGREDIENT, CLEAR } from './action';
 
 const initialState = {
   bun: null,
@@ -21,14 +21,18 @@ export const BurgerConstructorReducer = (state = initialState, action) => {
         ...state,
         burgerConstructor: state.burgerConstructor.filter(el => el.key !== action.id)
       }
-      case UPDATE_INGREDIENT:
-        const ingredients = [...state.burgerConstructor];
-        ingredients.splice(action.hoverIndex, 0, ingredients.splice(action.dragIndex, 1)[0]);
-  
-        return {
-          ...state,
-          burgerConstructor: ingredients
-        };
+    case UPDATE_INGREDIENT:
+      const ingredients = [...state.burgerConstructor];
+      ingredients.splice(action.hoverIndex, 0, ingredients.splice(action.dragIndex, 1)[0]);
+      return {
+        ...state,
+        burgerConstructor: ingredients
+      };
+    case CLEAR:
+      return {
+        bun: null,
+        burgerConstructor: []
+      };
     default: {
       return state
     }

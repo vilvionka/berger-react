@@ -8,20 +8,20 @@ import { useDispatch, useSelector } from 'react-redux';
 import { loadIngredients } from '../../services/ingredients/action';
 import { HTML5Backend } from "react-dnd-html5-backend";
 import { DndProvider } from "react-dnd";
+import {getIngrediensSelectorMain} from '../../services/ingredients/selector';
 
 
 
 function App() {
   //@ts-ignore
-  const { loading, error, ingredient } = useSelector(store => store.ingredientsReducer)
- // console.log(ingredient)
+  const { loading, error, ingredient } = useSelector(getIngrediensSelectorMain)
+
 
   const dispatсh = useDispatch();
 
   useEffect(() => {
     //@ts-ignore
     dispatсh(loadIngredients())
-    //  getProductData();
   }, []);
 
 
