@@ -1,7 +1,7 @@
 import { ADD_LOADING_ORDER, LOADING_ORDER, ERROR_ORDER } from './action';
 
 const initialState = {
-  order: [],
+  order: null,
   loading: false,
   error: null
 }

@@ -11,12 +11,7 @@ import { CLEAR } from '../../services/burgerConstructor/action';
 
 
 function OrderDetails() {
-
   const { order } = useSelector(getOrderSelector);
-  let numberOrder = null
-  order.forEach(el => {
-    numberOrder = el.number;
-  });
 
   const dispatch = useDispatch();
 
@@ -29,7 +24,7 @@ function OrderDetails() {
   return (
     <>
 
-      <div className={`${styles.id} mt-30 mb-8 text text_type_digits-large`}>{numberOrder && numberOrder}</div>
+      <div className={`${styles.id} mt-30 mb-8 text text_type_digits-large`}>{order!== null && order.order.number}</div>
       <div className={`${styles.discription} text text_type_main-medium`}>идентификатор заказа</div>
       <div className={styles.icon}>
         <img src={icon} alt={'icon'} />

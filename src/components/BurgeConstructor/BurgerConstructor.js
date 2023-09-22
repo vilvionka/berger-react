@@ -39,7 +39,6 @@ function BurgerConstructor() {
     if (dataBun) {
       data.map(el => burgId.push(el._id));
       burgId.push(dataBun._id);
-    //  console.log(burgId, dataBun);
       setState(true);
       dispatch(loadOrder(burgId))
     }

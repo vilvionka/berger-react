@@ -11,7 +11,7 @@ export const loadOrder = (ingredientsObject) => (dispatch) => {
  getOrderProject(ingredientsObject).then(res => {
     dispatch({
       type: ADD_LOADING_ORDER,
-      payload: res.orders
+      payload: res
     })
   })
   .catch(error =>{
