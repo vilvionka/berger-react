@@ -1,0 +1,1 @@
+export const getDetalsSelector = store => store.detailsReducer;

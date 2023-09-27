@@ -1,6 +1,9 @@
 .box{
   width: 100%;
 }
+.boxTab{
+  display: flex;
+}
 .card{
   width: 100%;
   overflow-y: scroll;
