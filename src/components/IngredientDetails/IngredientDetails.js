@@ -11,6 +11,7 @@ import {getDetalsSelector} from '../../services/moreDetails/selector';
 function IngredientDetails() {
 
   const {details} = useSelector(getDetalsSelector);
+  console.log(details)
 
   return (
     <>

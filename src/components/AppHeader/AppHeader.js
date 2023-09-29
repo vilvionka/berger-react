@@ -4,6 +4,7 @@ import { BurgerIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import { ListIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import { ProfileIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import { Typography } from '@ya.praktikum/react-developer-burger-ui-components'
+import { Link } from 'react-router-dom';
 
 function AppHeader() {
   return (
@@ -15,12 +16,14 @@ function AppHeader() {
             <p className="text text_type_main-default">Конструктор</p>
           </div>
           <div className={styles.header_feed}>
-          <ListIcon type="secondary" />
+            <ListIcon type="secondary" />
             <p className="text text_type_main-default text_color_inactive">Лента заказов</p>
           </div>
         </div>
         <div className="header_logo">
-          <Logo />
+          <Link to = "/">
+            <Logo />
+          </Link>
         </div>
         <div className={styles.header_profile}>
           <ProfileIcon type="secondary" />

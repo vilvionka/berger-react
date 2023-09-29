@@ -1,48 +1,43 @@
-
-import React, { useEffect } from 'react';
+import { Routes, Route, useLocation, useNavigate } from 'react-router-dom';
+import { Home } from '../../pages/Home';
 import AppHeader from '../AppHeader/AppHeader';
-import BurgerIngredients from '../BurgerIngredients/BurgerIngredients';
-import BurgerConstructor from '../BurgeConstructor/BurgerConstructor';
-import styles from "./App.module.css";
-import { useDispatch, useSelector } from 'react-redux';
-import { loadIngredients } from '../../services/ingredients/action';
-import { HTML5Backend } from "react-dnd-html5-backend";
-import { DndProvider } from "react-dnd";
-import {getIngrediensSelectorMain} from '../../services/ingredients/selector';
+import Modal from '../Modal/Modal';
+import IngredientDetails from '../IngredientDetails/IngredientDetails';
 
 
 
 function App() {
-  //@ts-ignore
-  const { loading, error, ingredient } = useSelector(getIngrediensSelectorMain)
 
+  const location = useLocation();
+  const navigate = useNavigate();
+  const background = location.state && location.state.background;
 
-  const dispatсh = useDispatch();
-
-  useEffect(() => {
-    //@ts-ignore
-    dispatсh(loadIngredients())
-  }, []);
-
-
-  if (loading) {
-    return <p>Загрузка...</p>
-  }
-  if (!loading && error) {
-    return <p>{`Ошибка: ${error}`}</p>
-  }
+  const handleModalClose = () => {
+    // Возвращаемся к предыдущему пути при закрытии модалки
+    navigate(-1);
+  };
 
   return (
     <>
       <AppHeader />
-      <main>
-        <DndProvider backend={HTML5Backend}>
-          <div className={styles.container}>
-            {ingredient.length > 0 && <BurgerIngredients />}
-            {ingredient.length > 0 && <BurgerConstructor />}
-          </div>
-        </DndProvider>
-      </main>
+      <Routes location={background || location}>
+        <Route path='/' element={<Home />} />
+        <Route path='/ingredients/:ingredientId'
+               element={<IngredientDetails />} />
+      </Routes>
+
+      {background && (
+        <Routes>
+	        <Route
+	          path='/ingredients/:ingredientId'
+	          element={
+	            <Modal modalClose={handleModalClose}>
+	              <IngredientDetails />
+	            </Modal>
+	          }
+	        />
+        </Routes>
+      )}
     </>
   );
 }
