@@ -1,5 +1,5 @@
 
-const getResponseOrder = (res) => {
+export const getResponseOrder = (res) => {
   if (res.ok) {
     return res.json()
 
@@ -9,7 +9,6 @@ const getResponseOrder = (res) => {
 }
 //@ts-ignore
 export const getOrderProject = (ingredientsObjec) => {
-  console.log(ingredientsObjec)
   return fetch('https://norma.nomoreparties.space/api/orders', {
     method: "POST",
     headers: {

@@ -5,13 +5,23 @@ import { Typography } from '@ya.praktikum/react-developer-burger-ui-components';
 import { Box } from '@ya.praktikum/react-developer-burger-ui-components';
 import { CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import { CloseIcon } from '@ya.praktikum/react-developer-burger-ui-components';
-import {useSelector} from 'react-redux';
-import {getDetalsSelector} from '../../services/moreDetails/selector';
+import { useSelector } from 'react-redux';
+import { getIngrediensSelector } from '../../services/ingredients/selector';
+import { useParams } from 'react-router-dom';
+import { getIngrediensSelectorMain } from '../../services/ingredients/selector';
+import { useEffect } from 'react';
+import { loadIngredients } from '../../services/ingredients/action';
+import { useDispatch } from 'react-redux';
+
+
 
 function IngredientDetails() {
 
-  const {details} = useSelector(getDetalsSelector);
-  console.log(details)
+  let { ingredientId } = useParams();
+  const data = useSelector(getIngrediensSelector);
+  const elem = data.find(el => el._id === ingredientId);
+
+
 
   return (
     <>
@@ -19,25 +29,25 @@ function IngredientDetails() {
         <h5 className={'text text_type_main-large'}>Детали ингредиента</h5>
       </div>
       <div className={styles.img}>
-        <img src={details.image} alt={details.name} />
+        <img src={elem.image} alt={elem.name} />
       </div>
-      <div className={`${styles.modal_name} text text_type_main-medium mt-4 mb-8`}>{details.name}</div>
+      <div className={`${styles.modal_name} text text_type_main-medium mt-4 mb-8`}>{elem.name}</div>
       <div className={`${styles.discription} mb-15`}>
         <div>
           <p className={'text text_type_main-default'}>Калории,ккал</p>
-          <span>{details.calories}</span>
+          <span>{elem.calories}</span>
         </div>
         <div>
           <p className={'text text_type_main-default'}>Белки, г</p>
-          <span>{details.proteins}</span>
+          <span>{elem.proteins}</span>
         </div>
         <div>
           <p className={'text text_type_main-default'}>Жиры, г</p>
-          <span>{details.fat}</span>
+          <span>{elem.fat}</span>
         </div>
         <div>
           <p className={'text text_type_main-default'}>Углеводы, г</p>
-          <span>{details.carbohydrates}</span>
+          <span>{elem.carbohydrates}</span>
         </div>
       </div>
     </>

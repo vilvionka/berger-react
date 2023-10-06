@@ -34,3 +34,30 @@ header {
   width: 24px;
   height: 24px;
 }
+.header_profile_link{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  color: inherit;
+}
+.header_profile_link p{
+  transition: .3s;
+}
+.header_profile_link:hover p{
+   color: var(--text-dark-grey-secondary-text, #8585AD);
+}
+.header_profile_link.active p{
+  color: var(--text-dark-grey-secondary-text, #8585AD);
+}
+.active{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  color: inherit;
+  width: 500px;
+}
+.active p{
+  color: var(--text-dark-grey-secondary-text, #8585AD);
+}

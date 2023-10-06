@@ -11,3 +11,15 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+.active p{
+  color: var(--text-dark-grey-secondary-text, #8585AD);
+}
+.activeProfile, .noactiveProfile{
+  text-decoration: none;
+}
+.noactiveProfile p{
+  color: #8585AD;
+}
+.activeProfile p{
+  color: var(--text-primary-light-standart-text, #F2F2F3);
+}
