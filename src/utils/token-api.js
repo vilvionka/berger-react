@@ -16,7 +16,7 @@ export const refreshToken = () => {
 
 
 export const fetchWithRefresh = async (options) => {
-  console.log(options)
+
   try {
     const res = await fetch('https://norma.nomoreparties.space/api/auth/user', {
       headers: {
@@ -24,7 +24,7 @@ export const fetchWithRefresh = async (options) => {
         authorization: options
       }
     });
-    console.log(options)
+
     return await checkReponse(res);
   } catch (err) {
     if (err.message === "jwt expired") {
@@ -40,6 +40,54 @@ export const fetchWithRefresh = async (options) => {
           'Content-Type': 'application/json;charset=utf-8',
           authorization: options
         }
+      }); //повторяем запрос
+      return await checkReponse(res);
+    } else {
+      return Promise.reject(err);
+    }
+  }
+};
+
+export const fetchWithRefreshPath = async (name, email, password, options) => {
+  try {
+    const res = await fetch('https://norma.nomoreparties.space/api/auth/user', {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+        authorization: options
+      },
+      body: JSON.stringify({
+
+        "email": email,
+        "password": password,
+        "name": name
+
+      })
+    })
+
+    return await checkReponse(res);
+  } catch (err) {
+    if (err.message === "jwt expired") {
+      const refreshData = await refreshToken(); //обновляем токен
+      if (!refreshData.success) {
+        return Promise.reject(refreshData);
+      }
+      localStorage.setItem("refreshToken", refreshData.refreshToken);
+      localStorage.setItem("accessToken", refreshData.accessToken);
+      options.headers.authorization = refreshData.accessToken;
+      const res = await fetch('https://norma.nomoreparties.space/api/auth/user', {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+          authorization: options
+        },
+        body: JSON.stringify({
+
+          "email": email,
+          "password": password,
+          "name": name
+
+        })
       }); //повторяем запрос
       return await checkReponse(res);
     } else {

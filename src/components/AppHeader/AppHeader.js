@@ -10,7 +10,7 @@ function AppHeader() {
 
   const constructorFlag = useMatch('/')
   const lentaFlag = useMatch('/profile/orders')
-  const profileFlag = useMatch('/profile')
+  const profileFlag = useMatch('/profile/*')
   
   return (
     <header>

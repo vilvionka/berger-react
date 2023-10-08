@@ -45,7 +45,6 @@ export const getRessetPassword = (password, token) => {
 
 
 export const login = (email, password) => {
-  console.log(email, password)
   return fetch('https://norma.nomoreparties.space/api/auth/login', {
     method: "POST",
     headers: {
@@ -58,17 +57,39 @@ export const login = (email, password) => {
   }).then(getResponseOrder)
 }
 
-export const logout = () =>
-  new Promise((resolve, reject) => {
-    setTimeout(() => {
-      resolve();
-    }, 1000);
-  });
+export const logout = (token) => {
+  return fetch('https://norma.nomoreparties.space/api/auth/logout', {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({
+      "token": token,
+    })
+  }).then(getResponseOrder)
+}
+
+export const editLoad = (name, email, password, token) => {
+  return fetch('https://norma.nomoreparties.space/api/auth/user', {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      'authorization': token,
+    },
+    body: JSON.stringify({
+      "name": name,
+      "email": email,
+      "password": password,
+    })
+  }).then(getResponseOrder)
+}
+
 
 export const api = {
   getRegister,
   login,
   logout,
   getForgotPassword,
-  getRessetPassword
-};
+  getRessetPassword,
+  editLoad
+}

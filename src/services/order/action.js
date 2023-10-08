@@ -6,9 +6,9 @@ export const ERROR_ORDER = 'ERROR_ORDER';
 
 
 
-export const loadOrder = (ingredientsObject) => (dispatch) => {
+export const loadOrder = (ingredientsObject, token) => (dispatch) => {
  dispatch({ type: LOADING_ORDER })
- getOrderProject(ingredientsObject).then(res => {
+ getOrderProject(ingredientsObject, token).then(res => {
     dispatch({
       type: ADD_LOADING_ORDER,
       payload: res

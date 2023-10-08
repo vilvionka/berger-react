@@ -17,7 +17,7 @@ export const Register = () => {
 
   const onIconClick = () => {
     setTimeout(() => inputRef.current.focus(), 0)
-    alert('Icon Click Callback')
+    inputRef.current.type === 'text'? inputRef.current.type ='password': inputRef.current.type = 'text'
   }
 
   const register = () =>{

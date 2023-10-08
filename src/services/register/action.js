@@ -1,5 +1,6 @@
 import { api } from "../../utils/api";
 import { fetchWithRefresh } from "../../utils/token-api";
+import { fetchWithRefreshPath } from "../../utils/token-api";
 
 
 export const SET_AUTH_CHECKED = 'SET_AUTH_CHECKED';
@@ -30,18 +31,21 @@ export const getRegistration = (name, email, password) => {
 
 export const getUser = () => {
   return (dispatch) => {
-    return fetchWithRefresh(localStorage.getItem('accessToken'))
+    return fetchWithRefresh(localStorage.getItem('accessToken')).then((res) => {
+      dispatch(setUser(res.user));
+    })
   }
 }
 
-;
+  ;
 
 export const getForgotPassword = (email) => {
   return (dispatch) => {
     return api.getForgotPassword(email).then((res) => {
-     if(res.message === "Reset email sent"){
-      console.log('yes')
-     }
+      if (res.message === "Reset email sent") {
+        console.log('yes')
+        localStorage.setItem("flagForgotPassword", true);
+      }
     });
   }
 }
@@ -49,9 +53,9 @@ export const getForgotPassword = (email) => {
 export const getRessetPassword = (password, token) => {
   return (dispatch) => {
     return api.getRessetPassword(password, token).then((res) => {
-      if(res.message === "Password successfully reset"){
+      if (res.message === "Password successfully reset") {
         console.log('yes')
-       }
+      }
     });
   }
 }
@@ -83,10 +87,19 @@ export const checkUserAuth = () => {
   };
 };
 
-
-export const logout = () => {
+export const editLoad = (name, email, password, token) => {
   return (dispatch) => {
-    return api.logout().then(() => {
+    return fetchWithRefreshPath(name, email, password, token).then((res) => {
+      console.log(res)
+      dispatch(setUser(res.user));
+    })
+  }
+}
+
+
+export const logout = (token) => {
+  return (dispatch) => {
+    return api.logout(token).then((res) => {
       localStorage.removeItem("accessToken");
       localStorage.removeItem("refreshToken");
       dispatch(setUser(null));

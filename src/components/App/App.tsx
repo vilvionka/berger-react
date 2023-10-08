@@ -10,7 +10,7 @@ import { useEffect } from 'react';
 import { Login } from '../../pages/Login/Login';
 import { Register } from '../../pages/Register/Register';
 import { ForgotPassword } from '../../pages/ForgotPassword/ForgotPassword';
-import { ResetPassword } from '../../pages/ResetPassword/ResetPassword';
+import { RessetPassword } from '../../pages/RessetPassword/RessetPassword';
 import { Profile } from '../../pages/Profile/Profile';
 import { Orders } from '../../pages/Orders/Orders';
 import {ProfilePage} from '../../pages/ProfilePage/ProfilePage';
@@ -54,9 +54,9 @@ function App() {
         <Routes location={background || location}>
           <Route path='/' element={<Home />} />
           <Route path='/login' element={<OnlyUnAuth component={<Login/>}/>} />
-          <Route path='/register' element={<Register />} />
-          <Route path='/forgot-password' element={<ForgotPassword />} />
-          <Route path='/resset-password' element={<ResetPassword />} />
+          <Route path='/register' element={<OnlyUnAuth component={<Register/>}/>} />
+          <Route path='/forgot-password' element={<OnlyUnAuth component={<ForgotPassword/>}/>} />
+          <Route path='/resset-password' element={<OnlyUnAuth component={<RessetPassword/>}/>} />
           <Route path='/profile' element={<OnlyAuth component={<Profile/>} />}>
             <Route index element = {<ProfilePage/>}/>
             <Route path='orders' element = {<Orders/>}/>

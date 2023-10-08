@@ -1,11 +1,21 @@
 import styles from "../ForgotPassword/ForgotPassword.module.css";
 import { Input, Box, ShowIcon, Button } from '@ya.praktikum/react-developer-burger-ui-components';
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { useDispatch } from "react-redux";
-import {getRessetPassword} from '../../services/register/action'
+import { getRessetPassword } from '../../services/register/action'
+import { useNavigate } from "react-router-dom";
 
 
-export const ResetPassword = () => {
+export const RessetPassword = () => {
+
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (localStorage.getItem("flagForgotPassword") !== true) {
+      navigate('/');
+    }
+  }, []);
+
 
   const [value, setValue] = useState('');
   const [valueP, setValueP] = useState('');
@@ -14,15 +24,15 @@ export const ResetPassword = () => {
 
   const onIconClick = () => {
     setTimeout(() => inputRef.current.focus(), 0)
-    alert('Icon Click Callback')
+    inputRef.current.type === 'text' ? inputRef.current.type = 'password' : inputRef.current.type = 'text'
   }
 
   const dispatch = useDispatch();
 
-  const ressetPassword = () =>{
-    if(value!== '' && valueP !== '' ){
-         //@ts-ignore
-        dispatch(getRessetPassword(value, valueP))
+  const ressetPassword = () => {
+    if (value !== '' && valueP !== '') {
+      //@ts-ignore
+      dispatch(getRessetPassword(value, valueP))
     }
 
   }
@@ -58,7 +68,7 @@ export const ResetPassword = () => {
         />
         <div className={`${styles.button} mt-6`}>
           <Button htmlType="button" type="primary" size="medium" onClick={ressetPassword}>
-          Сохранить
+            Сохранить
           </Button>
         </div>
         <div className={`${styles.register} mt-20`}>
