@@ -17,13 +17,14 @@ export const Register = () => {
 
   const onIconClick = () => {
     setTimeout(() => inputRef.current.focus(), 0)
-    inputRef.current.type === 'text'? inputRef.current.type ='password': inputRef.current.type = 'text'
+    inputRef.current.type === 'text' ? inputRef.current.type = 'password' : inputRef.current.type = 'text'
   }
 
-  const register = () =>{
-    if(valueName!== '' && valueEmail !== '' ){
-      if(valuePassword !== ''){
-         //@ts-ignore
+  const register = (e) => {
+    e.preventDefault();
+    if (valueName !== '' && valueEmail !== '') {
+      if (valuePassword !== '') {
+        //@ts-ignore
         dispatch(getRegistration(valueName, valueEmail, valuePassword))
       }
     }
@@ -34,47 +35,49 @@ export const Register = () => {
     <>
       <div className={styles.box}>
         <div className={styles.headling}>Регистрация</div>
-        <Input
-          type={'text'}
-          placeholder={'Имя'}
-          onChange={e => setValueName(e.target.value)}
-          name={'name'}
-          error={false}
-          errorText={'Ошибка'}
-          size={'default'}
-          extraClass="mt-6"
-          value={valueName}
-        />
-        <Input
-          type={'text'}
-          placeholder={'E-mail'}
-          onChange={e => setValueEmail(e.target.value)}
-          name={'email'}
-          error={false}
-          errorText={'Ошибка'}
-          size={'default'}
-          extraClass="mt-6"
-          value={valueEmail}
-        />
-        <Input
-          type={'text'}
-          placeholder={'Пароль'}
-          icon={'ShowIcon'}
-          onChange={e => setValuePassword(e.target.value)}
-          ref={inputRef}
-          onIconClick={onIconClick}
-          name={'password'}
-          error={false}
-          errorText={'Ошибка'}
-          size={'default'}
-          extraClass="mt-6"
-          value={valuePassword}
-        />
-        <div className={`${styles.button} mt-6`}>
-          <Button htmlType="submit" type="primary" size="medium" onClick={register}>
-            Зарегистрироваться
-          </Button>
-        </div>
+        <form onSubmit={register}>
+          <Input
+            type={'text'}
+            placeholder={'Имя'}
+            onChange={e => setValueName(e.target.value)}
+            name={'name'}
+            error={false}
+            errorText={'Ошибка'}
+            size={'default'}
+            extraClass="mt-6"
+            value={valueName}
+          />
+          <Input
+            type={'text'}
+            placeholder={'E-mail'}
+            onChange={e => setValueEmail(e.target.value)}
+            name={'email'}
+            error={false}
+            errorText={'Ошибка'}
+            size={'default'}
+            extraClass="mt-6"
+            value={valueEmail}
+          />
+          <Input
+            type={'text'}
+            placeholder={'Пароль'}
+            icon={'ShowIcon'}
+            onChange={e => setValuePassword(e.target.value)}
+            ref={inputRef}
+            onIconClick={onIconClick}
+            name={'password'}
+            error={false}
+            errorText={'Ошибка'}
+            size={'default'}
+            extraClass="mt-6"
+            value={valuePassword}
+          />
+          <div className={`${styles.button} mt-6`}>
+            <Button htmlType="submit" type="primary" size="medium">
+              Зарегистрироваться
+            </Button>
+          </div>
+        </form>
         <div className={`${styles.register} mt-20`}>
           <p className={`${styles.text} `}>Уже зарегистрированы?</p>
           <Link to='/login' className={styles.link}>

@@ -37,28 +37,9 @@ export const getUser = () => {
   }
 }
 
-  ;
+ 
 
-export const getForgotPassword = (email) => {
-  return (dispatch) => {
-    return api.getForgotPassword(email).then((res) => {
-      if (res.message === "Reset email sent") {
-        console.log('yes')
-        localStorage.setItem("flagForgotPassword", true);
-      }
-    });
-  }
-}
 
-export const getRessetPassword = (password, token) => {
-  return (dispatch) => {
-    return api.getRessetPassword(password, token).then((res) => {
-      if (res.message === "Password successfully reset") {
-        console.log('yes')
-      }
-    });
-  }
-}
 
 export const login = (email, password) => {
   return (dispatch) => {

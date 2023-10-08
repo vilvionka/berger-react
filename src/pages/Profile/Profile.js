@@ -9,7 +9,6 @@ export const Profile = () => {
   const dispatch = useDispatch();
 
 const entrance = () =>{
-  console.log(localStorage.getItem("refreshToken"))
   dispatch(logout(localStorage.getItem("refreshToken")))
 }
 

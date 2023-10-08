@@ -16,12 +16,13 @@ export const Login = () => {
 
   const onIconClick = () => {
     setTimeout(() => inputRef.current.focus(), 0)
-   inputRef.current.type === 'text'? inputRef.current.type ='password': inputRef.current.type = 'text'
+    inputRef.current.type === 'text' ? inputRef.current.type = 'password' : inputRef.current.type = 'text'
   }
 
-  const loginCheck = () => {
+  const loginCheck = (e) => {
     if (value !== '' && valueP !== '') {
       //@ts-ignore
+      e.preventDefault();
       dispatch(login(value, valueP))
     }
 
@@ -31,36 +32,38 @@ export const Login = () => {
     <>
       <div className={styles.box}>
         <div className={styles.headling}>Вход</div>
-        <Input
-          type={'text'}
-          placeholder={'E-mail'}
-          onChange={e => setValue(e.target.value)}
-          name={'name'}
-          error={false}
-          errorText={'Ошибка'}
-          size={'default'}
-          extraClass="mt-6"
-          value={value}
-        />
-        <Input
-          type={'text'}
-          placeholder={'Пароль'}
-          icon={'ShowIcon'}
-          onChange={e => setValueP(e.target.value)}
-          ref={inputRef}
-          onIconClick={onIconClick}
-          name={'name'}
-          error={false}
-          errorText={'Ошибка'}
-          size={'default'}
-          extraClass="mt-6"
-          value={valueP}
-        />
-        <div className={`${styles.button} mt-6`}>
-          <Button htmlType="button" type="primary" size="medium" onClick={loginCheck}>
-            Войти
-          </Button>
-        </div>
+        <form onSubmit={loginCheck}>
+          <Input
+            type={'text'}
+            placeholder={'E-mail'}
+            onChange={e => setValue(e.target.value)}
+            name={'name'}
+            error={false}
+            errorText={'Ошибка'}
+            size={'default'}
+            extraClass="mt-6"
+            value={value}
+          />
+          <Input
+            type={'text'}
+            placeholder={'Пароль'}
+            icon={'ShowIcon'}
+            onChange={e => setValueP(e.target.value)}
+            ref={inputRef}
+            onIconClick={onIconClick}
+            name={'name'}
+            error={false}
+            errorText={'Ошибка'}
+            size={'default'}
+            extraClass="mt-6"
+            value={valueP}
+          />
+          <div className={`${styles.button} mt-6`}>
+            <Button htmlType="submit" type="primary" size="medium">
+              Войти
+            </Button>
+          </div>
+        </form>
         <div className={`${styles.register} mt-20`}>
           <p className={`${styles.text} `}>Вы — новый пользователь?</p>
           <Link to='/register' className={styles.link}>
