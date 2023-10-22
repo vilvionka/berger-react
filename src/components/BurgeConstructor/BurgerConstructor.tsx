@@ -15,10 +15,18 @@ import { useNavigate } from 'react-router-dom';
 
 
 
+interface Idata {
+  key: number;
+  _id: number;
+  name: string;
+  image: string;
+  price: number;
+}
+
 
 function BurgerConstructor() {
   const [state, setState] = React.useState(false);
-  const data = useSelector(getBurgerSelectorIngredients);
+  const data: Idata[] = useSelector(getBurgerSelectorIngredients);
   const dataBun = useSelector(getBurgerSelectorBun);
   const burgersData = useSelector(getBurgerSelector);
 
@@ -26,7 +34,7 @@ function BurgerConstructor() {
 
   const [, dropTarget] = useDrop({
     accept: "animal",
-    drop(item) {
+    drop(item: object) {
       dispatch({
         type: ADD_INGREDIENT,
         payload: { ...item, key: uuidv4() }
@@ -36,14 +44,22 @@ function BurgerConstructor() {
 
   const { user } = useSelector(getRegisterSelectorUser);
   const navigate = useNavigate();
-  const burgId = [];
+  const burgId: number[] = [];
+
+  interface Iel {
+    _id: number;
+    name: string;
+
+  }
 
   function modalOpen() {
     if (user) {
       if (dataBun) {
+
         data.map(el => burgId.push(el._id));
         burgId.push(dataBun._id);
         setState(true);
+        //@ts-ignore
         dispatch(loadOrder(burgId, localStorage.getItem('accessToken')))
       }
     } else {
@@ -66,7 +82,7 @@ function BurgerConstructor() {
     let sum = 0;
     if (data.length > 0) {
       let value = 0
-      sum = data.reduce((accumulator, item) => {
+      sum = data.reduce((accumulator: number, item: { price: number }) => {
         return accumulator + Number(item.price)
       }, value)
     }
@@ -95,7 +111,7 @@ function BurgerConstructor() {
             }
           </div>
           <div className={`${styles.box_constructor} custom-scroll`} >
-            {data.length > 0 && data.map((el, index) =>
+            {data.length > 0 && data.map((el: { key: number; name: string; image: string; price: number }, index: number) =>
               <BurgerElement el={el} key={el.key} index={index} />
             )}
           </div>

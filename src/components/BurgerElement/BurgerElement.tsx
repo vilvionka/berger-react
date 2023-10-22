@@ -6,9 +6,19 @@ import { DELETE_INGREDIENT, UPDATE_INGREDIENT } from '../../services/burgerConst
 import styles from './BurgerElement.module.css';
 import { useRef } from 'react'
 
+type Tel = {
+  key: number;
+  name: string;
+  price: number;
+  image: string;
+}
 
+type TBurgerElementProps = {
+  el: Tel;
+  index: number;
+}
 
-export function BurgerElement({ el, index }) {
+export function BurgerElement({ el, index }: TBurgerElementProps) {
 
   const dispatch = useDispatch();
 
@@ -19,6 +29,14 @@ export function BurgerElement({ el, index }) {
     });
   }
 
+  type Titem = {
+    index: number;
+  }
+
+  type Thover = {
+    item: Titem;
+    monitor: object;
+  }
 
   const ref = useRef(null);
   const [{ handlerId }, drop] = useDrop({
