@@ -1,6 +1,6 @@
 import { refreshToken } from "./token-api";
 
-export const getResponseOrder = (res) => {
+export const getResponseOrder = (res:Response): Promise<any> => {
   if (res.ok) {
     return res.json()
 
@@ -8,21 +8,9 @@ export const getResponseOrder = (res) => {
   return Promise.reject(`Ошибка ${res.status}`);
 
 }
-//@ts-ignore
-//export const getOrderProject = (ingredientsObjec, token) => {
-// return fetch('https://norma.nomoreparties.space/api/orders', {
-//   method: "POST",
-//   headers: {
-//     "Content-Type": "application/json",
-//     authorization: token,
-//   },
-//   body: JSON.stringify({
-//     "ingredients": ingredientsObjec
-//   })
-// }).then(getResponseOrder)
-//}
 
-export const getOrderProject = async (ingredientsObjec, token) => {
+
+export const getOrderProject = async (ingredientsObjec:any, token:any) => {
 
   try {
     const res = await fetch('https://norma.nomoreparties.space/api/orders', {
@@ -37,7 +25,7 @@ export const getOrderProject = async (ingredientsObjec, token) => {
     });
 
     return await getResponseOrder(res);
-  } catch (err) {
+  } catch (err:any) {
     if (err.message === "jwt expired") {
       const refreshData = await refreshToken(); //обновляем токен
       if (!refreshData.success) {

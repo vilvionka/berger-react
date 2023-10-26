@@ -1,9 +1,10 @@
 import styles from "./ProfilePage.module.css";
-import { Input, Box, EditIcon, Button } from '@ya.praktikum/react-developer-burger-ui-components';
-import { useRef, useState } from 'react';
+import { Input, EditIcon, Button } from '@ya.praktikum/react-developer-burger-ui-components';
+import React, { useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getRegisterSelector } from '../../services/register/selector';
 import { editLoad } from '../../services/register/action';
+import Box from '@ya.praktikum/react-developer-burger-ui-components';
 
 
 export const ProfilePage = () => {
@@ -14,20 +15,20 @@ export const ProfilePage = () => {
   const [valueP, setValueP] = useState('');
   const [valueM, setValueM] = useState(email);
 
-  const inputRef1 = useRef(null)
+  const inputRef1 = useRef<HTMLInputElement>(null)
 
   const onIconClickName = () => {
-    setTimeout(() => inputRef1.current.focus(), 0)  
+    setTimeout(() => inputRef1.current!.focus(), 0)  
   }
-  const inputRef2 = useRef(null)
+  const inputRef2 = useRef<HTMLInputElement>(null)
 
   const onIconClickEmail = () => {
-    setTimeout(() => inputRef2.current.focus(), 0)
+    setTimeout(() => inputRef2.current!.focus(), 0)
   }
-  const inputRef3 = useRef(null)
+  const inputRef3 = useRef<HTMLInputElement>(null)
 
   const onIconClickPassword = () => {
-    setTimeout(() => inputRef3.current.focus(), 0)
+    setTimeout(() => inputRef3.current!.focus(), 0)
   }
 
   let display = 'none';
@@ -37,10 +38,11 @@ export const ProfilePage = () => {
   const token = localStorage.getItem('accessToken');
   const dispatch = useDispatch();
 
-  const edit = (e) => {
+  const edit = (e:React.SyntheticEvent) => {
     e.preventDefault();
     if (valueP !== '' && valueM !== '') {
       if (valueP !== '') {
+        //@ts-ignore
         dispatch(editLoad(value, valueM, valueP, token))
       }
     }

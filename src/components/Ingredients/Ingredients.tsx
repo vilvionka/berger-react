@@ -16,9 +16,13 @@ import { useLocation, Link } from 'react-router-dom';
 import { Iingredient } from '../../services/ingredients/type';
 import { type } from '@testing-library/user-event/dist/type';
 
+interface IIngredientsProps {
+  item: Iingredient;
+}
 
+function Ingredients(props:IIngredientsProps): JSX.Element {
 
-function Ingredients(item:Iingredient): JSX.Element {
+  const {item} = props;
 
   const data: Iingredient[] = useSelector(getBurgerSelectorIngredients);
   const dataBun = useSelector(getBurgerSelectorBun);

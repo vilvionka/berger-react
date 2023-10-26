@@ -1,4 +1,5 @@
-const checkReponse = (res) => {
+const checkReponse = (res:Response): Promise<any> => {
+  console.log(res)
   return res.ok ? res.json() : res.json().then((err) => Promise.reject(err));
 };
 
@@ -15,7 +16,7 @@ export const refreshToken = () => {
 };
 
 
-export const fetchWithRefresh = async (options) => {
+export const fetchWithRefresh = async (options: any) => {
 
   try {
     const res = await fetch('https://norma.nomoreparties.space/api/auth/user', {
@@ -26,7 +27,7 @@ export const fetchWithRefresh = async (options) => {
     });
 
     return await checkReponse(res);
-  } catch (err) {
+  } catch (err:any) {
     if (err.message === "jwt expired") {
       const refreshData = await refreshToken(); //обновляем токен
       if (!refreshData.success) {
@@ -48,7 +49,7 @@ export const fetchWithRefresh = async (options) => {
   }
 };
 
-export const fetchWithRefreshPath = async (name, email, password, options) => {
+export const fetchWithRefreshPath = async (name:string, email: string, password: string, options:any) => {
   try {
     const res = await fetch('https://norma.nomoreparties.space/api/auth/user', {
       method: "PATCH",
@@ -66,7 +67,7 @@ export const fetchWithRefreshPath = async (name, email, password, options) => {
     })
 
     return await checkReponse(res);
-  } catch (err) {
+  } catch (err:any) {
     if (err.message === "jwt expired") {
       const refreshData = await refreshToken(); //обновляем токен
       if (!refreshData.success) {

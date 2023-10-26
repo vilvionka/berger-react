@@ -1,9 +1,10 @@
 import styles from "./Register.module.css";
-import { Input, Box, ShowIcon, Button } from '@ya.praktikum/react-developer-burger-ui-components';
-import { useRef, useState } from 'react';
+import { Input, ShowIcon, Button } from '@ya.praktikum/react-developer-burger-ui-components';
+import React, { useRef, useState } from 'react';
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { getRegistration } from '../../services/register/action';
+import Box from '@ya.praktikum/react-developer-burger-ui-components';
 
 
 export const Register = () => {
@@ -12,15 +13,15 @@ export const Register = () => {
   const [valueEmail, setValueEmail] = useState('');
   const [valuePassword, setValuePassword] = useState('');
 
-  const inputRef = useRef(null)
+  const inputRef = useRef<HTMLInputElement>(null)
   const dispatch = useDispatch();
 
   const onIconClick = () => {
-    setTimeout(() => inputRef.current.focus(), 0)
-    inputRef.current.type === 'text' ? inputRef.current.type = 'password' : inputRef.current.type = 'text'
+    setTimeout(() => inputRef.current!.focus(), 0)
+    inputRef.current!.type === 'text' ? inputRef.current!.type = 'password' : inputRef.current!.type = 'text'
   }
 
-  const register = (e) => {
+  const register = (e:React.SyntheticEvent) => {
     e.preventDefault();
     if (valueName !== '' && valueEmail !== '') {
       if (valuePassword !== '') {

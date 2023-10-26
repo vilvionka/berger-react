@@ -5,6 +5,7 @@ export interface Iingredient{
   name: string;
   type: string;
   fat: number;
+  proteins: number;
   carbohydrates: number;
   calories: number;
   price: string;

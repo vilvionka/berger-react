@@ -9,6 +9,7 @@ export const Profile = () => {
   const dispatch = useDispatch();
 
 const entrance = () =>{
+  //@ts-ignore
   dispatch(logout(localStorage.getItem("refreshToken")))
 }
 
