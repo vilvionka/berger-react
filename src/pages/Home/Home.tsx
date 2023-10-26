@@ -1,4 +1,4 @@
-import BurgerIngredients from '../../components/BurgerIngredients/BurgerIngredients';
+import {BurgerIngredients} from '../../components/BurgerIngredients/BurgerIngredients';
 import BurgerConstructor from '../../components/BurgeConstructor/BurgerConstructor';
 import styles from "./Home.module.css";
 import { HTML5Backend } from "react-dnd-html5-backend";
@@ -8,7 +8,7 @@ import { useSelector } from 'react-redux';
 
 
 
-export const Home = () => {
+export const Home = ():JSX.Element => {
 
   const { ingredient } = useSelector(getIngrediensSelectorMain);
   return (
