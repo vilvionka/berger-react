@@ -11,7 +11,7 @@ import { CLEAR } from '../../services/burgerConstructor/action';
 
 
 function OrderDetails() {
-  const { order } = useSelector(getOrderSelector);
+  const { order, loading } = useSelector(getOrderSelector);
 
   const dispatch = useDispatch();
 
@@ -21,10 +21,20 @@ function OrderDetails() {
     });
   }, []);
 
+  if (order === null && loading === true) {
+    return (
+      <>
+        <div className={styles.stub}>
+          <p className={`${styles.text}  text text_type_main-medium`}>Заказ собирается...</p>
+        </div>
+      </>
+    )
+  }
+
   return (
     <>
 
-      <div className={`${styles.id} mt-30 mb-8 text text_type_digits-large`}>{order!== null && order.order.number}</div>
+      <div className={`${styles.id} mt-30 mb-8 text text_type_digits-large`}>{order !== null && order.order.number}</div>
       <div className={`${styles.discription} text text_type_main-medium`}>идентификатор заказа</div>
       <div className={styles.icon}>
         <img src={icon} alt={'icon'} />

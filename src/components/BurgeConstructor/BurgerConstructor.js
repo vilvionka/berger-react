@@ -9,7 +9,9 @@ import Modal from '../Modal/Modal';
 import OrderDetails from '../OrderDetails/OrderDetails';
 import styles from './BurgerConstructor.module.css';
 import { loadOrder } from '../../services/order/action';
-import {getBurgerSelectorBun, getBurgerSelectorIngredients, getBurgerSelector} from '../../services/burgerConstructor/selector';
+import { getBurgerSelectorBun, getBurgerSelectorIngredients, getBurgerSelector } from '../../services/burgerConstructor/selector';
+import { getRegisterSelectorUser } from '../../services/register/selector';
+import { useNavigate } from 'react-router-dom';
 
 
 
@@ -32,15 +34,20 @@ function BurgerConstructor() {
     },
   });
 
- // console.log(dataBun._id);
+  const { user } = useSelector(getRegisterSelectorUser);
+  const navigate = useNavigate();
   const burgId = [];
- 
+
   function modalOpen() {
-    if (dataBun) {
-      data.map(el => burgId.push(el._id));
-      burgId.push(dataBun._id);
-      setState(true);
-      dispatch(loadOrder(burgId))
+    if (user) {
+      if (dataBun) {
+        data.map(el => burgId.push(el._id));
+        burgId.push(dataBun._id);
+        setState(true);
+        dispatch(loadOrder(burgId, localStorage.getItem('accessToken')))
+      }
+    } else {
+      navigate('/login')
     }
   }
   function modalClose() {

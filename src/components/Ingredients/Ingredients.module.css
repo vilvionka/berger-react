@@ -22,6 +22,14 @@
   flex-direction: column;
   cursor: pointer;
   position: relative;
+  text-decoration: none;
+  color: inherit;
+}
+.tab_box_item_li{
+  list-style-type: none;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
 }
 .tab_box_item img{
   width: 240px;

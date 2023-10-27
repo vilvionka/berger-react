@@ -1,1 +1,0 @@
-export const MORE_DETAILS = 'MORE_DETAILS';
