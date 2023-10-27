@@ -1,15 +1,23 @@
 import { getResponseOrder } from "./order-api";
+import {Iingredient} from '../services/ingredients/type';
+
+
 
 // В проектной работе эта функция будет обращаться к серверу
 // и обновлять токены если они уже устарели.
 
-interface IgetRegister{
-  name: string;
-  email: string;
-  password: number;
+interface IgetRegisterApi{
+  accessToken: string;
+  refreshToken: string;
+  success: boolean;
+  user:{
+    email: string;
+    name: string;
+  }
+
 }
 
-export const getRegister = (name:string, email:string, password:number) => {
+export const getRegister = (name:string, email:string, password:number):Promise<IgetRegisterApi> => {
   
   return fetch('https://norma.nomoreparties.space/api/auth/register', {
     method: "POST",
@@ -24,7 +32,12 @@ export const getRegister = (name:string, email:string, password:number) => {
   }).then(getResponseOrder)
 }
 
-export const getForgotPassword = (email: string) => {
+interface IgetForgotPasswordApi{
+  message: string;
+  success: boolean;
+}
+
+export const getForgotPassword = (email: string):Promise<IgetForgotPasswordApi> => {
   return fetch(' https://norma.nomoreparties.space/api/password-reset', {
     method: "POST",
     headers: {
@@ -36,7 +49,7 @@ export const getForgotPassword = (email: string) => {
   }).then(getResponseOrder)
 }
 
-export const getRessetPassword = (password: string, token: string) => {
+export const getRessetPassword = (password: string, token: string):Promise<IgetForgotPasswordApi> => {
   return fetch('https://norma.nomoreparties.space/api/password-reset/reset', {
     method: "POST",
     headers: {
@@ -50,7 +63,7 @@ export const getRessetPassword = (password: string, token: string) => {
 }
 
 
-export const login = (email: string, password: string) => {
+export const login = (email: string, password: string):Promise<IgetRegisterApi> => {
   return fetch('https://norma.nomoreparties.space/api/auth/login', {
     method: "POST",
     headers: {
@@ -75,7 +88,7 @@ export const logout = (token: string) => {
   }).then(getResponseOrder)
 }
 
-export const editLoad = (name: string, email: string, password: string, token: string) => {
+export const editLoad = (name: string, email: string, password: string, token: string):Promise<Iingredient> => {
   return fetch('https://norma.nomoreparties.space/api/auth/user', {
     method: "POST",
     headers: {

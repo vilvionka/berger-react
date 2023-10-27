@@ -30,8 +30,9 @@ export const RessetPassword = () => {
   const ressetPassword = (e:React.SyntheticEvent) => {
     e.preventDefault();
     if (value !== '' && valueP !== '') {
-      //@ts-ignore
+      
       getRessetPassword(value, valueP).then((res) => {
+       
         if (res.message === "Password successfully reset") {
           navigate('/')
         }

@@ -1,5 +1,4 @@
 const checkReponse = (res:Response): Promise<any> => {
-  console.log(res)
   return res.ok ? res.json() : res.json().then((err) => Promise.reject(err));
 };
 

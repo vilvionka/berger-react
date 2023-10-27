@@ -1,3 +1,6 @@
+import {Iingredient} from '../services/ingredients/type';
+
+
 
 const getResponse = (res:Response):Promise<any> => {
   if (res.ok) {
@@ -7,7 +10,12 @@ const getResponse = (res:Response):Promise<any> => {
 
 }
 
-export const getProjectIngredients = () => {
+export interface IingredientApi{
+  data: Iingredient[];
+  success: boolean;
+}
+
+export const getProjectIngredients = ():Promise<Array<Iingredient>> => {
     return fetch('https://norma.nomoreparties.space/api/ingredients/').then(getResponse)
   
 }

@@ -19,8 +19,9 @@ export const ForgotPassword = () => {
   const forgotPassword = (e:React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (value !== '') {
-      //@ts-ignore
+      
       getForgotPassword(value).then((res) => {
+       
         if (res.message === "Reset email sent") {
           localStorage.setItem("flagForgotPassword", 'true');
           navigate('/resset-password')
