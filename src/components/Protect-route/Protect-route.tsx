@@ -1,12 +1,20 @@
 import { useSelector } from "react-redux";
 import { Navigate, useLocation } from "react-router-dom";
+import { Interface } from "readline";
+import {getRegisterSelector} from '../../services/register/selector';
+import {getRegisterSelectorIsAuthChecked} from '../../services/register/selector'
 
-const Protected = ({ onlyUnAuth = false, component }) => {
+interface IProtectedProps {
+  onlyUnAuth?: false| true;
+  component: JSX.Element;
+}
+
+const Protected = ({ onlyUnAuth = false, component }:IProtectedProps):JSX.Element|null => {
   // isAuthChecked это флаг, показывающий что проверка токена произведена
   // при этом результат этой проверки не имеет значения, важно только,
   // что сам факт проверки имел место.
-  const isAuthChecked = useSelector((store) => store.reduserRegister.isAuthChecked);
-  const user = useSelector((store) => store.reduserRegister.user);
+  const isAuthChecked = useSelector(getRegisterSelectorIsAuthChecked);
+  const user = useSelector(getRegisterSelector);
   const location = useLocation();
 
   if (!isAuthChecked) {
@@ -33,6 +41,10 @@ const Protected = ({ onlyUnAuth = false, component }) => {
 };
 
 export const OnlyAuth = Protected;
-export const OnlyUnAuth = ({ component }) => (
+
+interface IOnlyUnAuthProps{
+  component:JSX.Element;
+}
+export const OnlyUnAuth = ({ component }: IOnlyUnAuthProps):JSX.Element => (
   <Protected onlyUnAuth={true} component={component} />
 );

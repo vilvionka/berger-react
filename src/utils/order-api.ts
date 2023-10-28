@@ -1,6 +1,7 @@
 import { refreshToken } from "./token-api";
+import {Iingredient} from '../services/ingredients/type';
 
-export const getResponseOrder = (res) => {
+export const getResponseOrder = (res:Response): Promise<any> => {
   if (res.ok) {
     return res.json()
 
@@ -8,21 +9,29 @@ export const getResponseOrder = (res) => {
   return Promise.reject(`Ошибка ${res.status}`);
 
 }
-//@ts-ignore
-//export const getOrderProject = (ingredientsObjec, token) => {
-// return fetch('https://norma.nomoreparties.space/api/orders', {
-//   method: "POST",
-//   headers: {
-//     "Content-Type": "application/json",
-//     authorization: token,
-//   },
-//   body: JSON.stringify({
-//     "ingredients": ingredientsObjec
-//   })
-// }).then(getResponseOrder)
-//}
+interface IgetOrderProjectApi{
+  name: string;
+  order: {
+    createdAt: string;
+    ingredients: Iingredient[];
+    name: string;
+    number: number;
+    owner:{
+      name: string;
+      email: string;
+      createdAt: string;
+      updatedAt:string;
+    }
+    price: number;
+    status: string;
+    updatedAt: string;
+    _id: string;
 
-export const getOrderProject = async (ingredientsObjec, token) => {
+  }
+}
+
+
+export const getOrderProject = async (ingredientsObjec:[string], token: any):Promise<IgetOrderProjectApi> => {
 
   try {
     const res = await fetch('https://norma.nomoreparties.space/api/orders', {
@@ -37,7 +46,7 @@ export const getOrderProject = async (ingredientsObjec, token) => {
     });
 
     return await getResponseOrder(res);
-  } catch (err) {
+  } catch (err:any) {
     if (err.message === "jwt expired") {
       const refreshData = await refreshToken(); //обновляем токен
       if (!refreshData.success) {

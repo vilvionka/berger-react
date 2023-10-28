@@ -1,26 +1,34 @@
-import React, { Children, useEffect } from 'react';
+import { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { createPortal } from 'react-dom';
 import ModalOverlay from '../ModalOverlay/ModalOverlay';
 import styles from './Modal.module.css';
 import { CloseIcon } from '@ya.praktikum/react-developer-burger-ui-components';
+
+
+
 const modalRoot = document.getElementById("react_modals");
 
-function Modal({ children, modalClose }) {
+interface IModalProps{
+  children:JSX.Element;
+  modalClose: ()=> void;
+}
+
+function Modal({ children, modalClose }:IModalProps):JSX.Element {
 
 
   useEffect(() => {
-    function closeByEscape(evt) {
-      if(evt.key === 'Escape') {
+    function closeByEscape(evt:KeyboardEvent) {
+      if (evt.key === 'Escape') {
         modalClose();
       }
     }
-      document.addEventListener('keydown', closeByEscape);
-      return () => {
-        document.removeEventListener('keydown', closeByEscape);
-      }
+    document.addEventListener('keydown', closeByEscape);
+    return () => {
+      document.removeEventListener('keydown', closeByEscape);
+    }
 
-  }, []) 
+  }, [])
 
 
 
@@ -35,7 +43,7 @@ function Modal({ children, modalClose }) {
       </div>
     </>
 
-  ), modalRoot)
+  ), modalRoot!)
 }
 
 Modal.propTypes = {

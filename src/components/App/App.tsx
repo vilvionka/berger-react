@@ -16,12 +16,13 @@ import { Orders } from '../../pages/Orders/Orders';
 import {ProfilePage} from '../../pages/ProfilePage/ProfilePage';
 import {checkUserAuth} from '../../services/register/action';
 import { OnlyAuth, OnlyUnAuth } from "../Protect-route/Protect-route";
+import { IData } from '../../services/ingredients/type';
 
 
 
-function App() {
+function App():JSX.Element {
 
-  const { loading, error, ingredient } = useSelector(getIngrediensSelectorMain);
+  const { loading, error, ingredient }: IData = useSelector(getIngrediensSelectorMain);
 
   const dispatсh = useDispatch();
 

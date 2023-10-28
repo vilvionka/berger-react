@@ -4,11 +4,22 @@ import { useDrag, useDrop } from "react-dnd";
 import { useDispatch } from 'react-redux';
 import { DELETE_INGREDIENT, UPDATE_INGREDIENT } from '../../services/burgerConstructor/action';
 import styles from './BurgerElement.module.css';
-import { useRef } from 'react'
+import { useRef } from 'react';
+import {Identifier} from 'dnd-core';
 
+type Tel = {
+  key: number;
+  name: string;
+  price: number;
+  image: string;
+}
 
+type TBurgerElementProps = {
+  el: Tel;
+  index: number;
+}
 
-export function BurgerElement({ el, index }) {
+export function BurgerElement({ el, index }: TBurgerElementProps) {
 
   const dispatch = useDispatch();
 
@@ -18,10 +29,19 @@ export function BurgerElement({ el, index }) {
       id: el.key,
     });
   }
+  type TDragObject = {
+    id: number;
+    index: number;
+  }
+  type TDragCollectedProps = {
+    isDragging: boolean;
+  }
+  type TDropCollectedProps = {
+    handlerId: Identifier | null;
+  }
 
-
-  const ref = useRef(null);
-  const [{ handlerId }, drop] = useDrop({
+  const ref = useRef<HTMLDivElement | null>(null);
+  const [{ handlerId }, drop] = useDrop<TDragObject, unknown, TDropCollectedProps>({
     accept: 'card',
     collect(monitor) {
       return {
@@ -46,7 +66,7 @@ export function BurgerElement({ el, index }) {
 
       const clientOffset = monitor.getClientOffset()
 
-      const hoverClientY = clientOffset.y - hoverBoundingRect.top
+      const hoverClientY = clientOffset!.y - hoverBoundingRect.top
 
       if (dragIndex < hoverIndex && hoverClientY < hoverMiddleY) {
         return
@@ -68,7 +88,7 @@ export function BurgerElement({ el, index }) {
 
 
   const id = el.key;
-  const [{ isDragging }, drag] = useDrag({
+  const [{ isDragging }, drag] = useDrag<TDragObject, unknown, TDragCollectedProps>({
     type: 'card',
     item: () => {
       return { id, index }
@@ -95,7 +115,3 @@ export function BurgerElement({ el, index }) {
   )
 }
 
-BurgerElement.propTypes = {
-  el: PropTypes.object.isRequired,
-  index: PropTypes.number.isRequired
-}

@@ -1,6 +1,6 @@
 import styles from "./Login.module.css";
-import { Input, Box, ShowIcon, Button } from '@ya.praktikum/react-developer-burger-ui-components';
-import { useRef, useState } from 'react';
+import { Input, ShowIcon, Button } from '@ya.praktikum/react-developer-burger-ui-components';
+import React, { useRef, useState } from 'react';
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { login } from '../../services/register/action';
@@ -11,18 +11,18 @@ export const Login = () => {
   const [value, setValue] = useState('');
   const [valueP, setValueP] = useState('');
 
-  const inputRef = useRef(null)
+  const inputRef = useRef<HTMLInputElement>(null)
   const dispatch = useDispatch();
 
   const onIconClick = () => {
-    setTimeout(() => inputRef.current.focus(), 0)
-    inputRef.current.type === 'text' ? inputRef.current.type = 'password' : inputRef.current.type = 'text'
+    setTimeout(() => inputRef.current!.focus(), 0)
+    inputRef.current!.type === 'text' ? inputRef.current!.type = 'password' : inputRef.current!.type = 'text'
   }
 
-  const loginCheck = (e) => {
+  const loginCheck = (e:React.SyntheticEvent) => {
     if (value !== '' && valueP !== '') {
-      //@ts-ignore
       e.preventDefault();
+      //@ts-ignore
       dispatch(login(value, valueP))
     }
 

@@ -1,7 +1,7 @@
 import styles from "./ForgotPassword.module.css";
-import { Input, Box, ShowIcon, Button } from '@ya.praktikum/react-developer-burger-ui-components';
+import { Input, ShowIcon, Button } from '@ya.praktikum/react-developer-burger-ui-components';
 import { useState, useEffect } from 'react';
-import { Link, Navigate, useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { getForgotPassword } from '../../utils/api';
 
 
@@ -16,11 +16,12 @@ export const ForgotPassword = () => {
 
   const navigate = useNavigate();
 
-  const forgotPassword = (e) => {
+  const forgotPassword = (e:React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (value !== '') {
-      //@ts-ignore
+      
       getForgotPassword(value).then((res) => {
+       
         if (res.message === "Reset email sent") {
           localStorage.setItem("flagForgotPassword", 'true');
           navigate('/resset-password')

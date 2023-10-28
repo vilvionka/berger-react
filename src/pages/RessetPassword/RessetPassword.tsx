@@ -1,8 +1,9 @@
 import styles from "../ForgotPassword/ForgotPassword.module.css";
-import { Input, Box, ShowIcon, Button } from '@ya.praktikum/react-developer-burger-ui-components';
-import { useState, useRef, useEffect } from 'react';
+import { Input, ShowIcon, Button } from '@ya.praktikum/react-developer-burger-ui-components';
+import React, { useState, useRef, useEffect } from 'react';
 import { getRessetPassword } from '../../utils/api'
 import { useNavigate, Link } from "react-router-dom";
+import Box from '@ya.praktikum/react-developer-burger-ui-components';
 
 
 export const RessetPassword = () => {
@@ -19,18 +20,19 @@ export const RessetPassword = () => {
   const [value, setValue] = useState('');
   const [valueP, setValueP] = useState('');
 
-  const inputRef = useRef(null)
+  const inputRef = useRef<HTMLInputElement>(null)
 
   const onIconClick = () => {
-    setTimeout(() => inputRef.current.focus(), 0)
-    inputRef.current.type === 'text' ? inputRef.current.type = 'password' : inputRef.current.type = 'text'
+    setTimeout(() => inputRef.current!.focus(), 0)
+    inputRef.current!.type === 'text' ? inputRef.current!.type = 'password' : inputRef.current!.type = 'text'
   }
 
-  const ressetPassword = (e) => {
+  const ressetPassword = (e:React.SyntheticEvent) => {
     e.preventDefault();
     if (value !== '' && valueP !== '') {
-      //@ts-ignore
+      
       getRessetPassword(value, valueP).then((res) => {
+       
         if (res.message === "Password successfully reset") {
           navigate('/')
         }
