@@ -12,7 +12,7 @@ import { getIngrediensSelectorMain } from '../../services/ingredients/selector';
 import { useEffect } from 'react';
 import { loadIngredients } from '../../services/ingredients/action';
 import { useDispatch } from 'react-redux';
-import { Iingredient } from '../../services/ingredients/type';
+import { Iingredient } from '../../services/type/index';
 
 
 

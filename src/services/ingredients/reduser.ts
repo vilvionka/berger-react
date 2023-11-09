@@ -1,12 +1,20 @@
 import { ADD_LOADING, LOADING, ERROR } from './action';
+import {TActionsIngredient} from './action';
+import {Iingredient} from '../type/index'
 
-const initialState = {
+interface IinitialState {
+  ingredient: Iingredient[]
+  loading: boolean;
+  error: string | null;
+}
+
+const initialState:IinitialState = {
   ingredient: [],
   loading: false,
   error: null
 }
 
-export const ingredientsReducer = (state = initialState, action) => {
+export const ingredientsReducer = (state = initialState, action:TActionsIngredient):IinitialState => {
   switch (action.type) {
     case ERROR:
       return {

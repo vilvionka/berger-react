@@ -1,5 +1,6 @@
 import { refreshToken } from "./token-api";
-import {Iingredient} from '../services/ingredients/type';
+import {Iingredient} from '../services/type/index';
+import {IingredientKey} from '../services/type/index';
 
 export const getResponseOrder = (res:Response): Promise<any> => {
   if (res.ok) {
@@ -9,7 +10,7 @@ export const getResponseOrder = (res:Response): Promise<any> => {
   return Promise.reject(`Ошибка ${res.status}`);
 
 }
-interface IgetOrderProjectApi{
+export interface IgetOrderProjectApi{
   name: string;
   order: {
     createdAt: string;
@@ -31,7 +32,7 @@ interface IgetOrderProjectApi{
 }
 
 
-export const getOrderProject = async (ingredientsObjec:[string], token: any):Promise<IgetOrderProjectApi> => {
+export const getOrderProject = async (ingredientsObjec:IingredientKey, token: any):Promise<IgetOrderProjectApi> => {
 
   try {
     const res = await fetch('https://norma.nomoreparties.space/api/orders', {

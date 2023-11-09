@@ -13,7 +13,7 @@ import { useSelector } from 'react-redux';
 import { getBurgerSelectorIngredients } from '../../services/burgerConstructor/selector';
 import { getBurgerSelectorBun } from '../../services/burgerConstructor/selector';
 import { useLocation, Link } from 'react-router-dom';
-import { Iingredient } from '../../services/ingredients/type';
+import { Iingredient } from '../../services/type/index';
 import { type } from '@testing-library/user-event/dist/type';
 
 interface IIngredientsProps {

@@ -1,10 +1,6 @@
 import { getResponseOrder } from "./order-api";
-import {Iingredient} from '../services/ingredients/type';
+import {Iingredient} from '../services/type/index';
 
-
-
-// В проектной работе эта функция будет обращаться к серверу
-// и обновлять токены если они уже устарели.
 
 interface IgetRegisterApi{
   accessToken: string;
@@ -17,7 +13,7 @@ interface IgetRegisterApi{
 
 }
 
-export const getRegister = (name:string, email:string, password:number):Promise<IgetRegisterApi> => {
+export const getRegister = (name:string, email:string, password:string):Promise<IgetRegisterApi> => {
   
   return fetch('https://norma.nomoreparties.space/api/auth/register', {
     method: "POST",

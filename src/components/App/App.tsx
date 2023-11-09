@@ -3,7 +3,7 @@ import { Home } from '../../pages/Home/Home';
 import AppHeader from '../AppHeader/AppHeader';
 import Modal from '../Modal/Modal';
 import IngredientDetails from '../IngredientDetails/IngredientDetails';
-import { useDispatch, useSelector } from 'react-redux';
+import {useSelector, useDispatch} from '../../services/type/index';
 import { loadIngredients } from '../../services/ingredients/action';
 import { getIngrediensSelectorMain } from '../../services/ingredients/selector';
 import { useEffect } from 'react';
@@ -16,7 +16,7 @@ import { Orders } from '../../pages/Orders/Orders';
 import {ProfilePage} from '../../pages/ProfilePage/ProfilePage';
 import {checkUserAuth} from '../../services/register/action';
 import { OnlyAuth, OnlyUnAuth } from "../Protect-route/Protect-route";
-import { IData } from '../../services/ingredients/type';
+import { IData } from '../../services/type/index';
 
 
 

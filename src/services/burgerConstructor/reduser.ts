@@ -1,13 +1,18 @@
-
+import {TBurgerActions} from './action';
 import { ADD_INGREDIENT, DELETE_INGREDIENT, UPDATE_INGREDIENT, CLEAR } from './action';
+import {IingredientKey} from '../type/index';
 
+interface IinitialState{
+  bun: null| IingredientKey;
+  burgerConstructor: IingredientKey[]
+}
 const initialState = {
   bun: null,
   burgerConstructor: []
 }
 
 
-export const BurgerConstructorReducer = (state = initialState, action) => {
+export const BurgerConstructorReducer = (state = initialState, action:TBurgerActions):IinitialState => {
 
   switch (action.type) {
     case ADD_INGREDIENT:
@@ -19,6 +24,7 @@ export const BurgerConstructorReducer = (state = initialState, action) => {
     case DELETE_INGREDIENT:
       return {
         ...state,
+         //@ts-ignore
         burgerConstructor: state.burgerConstructor.filter(el => el.key !== action.id)
       }
     case UPDATE_INGREDIENT:

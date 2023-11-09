@@ -9,7 +9,7 @@ import { CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components
 import { useSelector, useDispatch } from 'react-redux';
 import { useInView } from 'react-intersection-observer';
 import {getIngrediensSelector} from '../../services/ingredients/selector';
-import {Iingredient} from '../../services/ingredients/type';
+import {Iingredient} from '../../services/type/index';
 
 
 

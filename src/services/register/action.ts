@@ -1,25 +1,41 @@
 import { api } from "../../utils/api";
 import { fetchWithRefresh } from "../../utils/token-api";
 import { fetchWithRefreshPath } from "../../utils/token-api";
+import {AppDispatch} from '../type/index'
 
 
-export const SET_AUTH_CHECKED = 'SET_AUTH_CHECKED';
-export const SET_USER = 'SET_USER';
+export const SET_AUTH_CHECKED: 'SET_AUTH_CHECKED' = 'SET_AUTH_CHECKED';
+export const SET_USER: 'SET_USER' = 'SET_USER';
 
+export interface IUser{
+  name: string;
+  email: string;
+}
+interface ISetAuthCheckedAction {
+  readonly type: typeof SET_AUTH_CHECKED;
+  readonly payload: boolean;
+}
 
+interface ISetUserAction {
+  readonly type: typeof SET_USER;
+  readonly payload: IUser | null;
+}
+export type TActionsRegister =
+  ISetAuthCheckedAction |
+  ISetUserAction;
 
-export const setAuthChecked = (value) => ({
+export const setAuthChecked = (value: boolean) => ({
   type: SET_AUTH_CHECKED,
   payload: value,
 });
 
-export const setUser = (user) => ({
+export const setUser = (user: IUser | null) => ({
   type: SET_USER,
   payload: user,
 });
 
-export const getRegistration = (name, email, password) => {
-  return (dispatch) => {
+export const getRegistration = (name: string, email: string, password: string) => {
+  return (dispatch:AppDispatch) => {
     return api.getRegister(name, email, password).then((res) => {
       localStorage.setItem("accessToken", res.accessToken);
       localStorage.setItem("refreshToken", res.refreshToken);
@@ -30,19 +46,19 @@ export const getRegistration = (name, email, password) => {
 };
 
 export const getUser = () => {
-  return (dispatch) => {
+  return (dispatch:AppDispatch) => {
     return fetchWithRefresh(localStorage.getItem('accessToken')).then((res) => {
       dispatch(setUser(res.user));
     })
   }
 }
 
- 
 
 
 
-export const login = (email, password) => {
-  return (dispatch) => {
+
+export const login = (email: string, password: string) => {
+  return (dispatch:AppDispatch) => {
     return api.login(email, password).then((res) => {
       localStorage.setItem("accessToken", res.accessToken);
       localStorage.setItem("refreshToken", res.refreshToken);
@@ -53,7 +69,7 @@ export const login = (email, password) => {
 };
 
 export const checkUserAuth = () => {
-  return (dispatch) => {
+  return (dispatch:any) => {
     if (localStorage.getItem("accessToken")) {
       dispatch(getUser())
         .catch(() => {
@@ -68,8 +84,8 @@ export const checkUserAuth = () => {
   };
 };
 
-export const editLoad = (name, email, password, token) => {
-  return (dispatch) => {
+export const editLoad = (name:string, email:string, password:string, token:string) => {
+  return (dispatch:AppDispatch) => {
     return fetchWithRefreshPath(name, email, password, token).then((res) => {
       console.log(res)
       dispatch(setUser(res.user));
@@ -78,8 +94,8 @@ export const editLoad = (name, email, password, token) => {
 }
 
 
-export const logout = (token) => {
-  return (dispatch) => {
+export const logout = (token:string) => {
+  return (dispatch:AppDispatch) => {
     return api.logout(token).then((res) => {
       localStorage.removeItem("accessToken");
       localStorage.removeItem("refreshToken");

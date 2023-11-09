@@ -1,4 +1,4 @@
-import {Iingredient} from '../services/ingredients/type';
+import {Iingredient} from '../services/type/index';
 
 
 
