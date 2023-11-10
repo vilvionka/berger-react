@@ -8,7 +8,7 @@ interface IinitialState{
  error: null | string;
 }
 
-const initialState = {
+const initialState:IinitialState = {
   order: null,
   loading: false,
   error: null

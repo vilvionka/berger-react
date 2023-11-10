@@ -7,7 +7,7 @@ interface IinitialState{
   isAuthChecked:boolean;
 }
 
-const initialState = {
+const initialState:IinitialState = {
     user: null,
     isAuthChecked: false,
 };

@@ -25,7 +25,7 @@ export type TActionsIngredient =
   ILOADING_Action |
   IERROR_Action;
 
-  
+ 
 
 export const loadIngredients:AppThunk = () => (dispatch:AppDispatch) => {
   dispatch({ type: LOADING })

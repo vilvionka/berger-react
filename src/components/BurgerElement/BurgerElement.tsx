@@ -6,6 +6,7 @@ import { DELETE_INGREDIENT, UPDATE_INGREDIENT } from '../../services/burgerConst
 import styles from './BurgerElement.module.css';
 import { useRef } from 'react';
 import {Identifier} from 'dnd-core';
+import {IingredientKey} from '../../services/type/index'
 
 type Tel = {
   key: number;
@@ -15,7 +16,7 @@ type Tel = {
 }
 
 type TBurgerElementProps = {
-  el: Tel;
+  el: IingredientKey;
   index: number;
 }
 
@@ -30,7 +31,7 @@ export function BurgerElement({ el, index }: TBurgerElementProps) {
     });
   }
   type TDragObject = {
-    id: number;
+    id: string | unknown;
     index: number;
   }
   type TDragCollectedProps = {

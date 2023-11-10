@@ -12,21 +12,14 @@ import { loadOrder } from '../../services/order/action';
 import { getBurgerSelectorBun, getBurgerSelectorIngredients, getBurgerSelector } from '../../services/burgerConstructor/selector';
 import { getRegisterSelectorUser } from '../../services/register/selector';
 import { useNavigate } from 'react-router-dom';
+import {IingredientKey} from '../../services/type/index';
 
 
-
-interface Idata {
-  key: number;
-  _id: number;
-  name: string;
-  image: string;
-  price: number;
-}
 
 
 function BurgerConstructor() {
   const [state, setState] = React.useState(false);
-  const data: Idata[] = useSelector(getBurgerSelectorIngredients);
+  const data: IingredientKey[] = useSelector(getBurgerSelectorIngredients);
   const dataBun = useSelector(getBurgerSelectorBun);
   const burgersData = useSelector(getBurgerSelector);
 
@@ -82,11 +75,11 @@ function BurgerConstructor() {
     let sum = 0;
     if (data.length > 0) {
       let value = 0
-      sum = data.reduce((accumulator: number, item: { price: number }) => {
+      sum = data.reduce((accumulator, item) => {
         return accumulator + Number(item.price)
       }, value)
     }
-    let sumBun = 0;
+    let sumBun: number = 0;
     if (dataBun) {
       sumBun = dataBun.price * 2;
     }
@@ -111,8 +104,8 @@ function BurgerConstructor() {
             }
           </div>
           <div className={`${styles.box_constructor} custom-scroll`} >
-            {data.length > 0 && data.map((el: { key: number; name: string; image: string; price: number }, index: number) =>
-              <BurgerElement el={el} key={el.key} index={index} />
+            {data.length > 0 && data.map((elem, index) =>
+              <BurgerElement el={elem} key={elem.key} index={index} />
             )}
           </div>
           <div className={styles.box_constructor_bun}>

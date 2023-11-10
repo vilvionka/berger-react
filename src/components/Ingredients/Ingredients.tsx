@@ -9,7 +9,7 @@ import IngredientDetails from '../IngredientDetails/IngredientDetails';
 import Modal from '../Modal/Modal';
 import { Counter } from '@ya.praktikum/react-developer-burger-ui-components';
 import { useDrag } from "react-dnd";
-import { useSelector } from 'react-redux';
+import { useSelector } from '../../services/type/index';
 import { getBurgerSelectorIngredients } from '../../services/burgerConstructor/selector';
 import { getBurgerSelectorBun } from '../../services/burgerConstructor/selector';
 import { useLocation, Link } from 'react-router-dom';
@@ -24,7 +24,7 @@ function Ingredients(props:IIngredientsProps): JSX.Element {
 
   const {item} = props;
 
-  const data: Iingredient[] = useSelector(getBurgerSelectorIngredients);
+  const data = useSelector(getBurgerSelectorIngredients);
   const dataBun = useSelector(getBurgerSelectorBun);
 
 

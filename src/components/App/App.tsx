@@ -27,7 +27,7 @@ function App():JSX.Element {
   const dispatсh = useDispatch();
 
   useEffect(() => {
-    //@ts-ignore
+    
     dispatсh(loadIngredients());
     //@ts-ignore
     dispatсh(checkUserAuth());

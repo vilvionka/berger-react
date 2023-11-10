@@ -6,7 +6,7 @@ interface IinitialState{
   bun: null| IingredientKey;
   burgerConstructor: IingredientKey[]
 }
-const initialState = {
+const initialState:IinitialState = {
   bun: null,
   burgerConstructor: []
 }
