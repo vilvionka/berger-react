@@ -27,7 +27,7 @@ export type TActionsIngredient =
 
  
 
-export const loadIngredients:AppThunk = () => (dispatch:AppDispatch) => {
+export const loadIngredients = ():AppThunk => (dispatch) => {
   dispatch({ type: LOADING })
   getProjectIngredients().then(res => {
     dispatch({

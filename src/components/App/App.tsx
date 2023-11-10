@@ -29,7 +29,7 @@ function App():JSX.Element {
   useEffect(() => {
     
     dispatсh(loadIngredients());
-    //@ts-ignore
+   
     dispatсh(checkUserAuth());
     
   }, []);

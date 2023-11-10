@@ -1,5 +1,5 @@
 import { getOrderProject } from '../../utils/order-api';
-import { IingredientKey } from '../type/index';
+import { AppThunk, IingredientKey } from '../type/index';
 import { AppDispatch } from '../type/index';
 import {IgetOrderProjectApi} from '../../utils/order-api';
 
@@ -24,7 +24,7 @@ export type TActionsOrder =
   IErrorOrderAction;
 
 
-export const loadOrder = (ingredientsObject: IingredientKey, token: string) => (dispatch:AppDispatch) => {
+export const loadOrder = (ingredientsObject: IingredientKey, token: string):AppThunk => (dispatch) => {
   dispatch({ type: LOADING_ORDER })
   getOrderProject(ingredientsObject, token).then(res => {
     dispatch({

@@ -1,7 +1,7 @@
 import { api } from "../../utils/api";
 import { fetchWithRefresh } from "../../utils/token-api";
 import { fetchWithRefreshPath } from "../../utils/token-api";
-import {AppDispatch} from '../type/index'
+import {AppDispatch, AppThunk} from '../type/index'
 
 
 export const SET_AUTH_CHECKED: 'SET_AUTH_CHECKED' = 'SET_AUTH_CHECKED';
@@ -34,8 +34,8 @@ export const setUser = (user: IUser | null) => ({
   payload: user,
 });
 
-export const getRegistration = (name: string, email: string, password: string) => {
-  return (dispatch:AppDispatch) => {
+export const getRegistration = (name: string, email: string, password: string):AppThunk => {
+  return (dispatch) => {
     return api.getRegister(name, email, password).then((res) => {
       localStorage.setItem("accessToken", res.accessToken);
       localStorage.setItem("refreshToken", res.refreshToken);
@@ -45,8 +45,8 @@ export const getRegistration = (name: string, email: string, password: string) =
   };
 };
 
-export const getUser = () => {
-  return (dispatch:AppDispatch) => {
+export const getUser = ():AppThunk => {
+  return (dispatch) => {
     return fetchWithRefresh(localStorage.getItem('accessToken')).then((res) => {
       dispatch(setUser(res.user));
     })
@@ -57,8 +57,8 @@ export const getUser = () => {
 
 
 
-export const login = (email: string, password: string) => {
-  return (dispatch:AppDispatch) => {
+export const login = (email: string, password: string):AppThunk => {
+  return (dispatch) => {
     return api.login(email, password).then((res) => {
       localStorage.setItem("accessToken", res.accessToken);
       localStorage.setItem("refreshToken", res.refreshToken);
@@ -68,8 +68,8 @@ export const login = (email: string, password: string) => {
   };
 };
 
-export const checkUserAuth = () => {
-  return (dispatch:any) => {
+export const checkUserAuth = ():AppThunk => {
+  return (dispatch) => {
     if (localStorage.getItem("accessToken")) {
       dispatch(getUser())
         .catch(() => {
@@ -84,8 +84,8 @@ export const checkUserAuth = () => {
   };
 };
 
-export const editLoad = (name:string, email:string, password:string, token:string) => {
-  return (dispatch:AppDispatch) => {
+export const editLoad = (name:string, email:string, password:string, token:string):AppThunk => {
+  return (dispatch) => {
     return fetchWithRefreshPath(name, email, password, token).then((res) => {
       console.log(res)
       dispatch(setUser(res.user));
@@ -94,8 +94,8 @@ export const editLoad = (name:string, email:string, password:string, token:strin
 }
 
 
-export const logout = (token:string) => {
-  return (dispatch:AppDispatch) => {
+export const logout = (token:string):AppThunk => {
+  return (dispatch:) => {
     return api.logout(token).then((res) => {
       localStorage.removeItem("accessToken");
       localStorage.removeItem("refreshToken");
