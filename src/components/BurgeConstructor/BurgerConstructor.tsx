@@ -1,7 +1,7 @@
 import { Button, ConstructorElement, CurrencyIcon, DragIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import React, { useMemo } from 'react';
 import { useDrop } from "react-dnd";
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch, useSelector } from '../../services/type/index';
 import { v4 as uuidv4 } from 'uuid';
 import { ADD_INGREDIENT } from '../../services/burgerConstructor/action';
 import { BurgerElement } from '../BurgerElement/BurgerElement';
@@ -29,7 +29,9 @@ function BurgerConstructor() {
     accept: "animal",
     drop(item: object) {
       dispatch({
+        //@ts-ignore
         type: ADD_INGREDIENT,
+        //@ts-ignore
         payload: { ...item, key: uuidv4() }
       });
     },
@@ -52,7 +54,7 @@ function BurgerConstructor() {
         data.map(el => burgId.push(el._id));
         burgId.push(dataBun._id);
         setState(true);
-        //@ts-ignore
+        console.log(burgId);
         dispatch(loadOrder(burgId, localStorage.getItem('accessToken')))
       }
     } else {

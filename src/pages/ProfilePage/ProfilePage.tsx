@@ -58,7 +58,7 @@ export const ProfilePage = () => {
 
   return (
     <>
-      <form onSubmit={edit}>
+      <form onSubmit={edit} className={styles.form}>
         <Input
           type={'text'}
           placeholder={'Имя'}

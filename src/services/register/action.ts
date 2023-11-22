@@ -45,7 +45,7 @@ export const getRegistration = (name: string, email: string, password: string):A
   };
 };
 
-export const getUser = ():AppThunk => {
+export const getUser = ():AppThunk<Promise<unknown>> => {
   return (dispatch) => {
     return fetchWithRefresh(localStorage.getItem('accessToken')).then((res) => {
       dispatch(setUser(res.user));
@@ -95,7 +95,7 @@ export const editLoad = (name:string, email:string, password:string, token:strin
 
 
 export const logout = (token:string):AppThunk => {
-  return (dispatch:) => {
+  return (dispatch) => {
     return api.logout(token).then((res) => {
       localStorage.removeItem("accessToken");
       localStorage.removeItem("refreshToken");

@@ -3,10 +3,12 @@ import {BurgerConstructorReducer} from './burgerConstructor/reduser';
 import { combineReducers } from 'redux';
 import {orderReducer} from './order/reducer';
 import {reduserRegister} from './register/reduser';
+import { wsReducer } from './websocket/reducer';
 
 export const rootReducer = combineReducers({
   ingredientsReducer,
   BurgerConstructorReducer,
   reduserRegister,
-  orderReducer
+  orderReducer,
+  wsReducer,
 }) 

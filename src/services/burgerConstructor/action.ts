@@ -19,7 +19,7 @@ export interface IADD_INGREDIENT_Action {
 }
 export interface IDELETE_INGREDIENT_Action {
   readonly type: typeof DELETE_INGREDIENT;
-  readonly id: string;
+  readonly id: string | undefined;
 }
 export interface ICLEAR_Action {
   readonly type: typeof CLEAR;

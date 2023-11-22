@@ -9,7 +9,7 @@ import { NavLink, useMatch } from 'react-router-dom';
 function AppHeader() {
 
   const constructorFlag = useMatch('/')
-  const lentaFlag = useMatch('/profile/orders')
+  const lentaFlag = useMatch('/feed/*')
   const profileFlag = useMatch('/profile/*')
   
   return (
@@ -23,7 +23,7 @@ function AppHeader() {
             </NavLink>
           </div>
           <div className={styles.header_feed}>
-            <NavLink to="/profile/orders" className={styles.header_profile_link}>
+            <NavLink to="/feed" className={styles.header_profile_link}>
               <ListIcon type={lentaFlag !== null ?"secondary" : "primary"} />
               <p className="text text_type_main-default ">Лента заказов</p>
             </NavLink>

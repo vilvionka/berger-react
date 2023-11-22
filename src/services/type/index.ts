@@ -7,6 +7,7 @@ import { Action, ActionCreator } from 'redux';
 import {store} from '../store';
 import {TBurgerActions} from '../burgerConstructor/action';
 import {TActionsRegister} from '../register/action';
+import {TWs} from '../websocket/action'
 import {
   TypedUseSelectorHook,
   useDispatch as dispatchHook,
@@ -49,18 +50,31 @@ export interface IData {
   loading: boolean;
   error: null | string;
 }
+export interface WebsocketOrders{
+
+}
+export enum WebsocketStatus{
+  CONNECTING = 'CONNECTING...',
+  ONLINE = 'ONLINE',
+  OFFLINE = 'OFFLINE'
+}
 
 export type TActionsGlobal =
   TActionsIngredient |
   TActionsOrder |
   TBurgerActions |
-  TActionsRegister;
+  TActionsRegister |
+  TWs;
 
 export type RootState = ReturnType<typeof rootReducer>;
 
  
-export type AppThunk<TReturn = void> = ActionCreator<
-  ThunkAction<TReturn, Action, RootState, TActionsGlobal>>;
+export type AppThunk<TReturn = void> = ThunkAction<
+  TReturn,
+  RootState,
+  unknown,
+  TActionsGlobal
+>;
 
 export type AppDispatch<TReturnType = void> = (action :TActionsGlobal| AppThunk<TReturnType>) => TReturnType; 
 // Теперь этот хук «знает» структуру хранилища

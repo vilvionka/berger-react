@@ -32,7 +32,7 @@ export interface IgetOrderProjectApi{
 }
 
 
-export const getOrderProject = async (ingredientsObjec:IingredientKey, token: any):Promise<IgetOrderProjectApi> => {
+export const getOrderProject = async (ingredientsObjec:number[], token: any):Promise<IgetOrderProjectApi> => {
 
   try {
     const res = await fetch('https://norma.nomoreparties.space/api/orders', {

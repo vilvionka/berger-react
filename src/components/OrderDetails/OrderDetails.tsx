@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch } from '../../services/type/index';
 import PropTypes from 'prop-types';
 import styles from './OrderDetails.module.css';
 import Typography  from '@ya.praktikum/react-developer-burger-ui-components';

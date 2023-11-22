@@ -24,7 +24,7 @@ export type TActionsOrder =
   IErrorOrderAction;
 
 
-export const loadOrder = (ingredientsObject: IingredientKey, token: string):AppThunk => (dispatch) => {
+export const loadOrder = (ingredientsObject: number[], token: string | null):AppThunk => (dispatch) => {
   dispatch({ type: LOADING_ORDER })
   getOrderProject(ingredientsObject, token).then(res => {
     dispatch({
