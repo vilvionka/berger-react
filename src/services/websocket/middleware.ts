@@ -1,6 +1,7 @@
 import { ActionCreatorWithoutPayload, ActionCreatorWithPayload } from "@reduxjs/toolkit";
 import { Middleware } from "redux";
 import { RootState } from "../type";
+import { refreshToken } from '../../utils/token-api';
 
 
 
@@ -9,7 +10,7 @@ export type TWsActionTypes = {
   disconnect: ActionCreatorWithoutPayload,
   sendMessage?: ActionCreatorWithPayload<any>,
   connecting: ActionCreatorWithoutPayload,
-  open: ActionCreatorWithoutPayload, 
+  open: ActionCreatorWithoutPayload,
   close: ActionCreatorWithoutPayload,
   message: ActionCreatorWithPayload<any>,
   error: ActionCreatorWithPayload<string>,
@@ -17,16 +18,13 @@ export type TWsActionTypes = {
 
 
 export const socketMiddleware = (wsActions: TWsActionTypes): Middleware<{}, RootState> => {
-  console.log('2');
   return ((store) => {
     let socket: WebSocket | null = null;
 
     return next => (action) => {
-      console.log(action);
-      const {dispatch} = store;
+      const { dispatch } = store;
       const { connect, disconnect, open, close, message, error, connecting } = wsActions;
       if (connect.match(action)) {
-        console.log('3');
         socket = new WebSocket(action.payload);
         dispatch(connecting());
       }
@@ -42,14 +40,20 @@ export const socketMiddleware = (wsActions: TWsActionTypes): Middleware<{}, Root
         socket.onmessage = event => {
           const { data } = event;
           const parsedData = JSON.parse(data);
-          dispatch(message(parsedData));
+          if (data.message == 'Invalid or missing token') {
+            //@ts-ignore
+            dispatch(refreshToken());
+          } else {
+            dispatch(message(parsedData));
+          }
+
         };
 
         socket.onclose = event => {
           dispatch(close());
         };
-        
-        if(disconnect.match(action)){
+
+        if (disconnect.match(action)) {
           socket.close();
           socket = null;
         }

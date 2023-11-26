@@ -55,6 +55,7 @@ function App(): JSX.Element {
         <Routes location={background || location}>
           <Route path='/' element={<Home />} />
           <Route path='/login' element={<OnlyUnAuth component={<Login />} />} />
+        
           <Route path='/feed' element={<Feed />} />
           <Route path='/feed/:feedId' element={<FeedId />} />
           <Route path='/register' element={<OnlyUnAuth component={<Register />} />} />
@@ -70,6 +71,11 @@ function App(): JSX.Element {
 
         {background && (
           <Routes>
+            <Route path='/feed/:feedId' element={
+              <Modal modalClose={handleModalClose}>
+                <FeedId />
+              </Modal>}
+            />
             <Route
               path='/ingredients/:ingredientId'
               element={
@@ -78,11 +84,7 @@ function App(): JSX.Element {
                 </Modal>
               }
             />
-            <Route path='/feed/:feedId' element={
-              <Modal modalClose={handleModalClose}>
-                <FeedId />
-              </Modal>}
-            />
+            
           </Routes>
         )}
       </>

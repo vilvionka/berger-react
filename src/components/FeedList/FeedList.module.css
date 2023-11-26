@@ -1,10 +1,8 @@
 .box{
   width: 100%;
 }
-.ready_noready{
-  display: flex;
-  justify-content: space-between;
-}
 .ready{
-  width: calc(50% - 18px);
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
 }

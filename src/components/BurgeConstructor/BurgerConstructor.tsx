@@ -54,7 +54,6 @@ function BurgerConstructor() {
         data.map(el => burgId.push(el._id));
         burgId.push(dataBun._id);
         setState(true);
-        console.log(burgId);
         dispatch(loadOrder(burgId, localStorage.getItem('accessToken')))
       }
     } else {
