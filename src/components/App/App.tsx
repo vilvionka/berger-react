@@ -14,7 +14,7 @@ import { Register } from '../../pages/Register/Register';
 import { ForgotPassword } from '../../pages/ForgotPassword/ForgotPassword';
 import { RessetPassword } from '../../pages/RessetPassword/RessetPassword';
 import { Profile } from '../../pages/Profile/Profile';
-import { FeedOrders } from '../FeedOrders/FeedOrders';
+import { ProfileOrders } from '../ProfileOrders/ProfileOrders';
 import { ProfilePage } from '../../pages/ProfilePage/ProfilePage';
 import { checkUserAuth } from '../../services/register/action';
 import { OnlyAuth, OnlyUnAuth } from "../Protect-route/Protect-route";
@@ -63,7 +63,7 @@ function App(): JSX.Element {
           <Route path='/resset-password' element={<OnlyUnAuth component={<RessetPassword />} />} />
           <Route path='/profile' element={<OnlyAuth component={<Profile />} />}>
             <Route index element={<ProfilePage />} />
-            <Route path='/profile/orders' element={<FeedOrders />} />
+            <Route path='/profile/orders' element={<ProfileOrders />} />
           </Route>
           <Route path='/ingredients/:ingredientId'
             element={<IngredientDetails />} />

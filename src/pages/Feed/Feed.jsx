@@ -16,7 +16,7 @@ export const urlWebSocket = 'wss://norma.nomoreparties.space/orders/all';
 export const Feed = () => {
   const dispatch = useDispatch();
 
-  const { status, orders } = useSelector(store => store.wsReducer);
+  const { orders } = useSelector(store => store.wsReducer);
   const { ingredient } = useSelector(getIngrediensSelector)
 
   useEffect(() => {
