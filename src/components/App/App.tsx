@@ -61,6 +61,7 @@ function App(): JSX.Element {
           <Route path='/register' element={<OnlyUnAuth component={<Register />} />} />
           <Route path='/forgot-password' element={<OnlyUnAuth component={<ForgotPassword />} />} />
           <Route path='/resset-password' element={<OnlyUnAuth component={<RessetPassword />} />} />
+          <Route path='/profile/orders/:orderId' element={<OnlyAuth component={<FeedId />} />} />
           <Route path='/profile' element={<OnlyAuth component={<Profile />} />}>
             <Route index element={<ProfilePage />} />
             <Route path='/profile/orders' element={<ProfileOrders />} />
@@ -71,7 +72,12 @@ function App(): JSX.Element {
 
         {background && (
           <Routes>
-            <Route path='/feed/:feedId' element={
+            <Route path='/feed/:orderId' element={
+              <Modal modalClose={handleModalClose}>
+                <FeedId />
+              </Modal>}
+            />
+             <Route path='/profile/orders/:orderId' element={
               <Modal modalClose={handleModalClose}>
                 <FeedId />
               </Modal>}

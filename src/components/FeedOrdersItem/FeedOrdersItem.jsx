@@ -28,12 +28,12 @@ export const FeedOrdersItem = ({ el }) => {
   const Day = Data.getDate();
 
   const location = useLocation();
-  const ingredientId = el.number;
+  const orderNumber = el.number;
 
   return (
     <>
-      <NavLink to={`/feed/${ingredientId}`}
-      key={ingredientId} state={{ background: location }}  className={`${styles.box} p-6 mb-4`}>
+      <NavLink to={`${location.pathname}/${orderNumber}`}
+      key={orderNumber} state={{ background: location }} className={`${styles.box} p-6 mb-4`}>
         <div className={styles.top}>
           <p className="text text_type_digits-default">#{el.number}</p>
           <p className='text text_type_main-default text_color_inactive'>{dateOrder.slice(8,10) == Day ? 'Сегодня' : (dateOrder.slice(8,10) - Day ) > 1  ? (dateOrder.slice(8,10) - Day) + "Дня(-ей) назад" : "Вчера" }, {dateOrder.slice(11)}</p>

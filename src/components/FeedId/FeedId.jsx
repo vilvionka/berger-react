@@ -24,7 +24,7 @@ export const FeedId = () => {
   }, []);
 
 
-  console.log(order)
+  
   if (order == '') {
     return (
       <>
@@ -54,7 +54,6 @@ export const FeedId = () => {
       return acc;
     }, {})
     const ordersObject = Object.entries(resObject)
-    console.log(ordersObject)
     for (let i = 0; i < ordersObject.length; i++) {
       let elems = ordersObject[i]
       ingredient.map(j => j._id == elems[0] && elems.push(j.price))
@@ -67,7 +66,6 @@ export const FeedId = () => {
       let elems = ordersObject[i]
       ingredient.map(j => j._id == elems[0] && elems.push(j.name))
     }
-    console.log(ordersObject)
 
     return (
       <>
