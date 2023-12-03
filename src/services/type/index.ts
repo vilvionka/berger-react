@@ -2,12 +2,12 @@ import { Dispatch } from 'redux';
 import { TActionsIngredient } from '../ingredients/action';
 import { TActionsOrder } from '../order/action';
 import { ThunkAction } from 'redux-thunk';
-import type {} from "redux-thunk/extend-redux";
+import type { } from "redux-thunk/extend-redux";
 import { Action, ActionCreator } from 'redux';
-import {store} from '../store';
-import {TBurgerActions} from '../burgerConstructor/action';
-import {TActionsRegister} from '../register/action';
-import {TWs} from '../websocket/action'
+import { store } from '../store';
+import { TBurgerActions } from '../burgerConstructor/action';
+import { TActionsRegister } from '../register/action';
+import { TWs } from '../websocket/action'
 import {
   TypedUseSelectorHook,
   useDispatch as dispatchHook,
@@ -26,7 +26,7 @@ export interface Iingredient {
   proteins: number;
   carbohydrates: number;
   calories: number;
-  price: string;
+  price: number;
   image: string;
   image_mobile: string;
   image_large: string;
@@ -50,10 +50,39 @@ export interface IData {
   loading: boolean;
   error: null | string;
 }
-export interface WebsocketOrders{
-
+export interface IwebsocketOrders {
+  success: boolean;
+  orders:IwebsocketOrdersOrders[];
+  total: string;
+  totalToday: string;
 }
-export enum WebsocketStatus{
+export interface IwebsocketOrdersOrders{
+  _id: string;
+  ingredients: string[];
+  status: string;
+  name: string;
+  createdAt: string;
+  updatedAt: string;
+  number: string;
+}
+export interface IwebsocketItemOrder{
+  orders: IwebsocketItemOrderOrders[];
+  success: boolean;
+}
+
+export interface IwebsocketItemOrderOrders{
+  createdAt:string;
+  ingredients: string[];
+  name: string;
+  number: number;
+  owner: string;
+  status:string;
+  updatedAt:string;
+  __v:number;
+  _id:string;
+}
+
+export enum WebsocketStatus {
   CONNECTING = 'CONNECTING...',
   ONLINE = 'ONLINE',
   OFFLINE = 'OFFLINE'
@@ -68,7 +97,7 @@ export type TActionsGlobal =
 
 export type RootState = ReturnType<typeof rootReducer>;
 
- 
+
 export type AppThunk<TReturn = void> = ThunkAction<
   TReturn,
   RootState,
@@ -76,7 +105,7 @@ export type AppThunk<TReturn = void> = ThunkAction<
   TActionsGlobal
 >;
 
-export type AppDispatch<TReturnType = void> = (action :TActionsGlobal| AppThunk<TReturnType>) => TReturnType; 
+export type AppDispatch<TReturnType = void> = (action: TActionsGlobal | AppThunk<TReturnType>) => TReturnType;
 // Теперь этот хук «знает» структуру хранилища
 export const useDispatch: () => AppDispatch = dispatchHook;
 export const useSelector: TypedUseSelectorHook<RootState> = selectorHook;

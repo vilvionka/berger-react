@@ -72,12 +72,12 @@ function App(): JSX.Element {
 
         {background && (
           <Routes>
-            <Route path='/feed/:orderId' element={
+            <Route path='/feed/:feedId' element={
               <Modal modalClose={handleModalClose}>
                 <FeedId />
               </Modal>}
             />
-             <Route path='/profile/orders/:orderId' element={
+             <Route path='/profile/orders/:feedId' element={
               <Modal modalClose={handleModalClose}>
                 <FeedId />
               </Modal>}

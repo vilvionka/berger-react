@@ -3,12 +3,11 @@ import { FeedOrders } from '../../components/FeedOrders/FeedOrders';
 import { FeedList } from '../../components/FeedList/FeedList';
 import Typography from '@ya.praktikum/react-developer-burger-ui-components'
 import Box from '@ya.praktikum/react-developer-burger-ui-components';
-import { useDispatch } from "react-redux";
-import { useSelector } from "react-redux";
+import { useDispatch } from '../../services/type/index'
+import { useSelector } from '../../services/type/index';
 import { store } from "../../services/store";
 import { connect, disconnect } from "../../services/websocket/action";
 import { useEffect } from 'react';
-import { socketMiddleware } from '../../services/websocket/middleware';
 import { getIngrediensSelector } from '../../services/ingredients/selector'
 
 export const urlWebSocket = 'wss://norma.nomoreparties.space/orders/all';
@@ -16,17 +15,17 @@ export const urlWebSocket = 'wss://norma.nomoreparties.space/orders/all';
 export const Feed = () => {
   const dispatch = useDispatch();
 
-  const { orders } = useSelector(store => store.wsReducer);
-  const { ingredient } = useSelector(getIngrediensSelector)
+  const {orders} = useSelector(store => store.wsReducer);
+  const data  = useSelector(getIngrediensSelector)
 
   useEffect(() => {
     dispatch(connect(urlWebSocket));
     return()=>{
-      dispatch(disconnect);
+      dispatch(disconnect());
     }
   }, []);
-
-  if (ingredient !== [] && orders.success === true) {
+ 
+  if ( data.length> 0  && orders?.success === true ) {
 
     return (
       <>

@@ -41,8 +41,7 @@ export const socketMiddleware = (wsActions: TWsActionTypes): Middleware<{}, Root
           const { data } = event;
           const parsedData = JSON.parse(data);
           if (data.message == 'Invalid or missing token') {
-            //@ts-ignore
-            dispatch(refreshToken());
+            refreshToken();
           } else {
             dispatch(message(parsedData));
           }

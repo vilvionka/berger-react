@@ -1,6 +1,6 @@
 import styles from './ProfileOrders.module.css';
 import { FeedOrdersItem } from '../FeedOrdersItem/FeedOrdersItem';
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector, useDispatch } from '../../services/type/index'
 import { useEffect } from 'react';
 import { getIngrediensSelector } from '../../services/ingredients/selector';
 import { connect, disconnect } from "../../services/websocket/action";
@@ -17,22 +17,22 @@ export const ProfileOrders = () => {
 
   const dispatch = useDispatch();
 
-  const { orders } = useSelector(store => store.wsReducer);
-  const { ingredient } = useSelector(getIngrediensSelector)
+  const {orders} = useSelector(store => store.wsReducer);
+  const data  = useSelector(getIngrediensSelector)
 
   useEffect(() => {
     dispatch(connect(urlWebSocket));
     return () => {
-      dispatch(disconnect);
+      dispatch(disconnect());
     }
-  }, []);
+  }, [accessToken]);
 
-  if (ingredient !== [] && orders.success === true) {
+  if ( data.length> 0  && orders?.success === true ) {
 
     return (
       <>
         <div className={`${styles.box} custom-scroll `}>
-          {orders.orders.map((el, index) =>
+          {orders.orders.map((el, index:number) =>
             <FeedOrdersItem el={el} key={index} />
           )}
         </div>

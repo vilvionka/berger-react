@@ -3,29 +3,32 @@ import bun from '../../images/bun-01.png';
 import { CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import { useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
-import { useSelector } from "react-redux";
+import { useSelector } from '../../services/type/index';
 import { getIngrediensSelectorMain } from '../../services/ingredients/selector';
 import { getProjectOrder } from '../../utils/ingredient-api';
+import {IwebsocketItemOrderOrders} from '../../services/type/index'
 
 
 export const FeedId = () => {
-  const [order, setOrder] = useState('');
+  const [order, setOrder] = useState<IwebsocketItemOrderOrders | null>(null)
   const { ingredient } = useSelector(getIngrediensSelectorMain);
 
-  const { feedId } = useParams();
+  const feedId = useParams().feedId || "";
 
   const Data = new Date();
   const Day = Data.getDate();
-
-  useEffect(() => {
-    getProjectOrder(feedId).then((res) => {
-      setOrder(res.orders[0]);
-    });
-  }, []);
-
-
   
-  if (order == '') {
+    useEffect(() => {
+      getProjectOrder(feedId).then((res) => {
+        setOrder(res.orders[0]);
+      });
+    }, []);
+    
+
+   
+  
+
+    if (!order) {
     return (
       <>
         <p>Загрузка...</p>
@@ -34,7 +37,7 @@ export const FeedId = () => {
   } else {
 
 
-    const priceArr = [];
+    const priceArr: number[] = [];
     for (let i = 0; i < order.ingredients.length; i++) {
       let elems = order.ingredients[i]
       ingredient.map(j => j._id == elems && priceArr.push(j.price))
@@ -45,7 +48,9 @@ export const FeedId = () => {
     const duplicates = order.ingredients.filter((number, index, numbers) => {
       return numbers.indexOf(number) !== index;
     });
-    const resObject = order.ingredients.reduce((acc, i) => {
+
+    
+    const resObject = order.ingredients.reduce((acc:Record<string,number>, i) => {
       if (acc.hasOwnProperty(i)) {
         acc[i] += 1;
       } else {
@@ -53,7 +58,9 @@ export const FeedId = () => {
       }
       return acc;
     }, {})
-    const ordersObject = Object.entries(resObject)
+   
+    const ordersObject:any[][] = Object.entries(resObject);
+   
     for (let i = 0; i < ordersObject.length; i++) {
       let elems = ordersObject[i]
       ingredient.map(j => j._id == elems[0] && elems.push(j.price))
@@ -77,23 +84,23 @@ export const FeedId = () => {
           <div className={`${styles.ingredient} custom-scroll`}>
             {ordersObject.map((item, index) =>
               <div className={styles.item} key={index}>
-              <div className={styles.flex}>
-                <div className={styles.img}>
-                  <img src={item[3]} alt="img" />
+                <div className={styles.flex}>
+                  <div className={styles.img}>
+                    <img src={item[3]} alt="img" />
+                  </div>
+                  <p className="text text_type_main-default ml-4">{item[4]}</p>
                 </div>
-                <p className="text text_type_main-default ml-4">{item[4]}</p>
+                <div className={styles.discription}>
+                  <p className='text text_type_digits-default mr-2'>{item[1]}</p>
+                  <p className="text text_type_digits-default mr-2">x</p>
+                  <p className="text text_type_digits-default mr-2">{item[2] * item[1]}</p>
+                  <CurrencyIcon type="primary" />
+                </div>
               </div>
-              <div className={styles.discription}>
-                <p className='text text_type_digits-default mr-2'>{item[1]}</p>
-                <p className="text text_type_digits-default mr-2">x</p>
-                <p className="text text_type_digits-default mr-2">{item[2]*item[1]}</p>
-                <CurrencyIcon type="primary" />
-              </div>
-            </div>
             )}
           </div>
           <div className={`${styles.bottom} mt-10 pb-8`}>
-            <p className='text text_type_main-default text_color_inactive'>{dateOrder.slice(8, 10) == Day ? 'Сегодня' : (dateOrder.slice(8, 10) - Day) > 1 ? (dateOrder.slice(8, 10) - Day) + "дня(-ей) назад" : "Вчера"}, {dateOrder.slice(11)}</p>
+            <p className='text text_type_main-default text_color_inactive'>{Number(dateOrder.slice(8, 10)) == Day ? 'Сегодня' : (Number(dateOrder.slice(8, 10)) - Day) > 1 ? (Number(dateOrder.slice(8, 10)) - Day) + "дня(-ей) назад" : "Вчера"}, {dateOrder.slice(11)}</p>
             <div className={styles.total}>
               <p className='text text_type_digits-default mr-2'>{sum}</p>
               <CurrencyIcon type="primary" />

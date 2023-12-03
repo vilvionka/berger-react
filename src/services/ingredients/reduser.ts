@@ -3,7 +3,7 @@ import {TActionsIngredient} from './action';
 import {Iingredient} from '../type/index'
 
 interface IinitialState {
-  ingredient: Iingredient[]
+  ingredient: Iingredient[];
   loading: boolean;
   error: string | null;
 }

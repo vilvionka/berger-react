@@ -1,17 +1,16 @@
 import styles from './FeedOrdersItem.module.css';
 import { CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components';
-import { NavLink, useMatch , useLocation } from 'react-router-dom';
+import { Link, useMatch , useLocation } from 'react-router-dom';
 import { useSelector } from '../../services/type/index';
-import { getIngrediensSelectorMain } from '../../services/ingredients/selector'
-import { useEffect } from 'react';
+import { getIngrediensSelector } from '../../services/ingredients/selector'
+import {IwebsocketOrdersOrders} from '../../services/type/index';
 
 
-export const FeedOrdersItem = ({ el }) => {
+export const FeedOrdersItem = ({el}:any): JSX.Element => {
   
-
-  const { ingredient } = useSelector(getIngrediensSelectorMain);
-  const imageArr = [];
-  const priceArr = []
+  const ingredient  = useSelector(getIngrediensSelector);
+  const imageArr:string[] = [];
+  const priceArr:number[] = []
 
   for (let i = 0; i < el.ingredients.length; i++) {
     let elem = el.ingredients[i]
@@ -29,11 +28,12 @@ export const FeedOrdersItem = ({ el }) => {
 
   const location = useLocation();
   const orderNumber = el.number;
+  
 
   return (
     <>
-      <NavLink to={`${location.pathname}/${orderNumber}`}
-      key={orderNumber} state={{ background: location }} className={`${styles.box} p-6 mb-4`}>
+      <Link to={orderNumber.toString()}
+       state={{ background: location }} className={`${styles.box} p-6 mb-4`}>
         <div className={styles.top}>
           <p className="text text_type_digits-default">#{el.number}</p>
           <p className='text text_type_main-default text_color_inactive'>{dateOrder.slice(8,10) == Day ? 'Сегодня' : (dateOrder.slice(8,10) - Day ) > 1  ? (dateOrder.slice(8,10) - Day) + "Дня(-ей) назад" : "Вчера" }, {dateOrder.slice(11)}</p>
@@ -57,7 +57,7 @@ export const FeedOrdersItem = ({ el }) => {
             <CurrencyIcon type="primary" />
           </div>
         </div>
-      </NavLink>
+      </Link>
     </>
   )
 }
