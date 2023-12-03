@@ -59,7 +59,7 @@ export const FeedId = () => {
       return acc;
     }, {})
    
-    const ordersObject:any[][] = Object.entries(resObject);
+    const ordersObject:Array<string | number>[] = Object.entries(resObject);
    
     for (let i = 0; i < ordersObject.length; i++) {
       let elems = ordersObject[i]
