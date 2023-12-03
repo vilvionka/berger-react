@@ -45,7 +45,7 @@ export const Login = () => {
             value={value}
           />
           <Input
-            type={'text'}
+            type={'password'}
             placeholder={'Пароль'}
             icon={'ShowIcon'}
             onChange={e => setValueP(e.target.value)}

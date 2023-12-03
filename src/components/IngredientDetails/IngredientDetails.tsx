@@ -11,7 +11,7 @@ import { useParams } from 'react-router-dom';
 import { getIngrediensSelectorMain } from '../../services/ingredients/selector';
 import { useEffect } from 'react';
 import { loadIngredients } from '../../services/ingredients/action';
-import { useDispatch } from 'react-redux';
+import { useDispatch } from '../../services/type/index';
 import { Iingredient } from '../../services/type/index';
 
 

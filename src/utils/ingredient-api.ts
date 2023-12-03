@@ -1,5 +1,6 @@
 import {Iingredient} from '../services/type/index';
 import {IwebsocketItemOrder} from '../services/type/index'
+import {BASE_URL} from './api'
 
 
 
@@ -17,11 +18,11 @@ export interface IingredientApi{
 }
 
 export const getProjectIngredients = ():Promise<Array<Iingredient>> => {
-    return fetch('https://norma.nomoreparties.space/api/ingredients/').then(getResponse)
+    return fetch(`${BASE_URL}/ingredients/`).then(getResponse).catch(err => console.log(err));
   
 }
 export const getProjectOrder = (number:string):Promise<IwebsocketItemOrder> => {
-  return fetch(`https://norma.nomoreparties.space/api/orders/${number}`).then(getResponse)
+  return fetch(`${BASE_URL}/orders/${number}`).then(getResponse).catch(err => console.log(err));
 
 }
 

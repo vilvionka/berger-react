@@ -12,7 +12,7 @@ const initialState:IinitialState = {
     isAuthChecked: false,
 };
 
-export const reduserRegister = (state = initialState, action:TActionsRegister):IinitialState => {
+export const reducerRegister = (state = initialState, action:TActionsRegister):IinitialState => {
   switch (action.type) {
     case SET_AUTH_CHECKED:
       return {

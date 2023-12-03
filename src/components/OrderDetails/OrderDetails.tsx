@@ -5,7 +5,7 @@ import styles from './OrderDetails.module.css';
 import Typography  from '@ya.praktikum/react-developer-burger-ui-components';
 import Box  from '@ya.praktikum/react-developer-burger-ui-components';
 import icon from '../../images/done.svg'
-import { useSelector } from 'react-redux';
+import { useSelector } from '../../services/type/index';
 import { getOrderSelector } from '../../services/order/selector';
 import { CLEAR } from '../../services/burgerConstructor/action';
 

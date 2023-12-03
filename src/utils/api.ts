@@ -1,4 +1,4 @@
-import { getResponseOrder } from "./order-api";
+import { checkResponse } from "./order-api";
 import {Iingredient} from '../services/type/index';
 
 
@@ -12,10 +12,11 @@ interface IgetRegisterApi{
   }
 
 }
+export const BASE_URL:string = 'https://norma.nomoreparties.space/api';
 
 export const getRegister = (name:string, email:string, password:string):Promise<IgetRegisterApi> => {
   
-  return fetch('https://norma.nomoreparties.space/api/auth/register', {
+  return fetch(`${BASE_URL}/auth/register`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json"
@@ -25,7 +26,7 @@ export const getRegister = (name:string, email:string, password:string):Promise<
       "password": password,
       "name": name
     })
-  }).then(getResponseOrder)
+  }).then(checkResponse)
 }
 
 interface IgetForgotPasswordApi{
@@ -34,7 +35,7 @@ interface IgetForgotPasswordApi{
 }
 
 export const getForgotPassword = (email: string):Promise<IgetForgotPasswordApi> => {
-  return fetch(' https://norma.nomoreparties.space/api/password-reset', {
+  return fetch(`${BASE_URL}/password-reset`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json"
@@ -42,11 +43,11 @@ export const getForgotPassword = (email: string):Promise<IgetForgotPasswordApi> 
     body: JSON.stringify({
       "email": email,
     })
-  }).then(getResponseOrder)
+  }).then(checkResponse).catch(err => console.log(err))
 }
 
 export const getRessetPassword = (password: string, token: string):Promise<IgetForgotPasswordApi> => {
-  return fetch('https://norma.nomoreparties.space/api/password-reset/reset', {
+  return fetch(`${BASE_URL}/password-reset/reset`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json"
@@ -55,12 +56,12 @@ export const getRessetPassword = (password: string, token: string):Promise<IgetF
       "password": password,
       "token": token
     })
-  }).then(getResponseOrder)
+  }).then(checkResponse).catch(err => console.log(err));
 }
 
 
 export const login = (email: string, password: string):Promise<IgetRegisterApi> => {
-  return fetch('https://norma.nomoreparties.space/api/auth/login', {
+  return fetch(`${BASE_URL}/auth/login`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json"
@@ -69,11 +70,11 @@ export const login = (email: string, password: string):Promise<IgetRegisterApi> 
       "email": email,
       "password": password,
     })
-  }).then(getResponseOrder)
+  }).then(checkResponse).catch(err => console.log(err));
 }
 
 export const logout = (token: string) => {
-  return fetch('https://norma.nomoreparties.space/api/auth/logout', {
+  return fetch(`${BASE_URL}/auth/logout`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json"
@@ -81,11 +82,11 @@ export const logout = (token: string) => {
     body: JSON.stringify({
       "token": token,
     })
-  }).then(getResponseOrder)
+  }).then(checkResponse).catch(err => console.log(err));
 }
 
 export const editLoad = (name: string, email: string, password: string, token: string):Promise<Iingredient> => {
-  return fetch('https://norma.nomoreparties.space/api/auth/user', {
+  return fetch(`${BASE_URL}/auth/user`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -96,7 +97,7 @@ export const editLoad = (name: string, email: string, password: string, token: s
       "email": email,
       "password": password,
     })
-  }).then(getResponseOrder)
+  }).then(checkResponse).catch(err => console.log(err));
 }
 
 
