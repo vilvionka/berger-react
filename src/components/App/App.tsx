@@ -29,7 +29,7 @@ function App(): JSX.Element {
   const dispatсh = useDispatch();
 
   useEffect(() => {
-    dispatсh(loadIngredients()).catch(err => console.log(err));
+    dispatсh(loadIngredients());
     dispatсh(checkUserAuth());
 
   }, []);
