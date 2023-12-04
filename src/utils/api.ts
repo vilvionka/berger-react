@@ -43,7 +43,7 @@ export const getForgotPassword = (email: string):Promise<IgetForgotPasswordApi> 
     body: JSON.stringify({
       "email": email,
     })
-  }).then(checkResponse).catch(err => console.log(err))
+  }).then(checkResponse);
 }
 
 export const getRessetPassword = (password: string, token: string):Promise<IgetForgotPasswordApi> => {
@@ -56,7 +56,7 @@ export const getRessetPassword = (password: string, token: string):Promise<IgetF
       "password": password,
       "token": token
     })
-  }).then(checkResponse).catch(err => console.log(err));
+  }).then(checkResponse);
 }
 
 
@@ -70,7 +70,7 @@ export const login = (email: string, password: string):Promise<IgetRegisterApi> 
       "email": email,
       "password": password,
     })
-  }).then(checkResponse).catch(err => console.log(err));
+  }).then(checkResponse);
 }
 
 export const logout = (token: string) => {
@@ -82,7 +82,7 @@ export const logout = (token: string) => {
     body: JSON.stringify({
       "token": token,
     })
-  }).then(checkResponse).catch(err => console.log(err));
+  }).then(checkResponse);
 }
 
 export const editLoad = (name: string, email: string, password: string, token: string):Promise<Iingredient> => {
@@ -97,7 +97,7 @@ export const editLoad = (name: string, email: string, password: string, token: s
       "email": email,
       "password": password,
     })
-  }).then(checkResponse).catch(err => console.log(err));
+  }).then(checkResponse);
 }
 
 

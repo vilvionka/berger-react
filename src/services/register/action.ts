@@ -49,7 +49,7 @@ export const getUser = ():AppThunk<Promise<unknown>> => {
   return (dispatch) => {
     return fetchWithRefresh(localStorage.getItem('accessToken')).then((res) => {
       dispatch(setUser(res.user));
-    })
+    }).catch(err => console.log(err));
   }
 }
 
@@ -64,7 +64,7 @@ export const login = (email: string, password: string):AppThunk => {
       localStorage.setItem("refreshToken", res.refreshToken);
       dispatch(setUser(res.user));
       dispatch(setAuthChecked(true));
-    });
+    }).catch(err => console.log(err));
   };
 };
 
@@ -72,10 +72,11 @@ export const checkUserAuth = ():AppThunk => {
   return (dispatch) => {
     if (localStorage.getItem("accessToken")) {
       dispatch(getUser())
-        .catch(() => {
+        .catch((err) => {
           localStorage.removeItem("accessToken");
           localStorage.removeItem("refreshToken");
           dispatch(setUser(null));
+          console.log(err);
         })
         .finally(() => dispatch(setAuthChecked(true)));
     } else {
@@ -87,9 +88,8 @@ export const checkUserAuth = ():AppThunk => {
 export const editLoad = (name:string, email:string, password:string, token:string):AppThunk => {
   return (dispatch) => {
     return fetchWithRefreshPath(name, email, password, token).then((res) => {
-      console.log(res)
       dispatch(setUser(res.user));
-    })
+    }).catch(err => console.log(err));
   }
 }
 
@@ -100,6 +100,6 @@ export const logout = (token:string):AppThunk => {
       localStorage.removeItem("accessToken");
       localStorage.removeItem("refreshToken");
       dispatch(setUser(null));
-    });
+    }).catch(err => console.log(err));
   };
 };

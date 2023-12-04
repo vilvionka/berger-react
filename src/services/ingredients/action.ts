@@ -1,6 +1,5 @@
 import { getProjectIngredients } from '../../utils/ingredient-api';
 import { Iingredient } from '../type/index';
-import { AppDispatch } from '../type/index';
 import { AppThunk } from '../type/index';
 
 export const ADD_LOADING: 'ADD_LOADING' = 'ADD_LOADING';

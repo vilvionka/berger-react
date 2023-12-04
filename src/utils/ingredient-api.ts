@@ -18,11 +18,11 @@ export interface IingredientApi{
 }
 
 export const getProjectIngredients = ():Promise<Array<Iingredient>> => {
-    return fetch(`${BASE_URL}/ingredients/`).then(getResponse).catch(err => console.log(err));
+    return fetch(`${BASE_URL}/ingredients/`).then(getResponse);
   
 }
 export const getProjectOrder = (number:string):Promise<IwebsocketItemOrder> => {
-  return fetch(`${BASE_URL}/orders/${number}`).then(getResponse).catch(err => console.log(err));
+  return fetch(`${BASE_URL}/orders/${number}`).then(getResponse);
 
 }
 

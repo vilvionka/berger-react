@@ -2,7 +2,7 @@ import styles from "./Login.module.css";
 import { Input, ShowIcon, Button } from '@ya.praktikum/react-developer-burger-ui-components';
 import React, { useRef, useState } from 'react';
 import { Link } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch } from '../../services/type/index';
 import { login } from '../../services/register/action';
 
 

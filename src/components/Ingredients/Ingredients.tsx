@@ -1,5 +1,4 @@
 import React, { useMemo } from 'react';
-import PropTypes from 'prop-types';
 import styles from './Ingredients.module.css';
 import Typography from '@ya.praktikum/react-developer-burger-ui-components';
 import Box from '@ya.praktikum/react-developer-burger-ui-components';
