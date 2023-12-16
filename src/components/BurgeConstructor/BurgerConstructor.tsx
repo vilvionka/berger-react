@@ -1,7 +1,7 @@
 import { Button, ConstructorElement, CurrencyIcon, DragIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import React, { useMemo } from 'react';
 import { useDrop } from "react-dnd";
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch, useSelector } from '../../services/type/index';
 import { v4 as uuidv4 } from 'uuid';
 import { ADD_INGREDIENT } from '../../services/burgerConstructor/action';
 import { BurgerElement } from '../BurgerElement/BurgerElement';
@@ -12,21 +12,14 @@ import { loadOrder } from '../../services/order/action';
 import { getBurgerSelectorBun, getBurgerSelectorIngredients, getBurgerSelector } from '../../services/burgerConstructor/selector';
 import { getRegisterSelectorUser } from '../../services/register/selector';
 import { useNavigate } from 'react-router-dom';
+import {IingredientKey} from '../../services/type/index';
 
 
-
-interface Idata {
-  key: number;
-  _id: number;
-  name: string;
-  image: string;
-  price: number;
-}
 
 
 function BurgerConstructor() {
   const [state, setState] = React.useState(false);
-  const data: Idata[] = useSelector(getBurgerSelectorIngredients);
+  const data: IingredientKey[] = useSelector(getBurgerSelectorIngredients);
   const dataBun = useSelector(getBurgerSelectorBun);
   const burgersData = useSelector(getBurgerSelector);
 
@@ -36,7 +29,9 @@ function BurgerConstructor() {
     accept: "animal",
     drop(item: object) {
       dispatch({
+        //@ts-ignore
         type: ADD_INGREDIENT,
+        //@ts-ignore
         payload: { ...item, key: uuidv4() }
       });
     },
@@ -59,8 +54,6 @@ function BurgerConstructor() {
         data.map(el => burgId.push(el._id));
         burgId.push(dataBun._id);
         setState(true);
-        console.log(burgId, localStorage.getItem('accessToken'));
-        //@ts-ignore
         dispatch(loadOrder(burgId, localStorage.getItem('accessToken')))
       }
     } else {
@@ -83,11 +76,11 @@ function BurgerConstructor() {
     let sum = 0;
     if (data.length > 0) {
       let value = 0
-      sum = data.reduce((accumulator: number, item: { price: number }) => {
+      sum = data.reduce((accumulator, item) => {
         return accumulator + Number(item.price)
       }, value)
     }
-    let sumBun = 0;
+    let sumBun: number = 0;
     if (dataBun) {
       sumBun = dataBun.price * 2;
     }
@@ -97,7 +90,7 @@ function BurgerConstructor() {
 
   return (
     <>
-      <div className={styles.box} ref={dropTarget}>
+      <div className={styles.box} ref={dropTarget} data-cy='constructor'>
 
         <div className={styles.box_burger}>
           <div className={styles.box_constructor_bun} >
@@ -112,8 +105,8 @@ function BurgerConstructor() {
             }
           </div>
           <div className={`${styles.box_constructor} custom-scroll`} >
-            {data.length > 0 && data.map((el: { key: number; name: string; image: string; price: number }, index: number) =>
-              <BurgerElement el={el} key={el.key} index={index} />
+            {data.length > 0 && data.map((elem, index) =>
+              <BurgerElement el={elem} key={elem.key} index={index} />
             )}
           </div>
           <div className={styles.box_constructor_bun}>
@@ -135,7 +128,7 @@ function BurgerConstructor() {
             <p className={'text text_type_digits-medium mr-2'}>{totalPrice}</p>
             <CurrencyIcon type="primary" />
           </div>
-          <div className={styles.price_buuton} onClick={modalOpen}>
+          <div className={styles.price_buuton} onClick={modalOpen} data-cy='submit'>
             <Button htmlType="button" type="primary" size="medium" >
               Оформить заказ
             </Button>

@@ -1,21 +1,15 @@
 import { ConstructorElement, DragIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import PropTypes from 'prop-types';
 import { useDrag, useDrop } from "react-dnd";
-import { useDispatch } from 'react-redux';
+import { useDispatch } from '../../services/type/index';
 import { DELETE_INGREDIENT, UPDATE_INGREDIENT } from '../../services/burgerConstructor/action';
 import styles from './BurgerElement.module.css';
 import { useRef } from 'react';
 import {Identifier} from 'dnd-core';
-
-type Tel = {
-  key: number;
-  name: string;
-  price: number;
-  image: string;
-}
+import {IingredientKey} from '../../services/type/index'
 
 type TBurgerElementProps = {
-  el: Tel;
+  el: IingredientKey;
   index: number;
 }
 
@@ -30,7 +24,7 @@ export function BurgerElement({ el, index }: TBurgerElementProps) {
     });
   }
   type TDragObject = {
-    id: number;
+    id: string | unknown;
     index: number;
   }
   type TDragCollectedProps = {

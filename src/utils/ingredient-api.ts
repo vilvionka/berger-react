@@ -1,4 +1,6 @@
-import {Iingredient} from '../services/ingredients/type';
+import {Iingredient} from '../services/type/index';
+import {IwebsocketItemOrder} from '../services/type/index'
+import {BASE_URL} from './api'
 
 
 
@@ -16,7 +18,11 @@ export interface IingredientApi{
 }
 
 export const getProjectIngredients = ():Promise<Array<Iingredient>> => {
-    return fetch('https://norma.nomoreparties.space/api/ingredients/').then(getResponse)
+    return fetch(`${BASE_URL}/ingredients/`).then(getResponse);
   
+}
+export const getProjectOrder = (number:string):Promise<IwebsocketItemOrder> => {
+  return fetch(`${BASE_URL}/orders/${number}`).then(getResponse);
+
 }
 

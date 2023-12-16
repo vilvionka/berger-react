@@ -1,15 +1,17 @@
 import styles from "./ProfilePage.module.css";
 import { Input, EditIcon, Button } from '@ya.praktikum/react-developer-burger-ui-components';
 import React, { useRef, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch, useSelector } from '../../services/type/index';
 import { getRegisterSelector } from '../../services/register/selector';
 import { editLoad } from '../../services/register/action';
 import Box from '@ya.praktikum/react-developer-burger-ui-components';
 
 
 export const ProfilePage = () => {
-  const { name, email } = useSelector(getRegisterSelector);
+  const user = useSelector(getRegisterSelector);
 
+  const name = user!.name;
+  const email = user!.email;
 
   const [value, setValue] = useState(name);
   const [valueP, setValueP] = useState('');
@@ -18,7 +20,7 @@ export const ProfilePage = () => {
   const inputRef1 = useRef<HTMLInputElement>(null)
 
   const onIconClickName = () => {
-    setTimeout(() => inputRef1.current!.focus(), 0)  
+    setTimeout(() => inputRef1.current!.focus(), 0)
   }
   const inputRef2 = useRef<HTMLInputElement>(null)
 
@@ -38,7 +40,7 @@ export const ProfilePage = () => {
   const token = localStorage.getItem('accessToken');
   const dispatch = useDispatch();
 
-  const edit = (e:React.SyntheticEvent) => {
+  const edit = (e: React.SyntheticEvent) => {
     e.preventDefault();
     if (valueP !== '' && valueM !== '') {
       if (valueP !== '') {
@@ -48,15 +50,15 @@ export const ProfilePage = () => {
     }
   }
 
-  const reset = () =>{
+  const reset = () => {
     setValue(name)
     setValueM(email);
-    
+
   }
 
   return (
     <>
-      <form onSubmit = {edit}>
+      <form onSubmit={edit} className={styles.form}>
         <Input
           type={'text'}
           placeholder={'Имя'}

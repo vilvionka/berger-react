@@ -1,7 +1,8 @@
 import { refreshToken } from "./token-api";
-import {Iingredient} from '../services/ingredients/type';
+import {Iingredient} from '../services/type/index';
+import {BASE_URL} from './api';
 
-export const getResponseOrder = (res:Response): Promise<any> => {
+export const checkResponse = (res:Response): Promise<any> => {
   if (res.ok) {
     return res.json()
 
@@ -9,7 +10,7 @@ export const getResponseOrder = (res:Response): Promise<any> => {
   return Promise.reject(`Ошибка ${res.status}`);
 
 }
-interface IgetOrderProjectApi{
+export interface IgetOrderProjectApi{
   name: string;
   order: {
     createdAt: string;
@@ -31,10 +32,10 @@ interface IgetOrderProjectApi{
 }
 
 
-export const getOrderProject = async (ingredientsObjec:[string], token: any):Promise<IgetOrderProjectApi> => {
+export const getOrderProject = async (ingredientsObjec:number[], token: any):Promise<IgetOrderProjectApi> => {
 
   try {
-    const res = await fetch('https://norma.nomoreparties.space/api/orders', {
+    const res = await fetch(`${BASE_URL}/orders`, {
       method: "POST",
       headers: {
         'Content-Type': 'application/json;charset=utf-8',
@@ -45,7 +46,7 @@ export const getOrderProject = async (ingredientsObjec:[string], token: any):Pro
       })
     });
 
-    return await getResponseOrder(res);
+    return await checkResponse(res);
   } catch (err:any) {
     if (err.message === "jwt expired") {
       const refreshData = await refreshToken(); //обновляем токен
@@ -55,7 +56,7 @@ export const getOrderProject = async (ingredientsObjec:[string], token: any):Pro
       localStorage.setItem("refreshToken", refreshData.refreshToken);
       localStorage.setItem("accessToken", refreshData.accessToken);
       token.headers.authorization = refreshData.accessToken;
-      const res = await fetch('https://norma.nomoreparties.space/api/orders', {
+      const res = await fetch(`${BASE_URL}/orders`, {
         method: "POST",
         headers: {
           'Content-Type': 'application/json;charset=utf-8',
@@ -65,7 +66,7 @@ export const getOrderProject = async (ingredientsObjec:[string], token: any):Pro
           "ingredients": ingredientsObjec
         })
       });; //повторяем запрос
-      return await getResponseOrder(res);
+      return await checkResponse(res);
     } else {
       return Promise.reject(err);
     }

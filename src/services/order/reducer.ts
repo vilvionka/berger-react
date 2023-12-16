@@ -1,12 +1,20 @@
 import { ADD_LOADING_ORDER, LOADING_ORDER, ERROR_ORDER } from './action';
+import {TActionsOrder} from './action';
+import {IgetOrderProjectApi} from '../../utils/order-api';
 
-const initialState = {
+interface IinitialState{
+ order: null | IgetOrderProjectApi;
+ loading: boolean;
+ error: null | string;
+}
+
+const initialState:IinitialState = {
   order: null,
   loading: false,
   error: null
 }
 
-export const orderReducer = (state = initialState, action) => {
+export const orderReducer = (state = initialState, action:TActionsOrder):IinitialState => {
   switch (action.type) {
     case ERROR_ORDER:
       return {

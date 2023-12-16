@@ -1,24 +1,40 @@
 import { api } from "../../utils/api";
 import { fetchWithRefresh } from "../../utils/token-api";
 import { fetchWithRefreshPath } from "../../utils/token-api";
+import {AppDispatch, AppThunk} from '../type/index'
 
 
-export const SET_AUTH_CHECKED = 'SET_AUTH_CHECKED';
-export const SET_USER = 'SET_USER';
+export const SET_AUTH_CHECKED: 'SET_AUTH_CHECKED' = 'SET_AUTH_CHECKED';
+export const SET_USER: 'SET_USER' = 'SET_USER';
 
+export interface IUser{
+  name: string;
+  email: string;
+}
+interface ISetAuthCheckedAction {
+  readonly type: typeof SET_AUTH_CHECKED;
+  readonly payload: boolean;
+}
 
+interface ISetUserAction {
+  readonly type: typeof SET_USER;
+  readonly payload: IUser | null;
+}
+export type TActionsRegister =
+  ISetAuthCheckedAction |
+  ISetUserAction;
 
-export const setAuthChecked = (value) => ({
+export const setAuthChecked = (value: boolean) => ({
   type: SET_AUTH_CHECKED,
   payload: value,
 });
 
-export const setUser = (user) => ({
+export const setUser = (user: IUser | null) => ({
   type: SET_USER,
   payload: user,
 });
 
-export const getRegistration = (name, email, password) => {
+export const getRegistration = (name: string, email: string, password: string):AppThunk => {
   return (dispatch) => {
     return api.getRegister(name, email, password).then((res) => {
       localStorage.setItem("accessToken", res.accessToken);
@@ -29,37 +45,38 @@ export const getRegistration = (name, email, password) => {
   };
 };
 
-export const getUser = () => {
+export const getUser = ():AppThunk<Promise<unknown>> => {
   return (dispatch) => {
     return fetchWithRefresh(localStorage.getItem('accessToken')).then((res) => {
       dispatch(setUser(res.user));
-    })
+    }).catch(err => console.log(err));
   }
 }
 
- 
 
 
 
-export const login = (email, password) => {
+
+export const login = (email: string, password: string):AppThunk => {
   return (dispatch) => {
     return api.login(email, password).then((res) => {
       localStorage.setItem("accessToken", res.accessToken);
       localStorage.setItem("refreshToken", res.refreshToken);
       dispatch(setUser(res.user));
       dispatch(setAuthChecked(true));
-    });
+    }).catch(err => console.log(err));
   };
 };
 
-export const checkUserAuth = () => {
+export const checkUserAuth = ():AppThunk => {
   return (dispatch) => {
     if (localStorage.getItem("accessToken")) {
       dispatch(getUser())
-        .catch(() => {
+        .catch((err) => {
           localStorage.removeItem("accessToken");
           localStorage.removeItem("refreshToken");
           dispatch(setUser(null));
+          console.log(err);
         })
         .finally(() => dispatch(setAuthChecked(true)));
     } else {
@@ -68,22 +85,21 @@ export const checkUserAuth = () => {
   };
 };
 
-export const editLoad = (name, email, password, token) => {
+export const editLoad = (name:string, email:string, password:string, token:string):AppThunk => {
   return (dispatch) => {
     return fetchWithRefreshPath(name, email, password, token).then((res) => {
-      console.log(res)
       dispatch(setUser(res.user));
-    })
+    }).catch(err => console.log(err));
   }
 }
 
 
-export const logout = (token) => {
+export const logout = (token:string):AppThunk => {
   return (dispatch) => {
     return api.logout(token).then((res) => {
       localStorage.removeItem("accessToken");
       localStorage.removeItem("refreshToken");
       dispatch(setUser(null));
-    });
+    }).catch(err => console.log(err));
   };
 };

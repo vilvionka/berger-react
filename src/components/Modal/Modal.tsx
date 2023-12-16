@@ -1,5 +1,4 @@
 import { useEffect } from 'react';
-import PropTypes from 'prop-types';
 import { createPortal } from 'react-dom';
 import ModalOverlay from '../ModalOverlay/ModalOverlay';
 import styles from './Modal.module.css';
@@ -35,8 +34,8 @@ function Modal({ children, modalClose }:IModalProps):JSX.Element {
   return createPortal((
     <>
       <ModalOverlay modalClose={modalClose} />
-      <div className={styles.modal}>
-        <div className={styles.close} onClick={modalClose}>
+      <div className={styles.modal} data-cy='modal'>
+        <div className={styles.close} onClick={modalClose} data-cy='close'>
           <CloseIcon type="primary" />
         </div>
         {children}
@@ -46,10 +45,7 @@ function Modal({ children, modalClose }:IModalProps):JSX.Element {
   ), modalRoot!)
 }
 
-Modal.propTypes = {
-  children: PropTypes.any.isRequired,
-  modalClose: PropTypes.func.isRequired
-}
+
 
 export default Modal;
 

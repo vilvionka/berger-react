@@ -2,7 +2,7 @@ import styles from "./Login.module.css";
 import { Input, ShowIcon, Button } from '@ya.praktikum/react-developer-burger-ui-components';
 import React, { useRef, useState } from 'react';
 import { Link } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch } from '../../services/type/index';
 import { login } from '../../services/register/action';
 
 
@@ -45,7 +45,7 @@ export const Login = () => {
             value={value}
           />
           <Input
-            type={'text'}
+            type={'password'}
             placeholder={'Пароль'}
             icon={'ShowIcon'}
             onChange={e => setValueP(e.target.value)}
@@ -58,7 +58,7 @@ export const Login = () => {
             extraClass="mt-6"
             value={valueP}
           />
-          <div className={`${styles.button} mt-6`}>
+          <div className={`${styles.button} mt-6`} data-cy='submit_entrance'>
             <Button htmlType="submit" type="primary" size="medium">
               Войти
             </Button>

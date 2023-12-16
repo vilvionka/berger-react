@@ -1,9 +1,11 @@
+import {BASE_URL} from './api';
+
 const checkReponse = (res:Response): Promise<any> => {
   return res.ok ? res.json() : res.json().then((err) => Promise.reject(err));
 };
 
 export const refreshToken = () => {
-  return fetch(`https://norma.nomoreparties.space/api/auth/token`, {
+  return fetch(`${BASE_URL}/auth/token`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json;charset=utf-8",
@@ -11,14 +13,14 @@ export const refreshToken = () => {
     body: JSON.stringify({
       token: localStorage.getItem("refreshToken"),
     }),
-  }).then(checkReponse);
+  }).then(checkReponse).catch(err => console.log(err));
 };
 
 
 export const fetchWithRefresh = async (options: any) => {
 
   try {
-    const res = await fetch('https://norma.nomoreparties.space/api/auth/user', {
+    const res = await fetch(`${BASE_URL}/auth/user`, {
       headers: {
         'Content-Type': 'application/json;charset=utf-8',
         authorization: options
@@ -35,7 +37,7 @@ export const fetchWithRefresh = async (options: any) => {
       localStorage.setItem("refreshToken", refreshData.refreshToken);
       localStorage.setItem("accessToken", refreshData.accessToken);
       options.headers.authorization = refreshData.accessToken;
-      const res = await fetch('https://norma.nomoreparties.space/api/auth/user', {
+      const res = await fetch(`${BASE_URL}/auth/user`, {
         headers: {
           'Content-Type': 'application/json;charset=utf-8',
           authorization: options
@@ -50,7 +52,7 @@ export const fetchWithRefresh = async (options: any) => {
 
 export const fetchWithRefreshPath = async (name:string, email: string, password: string, options:any) => {
   try {
-    const res = await fetch('https://norma.nomoreparties.space/api/auth/user', {
+    const res = await fetch(`${BASE_URL}/auth/user`, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
@@ -75,7 +77,7 @@ export const fetchWithRefreshPath = async (name:string, email: string, password:
       localStorage.setItem("refreshToken", refreshData.refreshToken);
       localStorage.setItem("accessToken", refreshData.accessToken);
       options.headers.authorization = refreshData.accessToken;
-      const res = await fetch('https://norma.nomoreparties.space/api/auth/user', {
+      const res = await fetch(`${BASE_URL}/auth/user`, {
         method: "PATCH",
         headers: {
           "Content-Type": "application/json",

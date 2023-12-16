@@ -1,4 +1,4 @@
-import { useSelector } from "react-redux";
+import { useSelector } from '../../services/type/index';
 import { Navigate, useLocation } from "react-router-dom";
 import { Interface } from "readline";
 import {getRegisterSelector} from '../../services/register/selector';

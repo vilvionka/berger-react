@@ -1,0 +1,7 @@
+{
+  "typescript.enablePromptUseWorkspaceTsdk": true,
+  "editor.parameterHints.cycle": true,
+  "editor.parameterHints.enabled": true,
+  "javascript.inlayHints.variableTypes.suppressWhenTypeMatchesName": false,
+  "typescript.referencesCodeLens.showOnAllFunctions": true
+}

@@ -5,21 +5,21 @@ import Typography  from '@ya.praktikum/react-developer-burger-ui-components';
 import  Box  from '@ya.praktikum/react-developer-burger-ui-components';
 import { CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import { CloseIcon } from '@ya.praktikum/react-developer-burger-ui-components';
-import { useSelector } from 'react-redux';
+import { useSelector } from '../../services/type/index';
 import { getIngrediensSelector } from '../../services/ingredients/selector';
 import { useParams } from 'react-router-dom';
 import { getIngrediensSelectorMain } from '../../services/ingredients/selector';
 import { useEffect } from 'react';
 import { loadIngredients } from '../../services/ingredients/action';
-import { useDispatch } from 'react-redux';
-import { Iingredient } from '../../services/ingredients/type';
+import { useDispatch } from '../../services/type/index';
+import { Iingredient } from '../../services/type/index';
 
 
 
 function IngredientDetails() {
 
-  let { ingredientId } = useParams<{ingredientId: string;}>();
-  const data:Iingredient[] = useSelector(getIngrediensSelector);
+  let { ingredientId } = useParams<{ingredientId: string ;}>();
+  const data = useSelector(getIngrediensSelector);
   const elem = data.find(el => el._id === ingredientId);
 
 

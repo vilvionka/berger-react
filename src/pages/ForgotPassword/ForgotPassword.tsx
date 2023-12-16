@@ -37,7 +37,7 @@ export const ForgotPassword = () => {
         <div className={styles.headling}>Восстановление пароля</div>
         <form onSubmit={forgotPassword}>
           <Input
-            type={'text'}
+            type={'email'}
             placeholder={'Укажите e-mail'}
             onChange={e => setValue(e.target.value)}
             name={'name'}

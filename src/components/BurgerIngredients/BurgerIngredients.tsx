@@ -1,15 +1,14 @@
 import React, { useState, useEffect } from 'react';
-import PropTypes from 'prop-types';
 import styles from './BurgerIngredients.module.css';
 import Ingredients from '../Ingredients/Ingredients';
 import { Tab } from '@ya.praktikum/react-developer-burger-ui-components';
 import  Typography  from '@ya.praktikum/react-developer-burger-ui-components';
 import  Box  from '@ya.praktikum/react-developer-burger-ui-components';
 import { CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from '../../services/type/index';
 import { useInView } from 'react-intersection-observer';
 import {getIngrediensSelector} from '../../services/ingredients/selector';
-import {Iingredient} from '../../services/ingredients/type';
+import {Iingredient} from '../../services/type/index';
 
 
 
@@ -18,7 +17,6 @@ import {Iingredient} from '../../services/ingredients/type';
 
 export function BurgerIngredients():JSX.Element{
   const [current, setCurrent] = useState('Булки');
-  //@ts-ignore
   const datas:Iingredient[] = useSelector(getIngrediensSelector);
  
 
@@ -66,7 +64,7 @@ export function BurgerIngredients():JSX.Element{
           </Tab>
         </div>
       </div>
-      <div className={`${styles.card} custom-scroll `}>
+      <div className={`${styles.card} custom-scroll `} data-cy='ingredients'>
         <h3 className="mb-6 text text_type_main-medium">Булки</h3>
         <ul className={styles.tab_box_wrap} ref={ref}>
           {arrBun.map(el =>
