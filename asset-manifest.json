@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/berger-react/static/css/main.4a7a277c.css",
-    "main.js": "/berger-react/static/js/main.990d0aed.js",
+    "main.js": "/berger-react/static/js/main.900ff19e.js",
     "static/js/787.802a99a9.chunk.js": "/berger-react/static/js/787.802a99a9.chunk.js",
     "static/media/JetBrainsMono-Bold.woff": "/berger-react/static/media/JetBrainsMono-Bold.3914674f1cb2335acf26.woff",
     "static/media/JetBrainsMono-Regular.woff": "/berger-react/static/media/JetBrainsMono-Regular.f52bee61d00ce995b89f.woff",
@@ -12,11 +12,11 @@
     "static/media/iceland.woff2": "/berger-react/static/media/iceland.4ae67a017a5ff82bbbb7.woff2",
     "index.html": "/berger-react/index.html",
     "main.4a7a277c.css.map": "/berger-react/static/css/main.4a7a277c.css.map",
-    "main.990d0aed.js.map": "/berger-react/static/js/main.990d0aed.js.map",
+    "main.900ff19e.js.map": "/berger-react/static/js/main.900ff19e.js.map",
     "787.802a99a9.chunk.js.map": "/berger-react/static/js/787.802a99a9.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.4a7a277c.css",
-    "static/js/main.990d0aed.js"
+    "static/js/main.900ff19e.js"
   ]
 }
