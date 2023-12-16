@@ -58,7 +58,7 @@ export const Login = () => {
             extraClass="mt-6"
             value={valueP}
           />
-          <div className={`${styles.button} mt-6`}>
+          <div className={`${styles.button} mt-6`} data-cy='submit_entrance'>
             <Button htmlType="submit" type="primary" size="medium">
               Войти
             </Button>

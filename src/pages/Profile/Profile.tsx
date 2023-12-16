@@ -1,7 +1,8 @@
 import styles from "./Profile.module.css";
 import { Outlet, NavLink } from "react-router-dom";
-import { useDispatch } from '../../services/type/index';;
 import { logout } from "../../services/register/action";
+import { useDispatch } from '../../services/type/index';;
+
 
 
 export const Profile = () => {

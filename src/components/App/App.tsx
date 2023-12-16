@@ -29,8 +29,8 @@ function App(): JSX.Element {
   const dispatсh = useDispatch();
 
   useEffect(() => {
-    dispatсh(loadIngredients());
     dispatсh(checkUserAuth());
+    dispatсh(loadIngredients());
 
   }, []);
 

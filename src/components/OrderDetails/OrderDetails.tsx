@@ -34,7 +34,7 @@ function OrderDetails() {
   return (
     <>
 
-      <div className={`${styles.id} mt-30 mb-8 text text_type_digits-large`}>{order !== null && order.order.number}</div>
+      <div className={`${styles.id} mt-30 mb-8 text text_type_digits-large`} data-testid='order-number'>{order !== null && order.order.number}</div>
       <div className={`${styles.discription} text text_type_main-medium`}>идентификатор заказа</div>
       <div className={styles.icon}>
         <img src={icon} alt={'icon'} />

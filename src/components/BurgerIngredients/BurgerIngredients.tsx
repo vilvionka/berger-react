@@ -64,7 +64,7 @@ export function BurgerIngredients():JSX.Element{
           </Tab>
         </div>
       </div>
-      <div className={`${styles.card} custom-scroll `}>
+      <div className={`${styles.card} custom-scroll `} data-cy='ingredients'>
         <h3 className="mb-6 text text_type_main-medium">Булки</h3>
         <ul className={styles.tab_box_wrap} ref={ref}>
           {arrBun.map(el =>

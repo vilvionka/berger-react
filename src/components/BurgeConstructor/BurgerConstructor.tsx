@@ -90,7 +90,7 @@ function BurgerConstructor() {
 
   return (
     <>
-      <div className={styles.box} ref={dropTarget}>
+      <div className={styles.box} ref={dropTarget} data-cy='constructor'>
 
         <div className={styles.box_burger}>
           <div className={styles.box_constructor_bun} >
@@ -128,7 +128,7 @@ function BurgerConstructor() {
             <p className={'text text_type_digits-medium mr-2'}>{totalPrice}</p>
             <CurrencyIcon type="primary" />
           </div>
-          <div className={styles.price_buuton} onClick={modalOpen}>
+          <div className={styles.price_buuton} onClick={modalOpen} data-cy='submit'>
             <Button htmlType="button" type="primary" size="medium" >
               Оформить заказ
             </Button>

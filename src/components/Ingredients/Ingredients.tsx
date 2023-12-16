@@ -19,9 +19,9 @@ interface IIngredientsProps {
   item: Iingredient;
 }
 
-function Ingredients(props:IIngredientsProps): JSX.Element {
+function Ingredients(props: IIngredientsProps): JSX.Element {
 
-  const {item} = props;
+  const { item } = props;
 
   const data = useSelector(getBurgerSelectorIngredients);
   const dataBun = useSelector(getBurgerSelectorBun);
@@ -56,7 +56,7 @@ function Ingredients(props:IIngredientsProps): JSX.Element {
       to={`/ingredients/${ingredientId}`}
       state={{ background: location }}
       className={`${styles.tab_box_item} mb-8`}>
-      <li className={styles.tab_box_item_li} ref={dragRef} >
+      <li className={styles.tab_box_item_li} ref={dragRef} data-cy={`ingredient${ingredientId}`}>
         <div className={styles.curent}>
           {item.type !== 'bun' && counterUpdatee !== 0 && <Counter count={counterUpdatee} size="default" extraClass="m-1" />}
           {item.type === 'bun' && counterUpdate !== 0 && <Counter count={counterUpdate} size="default" extraClass="m-1" />}

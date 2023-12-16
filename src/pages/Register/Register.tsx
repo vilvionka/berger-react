@@ -1,10 +1,11 @@
 import styles from "./Register.module.css";
+import { getRegistration } from '../../services/register/action';
+import Box from '@ya.praktikum/react-developer-burger-ui-components';
 import { Input, ShowIcon, Button } from '@ya.praktikum/react-developer-burger-ui-components';
 import React, { useRef, useState } from 'react';
 import { Link } from "react-router-dom";
 import { useDispatch } from '../../services/type/index';;
-import { getRegistration } from '../../services/register/action';
-import Box from '@ya.praktikum/react-developer-burger-ui-components';
+
 
 
 export const Register = () => {
